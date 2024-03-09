@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap"> 
+    <link rel="stylesheet" href="data.css">
+</head>
+<body>
+    <div id="ctrls">
+        <md-icon-button class="topbtn-l"><md-icon>close</md-icon></md-icon-button>
+        <md-icon-button class="topbtn-r"><md-icon>edit</md-icon></md-icon-button>
+    </div>
+    <h1>数据</h1>
+
+    <div id="chart"></div>
+
+    <md-dialog>
+        <div slot="headline">编辑localStorge</div>
+        <form slot="content" id="dialogform" method="dialog" style="line-height: 30px;">
+            <md-outlined-text-field id="lsedit" type="text" label="localStorge" value="" supporting-text="没事不要改">
+            </md-outlined-text-field>
+        </form>
+        <div slot="actions">
+            <md-text-button form="dialogform" value="ok" id="formbtn">确定</md-text-button>
+        </div>
+    </md-dialog>
+
+
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <script src="https://esm.run/@material/web/all.js" type="module"></script>
+    <script src="data.js"></script>
+</body>
+</html>

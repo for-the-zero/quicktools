@@ -1,0 +1,57 @@
+:root,:host{
+    --md-sys-color-background:#fff8f3;--md-sys-color-on-background:#201b12;--md-sys-color-surface:#fff8f3;--md-sys-color-surface-dim:#e4d8cb;--md-sys-color-surface-bright:#fff8f3;--md-sys-color-surface-container-lowest:#ffffff;--md-sys-color-surface-container-low:#fef2e4;--md-sys-color-surface-container:#f8ecde;--md-sys-color-surface-container-high:#f3e6d8;--md-sys-color-surface-container-highest:#ede1d3;--md-sys-color-on-surface:#201b12;--md-sys-color-surface-variant:#f2e0c9;--md-sys-color-on-surface-variant:#504534;--md-sys-color-inverse-surface:#362f26;--md-sys-color-inverse-on-surface:#fbefe1;--md-sys-color-outline:#837562;--md-sys-color-outline-variant:#d5c4ae;--md-sys-color-shadow:#000000;--md-sys-color-scrim:#000000;--md-sys-color-surface-tint:#7f5700;--md-sys-color-primary:#7f5700;--md-sys-color-on-primary:#ffffff;--md-sys-color-primary-container:#f7b337;--md-sys-color-on-primary-container:#442d00;--md-sys-color-inverse-primary:#ffba3e;--md-sys-color-secondary:#765a2b;--md-sys-color-on-secondary:#ffffff;--md-sys-color-secondary-container:#ffdca9;--md-sys-color-on-secondary-container:#5c4316;--md-sys-color-tertiary:#566500;--md-sys-color-on-tertiary:#ffffff;--md-sys-color-tertiary-container:#b6ca54;--md-sys-color-on-tertiary-container:#2d3600;--md-sys-color-error:#ba1a1a;--md-sys-color-on-error:#ffffff;--md-sys-color-error-container:#ffdad6;--md-sys-color-on-error-container:#410002;
+    --md-ref-typeface-brand: 'Google Sans','Noto Sans SC';--md-ref-typeface-plain: 'Google Sans','Noto Sans SC';
+}
+body{
+    background-color: #f8ecde;
+    margin-top: 70px;
+    font-family: 'Google Sans','Noto Sans SC';
+    color: #201b12;
+}
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+}
+.topbtn-l{
+    top: 10px;
+    left: 10px;
+    position: absolute;
+}
+.topbtn-r{
+    top: 10px;
+    right: 10px;
+    position: absolute;
+}
+h1{
+    font-size: 100px;
+    margin: 15px;
+    margin-top: 0px;
+}
+p{
+    font-size: 20px;
+}
+.btns{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+.sentence{
+    margin: 0px;
+    font-size: 15px ;
+    text-align: center;
+}
+#dialogform md-outlined-text-field{
+    margin-top: 15px;
+}
+#dialogform label{
+    margin-top: 15px;
+}
+
+@media (max-width: 768px) {
+    h1{
+        font-size: 70px;
+    }
+}

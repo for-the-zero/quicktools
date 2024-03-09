@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zen</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <md-icon-button class="topbtn-l" href="data.html" target="_blank"><md-icon>show_chart</md-icon></md-icon-button>
+    <md-icon-button class="topbtn-r"><md-icon>settings</md-icon></md-icon-button>
+
+    <div class="main">
+        <p class="sentence">点击加载一言</p>
+        <h1 class="time">00:00:00</h1>
+
+        <div class="btns">
+            <md-elevated-button class="btn-l">
+                <md-icon slot="icon">stop</md-icon>
+                Stop
+            </md-elevated-button>
+            <md-elevated-button class="btn-r">
+                <md-icon slot="icon">play_arrow</md-icon>
+                Start
+            </md-elevated-button>
+        </div>
+
+        <p class="clock">12:00:00</p>
+    </div>
+
+    <md-dialog>
+        <div slot="headline">设置</div>
+        <form slot="content" id="dialogform" method="dialog" style="line-height: 30px;">
+            
+            （目前仅支持自定义一言部分）<br>点击确定才能生效<br>
+            <label>显示
+                <md-switch id="isshowsent"></md-switch>
+            </label><br>
+            <label>自动刷新
+                <md-switch id="isautosent"></md-switch>
+            </label><br>
+            <md-outlined-text-field id="reftimesent" type="number" label="刷新时间(s)" value="10" supporting-text="低于10s自动转化为10s">
+            </md-outlined-text-field>
+            
+        </form>
+        <div slot="actions">
+            <md-text-button form="dialogform" value="ok" id="formbtn">确定</md-text-button>
+        </div>
+    </md-dialog>
+
+    
+
+
+    
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <!--<script src="https://cdn.bootcdn.net/ajax/libs/moment-duration-format/2.3.2/moment-duration-format.js"></script>-->
+    <script src="https://esm.run/@material/web/all.js" type="module"></script>
+    <script src="index.js"></script>
+</body>
+</html>
