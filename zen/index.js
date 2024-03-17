@@ -44,8 +44,11 @@ ele_btnl.click(function(){
     ele_btnr.contents().filter(function() {
         return this.nodeType === 3 && $.trim(this.nodeValue).length > 0;
     }).replaceWith('Start');
-    tstatus = 'pause-stop';
-    timebeforepause += moment().valueOf() - timerecord;
+
+    if (tstatus == 'running') {
+        timebeforepause += moment().valueOf() - timerecord;
+        tstatus = 'pause-stop';
+    };
     savetime(timebeforepause);
     timebeforepause = 0;
     timerecord = 0;
