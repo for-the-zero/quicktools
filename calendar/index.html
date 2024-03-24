@@ -4,32 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar</title>
-    <link rel="stylesheet" href="https://cdn.w3cbus.com/mdui/2/assets/vendor-fonts-dca0575d.csss">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap"> 
+    <!--
+    <script src="https://jsd.cdn.zzko.cn/npm/vconsole/dist/vconsole.min.js"></script>
+    <script>var vConsole = new VConsole({ defaultPlugins: ['system', 'network', 'element'], theme: 'dark' });</script>
+    -->
+    <link rel="stylesheet" href="mdicons.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap">  
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/mdui/mdui.css">
-
-    <script src="https://jsd.cdn.zzko.cn/npm/mdui/mdui.global.js"></script>
-    <script type="module">
-        import { setColorScheme } from 'https://jsd.cdn.zzko.cn/npm/mdui/functions/setColorScheme.js/+esm';
-        async function loadSetColorScheme() {
-            await import('https://jsd.cdn.zzko.cn/npm/mdui/functions/setColorScheme.js/+esm');
-            setColorScheme('#FFAA2F');
-        };
-        loadSetColorScheme();
-    </script>
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <script src="https://jsd.cdn.zzko.cn/npm/mdui/functions/setColorScheme.js/+esm" type="module"></script>
 </head>
 <body>
-    <mdui-navigation-bar value="page-1">
+    <mdui-navigation-bar value="page-1" divider>
         <mdui-navigation-bar-item icon="calendar_month" value="page-1">日历</mdui-navigation-bar-item>
         <mdui-navigation-bar-item icon="timelapse" value="page-2">倒数日</mdui-navigation-bar-item>
         <mdui-navigation-bar-item icon="info" value="page-3">关于</mdui-navigation-bar-item>
+    </mdui-navigation-bar>
+    <mdui-navigation-rail value="page-1" divider alignment="center">
+        <mdui-navigation-rail-item icon="calendar_month" value="page-1">日历</mdui-navigation-rail-item>
+        <mdui-navigation-rail-item icon="timelapse" value="page-2">倒数日</mdui-navigation-rail-item>
+        <mdui-navigation-rail-item icon="info" value="page-3">关于</mdui-navigation-rail-item>
     </mdui-navigation-bar>
 
 
 
 
     <script src="index.js"></script>
+    
+
 </body>
 </html>
