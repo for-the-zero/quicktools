@@ -8,13 +8,18 @@
     <script src="https://jsd.cdn.zzko.cn/npm/vconsole/dist/vconsole.min.js"></script>
     <script>var vConsole = new VConsole({ defaultPlugins: ['system', 'network', 'element'], theme: 'dark' });</script>
     -->
-    <link rel="stylesheet" href="mdicons.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap">  
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/mdui/mdui.css">
     <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
     <script src="https://jsd.cdn.zzko.cn/npm/mdui/functions/setColorScheme.js/+esm" type="module"></script>
+    <!--icons-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone" rel="stylesheet">
 </head>
 <body>
     <mdui-navigation-bar value="page-1" divider>
@@ -26,7 +31,14 @@
         <mdui-navigation-rail-item icon="calendar_month" value="page-1">日历</mdui-navigation-rail-item>
         <mdui-navigation-rail-item icon="timelapse" value="page-2">倒数日</mdui-navigation-rail-item>
         <mdui-navigation-rail-item icon="info" value="page-3">关于</mdui-navigation-rail-item>
-    </mdui-navigation-bar>
+    </mdui-navigation-rail>
+    <mdui-layout-main>
+        <div class="main-1">1</div>
+        <div class="main-2">2</div>
+        <div class="main-3">3</div>
+    </mdui-layout-main>
+    
+    
 
 
 
