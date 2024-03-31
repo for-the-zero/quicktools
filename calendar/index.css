@@ -2,28 +2,24 @@ body{
     font-family: 'Google Sans','Noto Sans SC';
     color: #201b12;
 }
-
-
-
-mdui-navigation-bar{
+.main-3{
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px;
+    text-align: center;
 }
-mdui-navigation-rail{
-    display: none;
+.main-1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
 }
-@media (min-width: 600px) {
-    mdui-navigation-bar{
-        display: none;
-    }
-    mdui-navigation-rail{
-        display: flex;
-    }
-}
-
-
-
-.main-1, .main-2, .main-3{
-    padding-right: 5.125rem;
-    width: 100%;
-    height: 100%;
+.mouth-picker-parent{
+    display: flex;
+    flex-direction: row;
+    font-size: 50px;
+    margin-right: auto;
+    user-select: none;
+    align-items: center;
 }

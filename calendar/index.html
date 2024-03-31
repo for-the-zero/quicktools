@@ -4,16 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar</title>
-    <!--
-    <script src="https://jsd.cdn.zzko.cn/npm/vconsole/dist/vconsole.min.js"></script>
-    <script>var vConsole = new VConsole({ defaultPlugins: ['system', 'network', 'element'], theme: 'dark' });</script>
-    -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap">  
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/mdui/mdui.css">
     <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
-    <script src="https://jsd.cdn.zzko.cn/npm/mdui/functions/setColorScheme.js/+esm" type="module"></script>
     <!--icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
@@ -27,22 +22,54 @@
         <mdui-navigation-bar-item icon="timelapse" value="page-2">倒数日</mdui-navigation-bar-item>
         <mdui-navigation-bar-item icon="info" value="page-3">关于</mdui-navigation-bar-item>
     </mdui-navigation-bar>
-    <mdui-navigation-rail value="page-1" divider alignment="center">
-        <mdui-navigation-rail-item icon="calendar_month" value="page-1">日历</mdui-navigation-rail-item>
-        <mdui-navigation-rail-item icon="timelapse" value="page-2">倒数日</mdui-navigation-rail-item>
-        <mdui-navigation-rail-item icon="info" value="page-3">关于</mdui-navigation-rail-item>
-    </mdui-navigation-rail>
     <mdui-layout-main>
-        <div class="main-1">1</div>
+
+
+        <div class="main-1">
+
+            <div class="mouth-picker-parent">
+                <mdui-dialog close-on-overlay-click
+                    headline="修改"
+                    class="year-month-dialog">
+                    <mdui-text-field variant="outlined" label="修改值"></mdui-text-field>
+                    <mdui-button slot="action" variant="text" onclick="ele_ymdialog.removeAttr('open');">取消</mdui-button>
+                    <mdui-button slot="action" variant="tonal" id="confirm-btn">确定</mdui-button>
+                </mdui-dialog>
+                <mdui-snackbar closeable class="snackbar-invalid">无效值</mdui-snackbar>
+                <!---->
+                <mdui-button-icon id="icon-lastmonth" icon="chevron_left" style="font-size: 50px;"></mdui-button-icon>
+                <span class="year">2077</span><span style="color: orangered;">/</span><span class="month">1</span>
+                <mdui-button-icon id="icon-nextmonth" icon="chevron_right" style="font-size: 50px;"></mdui-button-icon>
+                <mdui-tooltip content="飞回今天">
+                    <mdui-button-icon id="icon-today" icon="today" style="font-size: 30px;"></mdui-button-icon>
+                </mdui-tooltip>
+            </div>
+
+        </div>
+
+
+
         <div class="main-2">2</div>
-        <div class="main-3">3</div>
+
+
+
+        <div class="main-3">
+            <mdui-icon style="font-size: 100px; user-select: none;"
+                name="date_range">
+            </mdui-icon>
+            <h1 style="margin: 5px;">简单日历</h1>
+            <p>一个简单的日历，没有太多功能，只有查看日历、查看节假日、倒数日这几个功能</p>
+        </div>
+
+
+
     </mdui-layout-main>
     
     
 
 
 
-
+    <script src="p1reflash.js"></script>
     <script src="index.js"></script>
     
 
