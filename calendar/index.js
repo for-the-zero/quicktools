@@ -1,5 +1,5 @@
 // 初始化
-const $ = mdui.$;
+//const $ = mdui.$;
 mdui.setColorScheme('#ff4500');
 var view_year = new Date().getFullYear();
 var view_month = new Date().getMonth()+1;
@@ -18,6 +18,10 @@ const ele_ymdialog = $('.year-month-dialog');
 const ele_ymdialog_btn = $('.year-month-dialog #confirm-btn');
 const ele_ymdialog_input = $('.year-month-dialog mdui-text-field');
 const ele_sb_invalid = $('.snackbar-invalid');
+const ele_countadd_dialog = $('.add-count-dialog');
+const ele_countadd_dialog_btn = $('.add-count-dialog #confirm-btn');
+const ele_countadd_dialog_input_date = $('.add-count-dialog #date');
+const ele_countadd_dialog_input_name = $('.add-count-dialog #name');
 
 
 
@@ -44,7 +48,7 @@ function changepage(page){
         view_month = new Date().getMonth()+1;
         ele_syear.text(view_year);
         ele_smonth.text(view_month);
-        page1_reflash();
+        page1_reflash(view_year,view_month);
     } else if (page == 2) {
         ele_page1.hide();
         ele_page2.show();
@@ -67,7 +71,7 @@ ele_lastmonth.on('click',function(){
     };
     ele_syear.text(view_year);
     ele_smonth.text(view_month);
-    page1_reflash();
+    page1_reflash(view_year,view_month);
 });
 ele_nextmonth.on('click',function(){
     view_month += 1;
@@ -77,14 +81,14 @@ ele_nextmonth.on('click',function(){
     };
     ele_syear.text(view_year);
     ele_smonth.text(view_month);
-    page1_reflash();
+    page1_reflash(view_year,view_month);
 });
 ele_todaybtn.on('click',function(){
     view_year = new Date().getFullYear();
     view_month = new Date().getMonth()+1;
     ele_syear.text(view_year);
     ele_smonth.text(view_month);
-    page1_reflash();
+    page1_reflash(view_year,view_month);
 });
 var dialog_o;
 ele_syear.on('click',function(){dialog_o = 'y';month_year_dialog();});
@@ -107,7 +111,7 @@ ele_ymdialog_btn.on('click',function(){
                 view_year = input_val;
                 ele_syear.text(view_year);
                 ele_smonth.text(view_month);
-                page1_reflash();
+                page1_reflash(view_year,view_month);
             } else {
                 ele_sb_invalid.attr('open','');
             };
@@ -116,7 +120,7 @@ ele_ymdialog_btn.on('click',function(){
                 view_month = input_val;
                 ele_syear.text(view_year);
                 ele_smonth.text(view_month);
-                page1_reflash();
+                page1_reflash(view_year,view_month);
             } else {
                 ele_sb_invalid.attr('open','');
             };

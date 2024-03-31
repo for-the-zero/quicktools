@@ -23,3 +23,40 @@ body{
     user-select: none;
     align-items: center;
 }
+.calendar-grid{
+    display: grid;
+    /*border: 2px solid red;*/
+    width: 100vw;
+    box-sizing: border-box;
+    margin-top: 15px;
+    max-width: 600px;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
+}
+.cal-items{
+    aspect-ratio: 4/3;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.day-past{
+    color: rgb(130, 130, 130);
+}
+.day-today{
+    color: orangered;
+    font-weight: bold;
+}
+.day-future{
+    color: black;
+}
+mdui-fab{
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+}
+.add-count-dialog mdui-text-field{
+    margin-top: 10px;
+}

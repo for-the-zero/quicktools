@@ -40,16 +40,25 @@
                 <mdui-button-icon id="icon-lastmonth" icon="chevron_left" style="font-size: 50px;"></mdui-button-icon>
                 <span class="year">2077</span><span style="color: orangered;">/</span><span class="month">1</span>
                 <mdui-button-icon id="icon-nextmonth" icon="chevron_right" style="font-size: 50px;"></mdui-button-icon>
-                <mdui-tooltip content="飞回今天">
-                    <mdui-button-icon id="icon-today" icon="today" style="font-size: 30px;"></mdui-button-icon>
-                </mdui-tooltip>
+                <mdui-button-icon id="icon-today" icon="today" style="font-size: 30px;"></mdui-button-icon>
             </div>
-
+            <div class="calendar-grid"></div>
         </div>
 
 
-
-        <div class="main-2">2</div>
+        <div class="main-2">
+            <mdui-fab icon="add" onclick="ele_countadd_dialog.attr('open','');"></mdui-fab>
+            <mdui-dialog close-on-overlay-click
+                headline="添加"
+                class="add-count-dialog">
+                <mdui-text-field variant="outlined" label="日期" id="date"></mdui-text-field>
+                <br>
+                <mdui-text-field variant="outlined" label="名称" id="name"></mdui-text-field>
+                <mdui-button slot="action" variant="text" onclick="ele_countadd_dialog.removeAttr('open');">取消</mdui-button>
+                <mdui-button slot="action" variant="tonal" id="confirm-btn">确定</mdui-button>
+            </mdui-dialog>
+            
+        </div>
 
 
 
@@ -58,7 +67,7 @@
                 name="date_range">
             </mdui-icon>
             <h1 style="margin: 5px;">简单日历</h1>
-            <p>一个简单的日历，没有太多功能，只有查看日历、查看节假日、倒数日这几个功能</p>
+            <p>一个简单的日历，没有太多功能，只有查看日历、倒数日这两个功能</p>
         </div>
 
 
