@@ -57,6 +57,8 @@
                 <mdui-button slot="action" variant="text" onclick="ele_countadd_dialog.removeAttr('open');">取消</mdui-button>
                 <mdui-button slot="action" variant="tonal" id="confirm-btn">确定</mdui-button>
             </mdui-dialog>
+            <mdui-snackbar closeable class="snackbar-invalid2">无效值</mdui-snackbar>
+            <div class="count-grid"></div>
             
         </div>
 
@@ -67,7 +69,16 @@
                 name="date_range">
             </mdui-icon>
             <h1 style="margin: 5px;">简单日历</h1>
-            <p>一个简单的日历，没有太多功能，只有查看日历、倒数日这两个功能</p>
+            <p>一个简单的日历，没有太多功能，只有查看日历、倒数日这两个功能
+            <br>你可以拿倒数日代替日程
+            <br>倒数日那里只要不超过4位数应该就没问题，懒得改</p>
+            <p>用了googleapis获取思源黑体(Noto Sans SC)和Material Icons，unpkg获取组件库mdui……好像没了，对，就这么简单</p>
+            <p>注：日历顶上的数字是可以点的哦~<br>注²：倒数日右键(手机长按)可删除</p>
+            <p><del>本来想要加节假日的，但是我是谁？老子既是甲方有时乙方，你管我怎么做，直接发挥微软砍刀部传统艺能，砍了！爽！</del>
+                <br><span style="color: white;"><del>（其实不是一次两次了）</del></span>
+                <br>
+                <span style="color: white;">什么？这两句话被你发现了？真厉害，可惜不想藏别的小彩蛋了……</span>
+            </p>
         </div>
 
 

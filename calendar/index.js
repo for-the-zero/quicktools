@@ -3,6 +3,18 @@
 mdui.setColorScheme('#ff4500');
 var view_year = new Date().getFullYear();
 var view_month = new Date().getMonth()+1;
+var count_list;
+reflashlocalstorge();
+function reflashlocalstorge(){
+    count_list = localStorage.getItem('calendar_count');
+    if(count_list == null){
+        count_list = [];
+        localStorage.setItem('calendar_count',JSON.stringify(count_list));
+    } else {
+        count_list = JSON.parse(count_list);
+    };
+};
+
 
 // 元素
 const ele_nav = $('mdui-navigation-bar');
@@ -18,6 +30,8 @@ const ele_ymdialog = $('.year-month-dialog');
 const ele_ymdialog_btn = $('.year-month-dialog #confirm-btn');
 const ele_ymdialog_input = $('.year-month-dialog mdui-text-field');
 const ele_sb_invalid = $('.snackbar-invalid');
+const ele_sb_invalid2 = $('.snackbar-invalid2');
+const ele_count_grid = $('.count-grid');
 const ele_countadd_dialog = $('.add-count-dialog');
 const ele_countadd_dialog_btn = $('.add-count-dialog #confirm-btn');
 const ele_countadd_dialog_input_date = $('.add-count-dialog #date');
@@ -53,6 +67,7 @@ function changepage(page){
         ele_page1.hide();
         ele_page2.show();
         ele_page3.hide();
+        page2_reflash();
     } else if (page == 3) {
         ele_page1.hide();
         ele_page2.hide();
@@ -131,3 +146,48 @@ ele_ymdialog_btn.on('click',function(){
     
 
 });
+
+function in_count_list(val){
+    return count_list.some((t) => {return t.name == val});
+};
+
+ele_countadd_dialog_btn.on('click',function(){
+    let date = ele_countadd_dialog_input_date.val();
+    let name = ele_countadd_dialog_input_name.val();
+    let topush = {date: date,name: name};
+    reflashlocalstorge();
+    if ((name == '') || (date == '') || in_count_list(name)){
+        ele_sb_invalid2.attr('open','');
+    } else {
+        count_list.push(topush);
+        localStorage.setItem('calendar_count',JSON.stringify(count_list));
+    };
+    page2_reflash();
+});
+
+function page2_reflash(){
+    reflashlocalstorge();
+    ele_count_grid.html('');
+    count_list.sort(function(a,b){
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+    });
+    let today = new Date();
+    for (let i = 0; i < count_list.length; i++) {
+        let date = new Date(count_list[i].date);
+        let name = count_list[i].name;
+        let time_count = date.getTime() - today.getTime();
+        time_count = Math.ceil(time_count / 1000 / 60 / 60 / 24);
+        let toadd = $('<mdui-card clickable><p class="counttext counttextp">' + name + '</p><h1 class="counttext counttexth1">' + time_count + '</h1></mdui-card>');
+        ele_count_grid.append(toadd);
+        toadd.on('contextmenu',function(e){e.preventDefault();delthiscount(name);});
+    };
+}
+function delthiscount(name){
+    //TODO:
+    //console.log(name);
+    count_list = count_list.filter(function(t){
+        return t.name != name;
+    });
+    localStorage.setItem('calendar_count',JSON.stringify(count_list));
+    page2_reflash();
+};

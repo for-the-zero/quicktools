@@ -35,7 +35,7 @@ function page1_reflash(year,month){
         } else {
             if (new Date().getDate() > this_day){
                 ele_parent.append($('<div id="' + this_day + '" class="cal-items day-past"><h1>' + this_day + '</h1></div>'));
-            } else if (new Date().getDate() > this_day){
+            } else if (new Date().getDate() < this_day){
                 ele_parent.append($('<div id="' + this_day + '" class="cal-items day-future"><h1>' + this_day + '</h1></div>'));
             } else {
                 ele_parent.append($('<div id="' + this_day + '" class="cal-items day-today"><h1>' + this_day + '</h1></div>'));
