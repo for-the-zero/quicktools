@@ -3,47 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickTools</title>
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap"> 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap">
-    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css"/>
-
+    <title>Quicktools</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap">  
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/mdui/mdui.css">
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <!--icons-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone" rel="stylesheet">
+    
     <link rel="stylesheet" href="index.css">
 </head>
-<body class="mdui-theme-accent-indigo">
-    <div class="mdui-typo-display-3">QuickTools</div>
-    <p><del>Google 的 Material Web 和 mdui2 都没有更新表格，忍痛退回旧的 Material Design</del></p>
-    <p>这是一个简单小工具合集，会不断更新</p>
+<body>
+    <mdui-top-app-bar scroll-behavior="elevate" scroll-target=".main">
+        <mdui-tooltip content="没有东西的，就一个摆设" placement="right"><mdui-button-icon icon="menu"></mdui-button-icon></mdui-tooltip>
+        <mdui-top-app-bar-title>Quicktools</mdui-top-app-bar-title>
+    </mdui-top-app-bar>
+
+    <div class="main">
+
+        <p>这是一个简单小工具合集，会不断更新</p>
+        
+        <mdui-card clickable href="./todo/index.html">
+            <mdui-icon name="format_list_numbered--outlined" class="item-icon"></mdui-icon>
+            <h1>Todo</h1>
+            <p>模仿别人做的todo，左键标记右键删除</p>
+        </mdui-card>
+
+        <mdui-card clickable href="./zen/index.html">
+            <mdui-icon name="timer--outlined" class="item-icon"></mdui-icon>
+            <h1>Zen</h1>
+            <p><del>带记录功能的计时器……</del>一个Material3风格的简约专注网页，可显示一言句子，可以对专注计时进行统计</p>
+        </mdui-card>
+
+        <mdui-card clickable href="./calendar/index.html">
+            <mdui-icon name="date_range--outlined" class="item-icon"></mdui-icon>
+            <h1>简单日历</h1>
+            <p>简约的日历，就只由简单的日历功能</p>
+        </mdui-card>
+
+        <mdui-card clickable href="./playvib/1.html">
+            <mdui-icon name="vibration--outlined" class="item-icon"></mdui-icon>
+            <h1>震动测试</h1>
+            <p>仅限带线性马达的手机，随便搞的</p>
+        </mdui-card>
 
 
-
-    <div class="mdui-table-fluid mdui-text-color-theme mdui-typo"><table class="mdui-table mdui-table-hoverable">
-        <thead><tr><th>工具</th><th>介绍</th></tr></thead>
-        <tbody>
-
-        	<tr>
-                <td> <i class="mdui-icon material-icons">format_list_numbered</i> <a href="./todo/index.html">Todo</a> </td>
-                <td>模仿别人做的todo，左键标记右键删除</td>
-            </tr>
-            <tr>
-                <td> <i class="mdui-icon material-icons">timer</i> <a href="./zen/index.html">Zen</a> </td>
-                <td><del>带记录功能的计时器……</del>一个Material3风格的简约专注网页，可显示一言句子，可以对专注计时进行统计</td>
-            </tr>
-            <tr>
-                <td> <i class="mdui-icon material-icons">date_range</i> <a href="./calendar/index.html">简单日历</a> </td>
-                <td>简约的日历，就自由简单的日历功能</td>
-            </tr>
-            <tr>
-                <td> <i class="mdui-icon material-icons">vibration</i> <a href="./calendar/index.html">震动</a> </td>
-                <td>仅限带线性马达的手机，随便搞的</td>
-            </tr>
-
-        </tbody>
-    </table></div>
+    </div>
     
 
-
-    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <script>mdui.setColorScheme('#59ffee')</script>
 </body>
 </html>
