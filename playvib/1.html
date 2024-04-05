@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayVib</title>
+</head>
+<body>
+    <h1>玩玩震动马达</h1>
+    <p>注：要线性马达哦~，试着做个东西让马达放歌</p>
+    <p>css、使用等方面的bug...已经无所谓了，反正是随手做的</p>
+    <p>笑死，大部分都是通义千问做的</p>
+    <a href="2.html">page2</a>
+    <p class="music-loading">加载中，莫急</p>
+    <hr>
+    <p>导入音频</p>
+    <form class="music-select">
+        <p>示例音乐：</p>
+        <label><input type="radio" name="music" value="1" checked>bestmusic.mp3</label><br>
+        <label><input type="radio" name="music" value="2">Lockyn-Volt.mp3</label>
+        <p>自定义</p>
+        <label><input type="radio" name="music" value="s">
+            <input type="file" class="music-file" single accept=".mp3,.wav,.aac,.webm">
+        </label>
+    </form>
+    <hr>
+    <p>阈值</p>
+    <label class="range-value">
+        <input class="range" type="range" style="width: 70vw;" min="20000" max="35000" value="25000" step="1">
+        <span></span>
+    </label>
+    <p>检测时长</p>
+    <label class="range-value2">
+        <input class="range2" type="range" style="width: 70vw;" min="1" max="100" value="50" step="1">
+        <span></span>
+    </label>
+    <br><button class="music-play">播放</button>
+    <hr>
+    <p>别的：</p>
+    <button onclick="navigator.vibrate(1);">1ms</button>
+    <button onclick="navigator.vibrate(5);">5ms</button>
+    <button onclick="navigator.vibrate(10);">10ms</button>
+    <button onclick="navigator.vibrate(25);">25ms</button>
+    <button onclick="navigator.vibrate(35);">35ms</button>
+    <button onclick="navigator.vibrate(50);">50ms</button>
+    <button onclick="navigator.vibrate(75);">75ms</button>
+    <button onclick="navigator.vibrate(100);">100ms</button>
+    <button onclick="navigator.vibrate(1000);">1000ms</button>
+
+
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="1.js"></script>
+</body>
+</html>
