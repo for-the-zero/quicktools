@@ -21,7 +21,13 @@
 <body>
     <mdui-top-app-bar scroll-behavior="elevate" scroll-target=".main">
         <mdui-tooltip content="没有东西的，就一个摆设" placement="right"><mdui-button-icon icon="menu"></mdui-button-icon></mdui-tooltip>
-        <mdui-top-app-bar-title>Quicktools</mdui-top-app-bar-title>
+        <mdui-dropdown>
+            <mdui-top-app-bar-title slot="trigger">Quicktools</mdui-top-app-bar-title>
+            <mdui-menu>
+                <mdui-menu-item href="https://for-the-zero.github.io/Quicktools">GitHub Pages</mdui-menu-item>
+                <mdui-menu-item href="https://ftz-tools.netlify.app/">Netlify</mdui-menu-item>
+            </mdui-menu>
+        </mdui-dropdown>
     </mdui-top-app-bar>
 
     <div class="main">
@@ -29,7 +35,7 @@
         <p>这是一个简单小工具合集，会不断更新</p>
         
         <mdui-card clickable href="./todo/index.html">
-            <mdui-icon name="format_list_numbered--outlined" class="item-icon"></mdui-icon>
+            <mdui-icon name="task_alt--outlined" class="item-icon"></mdui-icon>
             <h1>Todo</h1>
             <p>模仿别人做的todo，左键标记右键删除，手机长按=右键</p>
         </mdui-card>
@@ -50,6 +56,14 @@
             <mdui-icon name="vibration--outlined" class="item-icon"></mdui-icon>
             <h1>震动测试</h1>
             <p>仅限带线性马达的手机，随便搞的</p>
+        </mdui-card>
+
+        <mdui-card clickable>
+            <mdui-icon name="question_answer--outlined" class="item-icon"></mdui-icon>
+            <h1>QpenForm</h1>
+            <p>(特殊 单独开新仓库)部分链接:</p>
+            <mdui-chip href="https://github.com/for-the-zero/QpenForm" target="_blank">Github</mdui-chip>
+            <mdui-chip href="https://for-the-zero.github.io/QpenForm/index.html" target="_blank">Github Pages</mdui-chip>
         </mdui-card>
 
 
