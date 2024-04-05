@@ -1,6 +1,10 @@
 body{
     font-family: 'Google Sans','Noto Sans SC';
     color: #201b12;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 mdui-card{
     padding: 10px;
