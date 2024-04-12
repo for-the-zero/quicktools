@@ -66,5 +66,69 @@ function vib_control(need_vib) {
 };
 
 function play_music(audio) {
-    //
+    createOrResumeAudioContext();
+
+    const analyser = audCtx.createAnalyser();
+    const source = audCtx.createMediaElementSource(audio);
+
+    // 连接音频源到AnalyserNode
+    source.connect(analyser);
+    analyser.connect(audCtx.destination);
+
+    // 设置参数
+    analyser.fftSize = 2048;
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+
+    let lastLoudness = 0;
+    let lastFreq = 0;
+    let thresholdLoudnessDelta = 0.09;
+    let thresholdFreqDelta = 25500;
+
+    audio.addEventListener('ended', () => {
+        vib_control(false);
+    });
+
+    function processAudioData() {
+        requestAnimationFrame(processAudioData);
+
+        // 获取当前音频数据
+        analyser.getByteTimeDomainData(dataArray);
+
+        // 计算响度
+        const loudness = Math.max(...dataArray) / 255;
+
+        // 计算音调
+        let pitch = 0;
+        let maxIndex = -1;
+        for (let i = 0; i < bufferLength; i++) {
+            if (dataArray[i] > pitch) {
+                pitch = dataArray[i];
+                maxIndex = i;
+            }
+        }
+        const freq = (maxIndex * audCtx.sampleRate) / bufferLength;
+
+        // 判断是否需要震动
+        const loudnessDelta = Math.abs(loudness - lastLoudness);
+        const freqDelta = Math.abs(freq - lastFreq);
+
+        let needVib = false;
+        if (loudnessDelta > thresholdLoudnessDelta) {
+            needVib = loudness > lastLoudness;
+        } else if (freqDelta > thresholdFreqDelta) {
+            needVib = freq > lastFreq;
+        }
+
+        vib_control(needVib);
+
+        lastLoudness = loudness;
+        lastFreq = freq;
+
+        console.log("Loudness Delta:", loudnessDelta, "Frequency Delta:", freqDelta);
+    }
+
+    processAudioData();
+
+    audio.play();
 };
