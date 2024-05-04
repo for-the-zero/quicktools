@@ -1,0 +1,82 @@
+body{
+    font-family: 'Google Sans','Noto Sans SC';
+    color: #201b12;
+}
+.main{
+    margin: 15px;
+}
+.main code{
+    padding: 7px;
+    border-radius: var(--mdui-shape-corner-medium);;
+}
+mdui-divider{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.main h1,.main h2,.main h3,.main h4,.main h5,.main h6,.main p{
+    margin: 17px 0;
+}
+.codeblock{
+    display: block;
+}
+.space{
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+.complex-con{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+/*
+.complex-con-list{
+    display: flex;
+    flex-direction: row;
+    min-height: 50px;
+    overflow-x: auto;
+}
+*/
+.complex-con-list{
+    min-height: 50px;
+    padding: 10px;
+}
+.complex-con-controls{
+    display: flex;
+    flex-direction: row;
+    min-height: 50px;
+    align-items: center;
+    padding: 10px;
+    justify-content: flex-start;
+}
+.complex-con-controls mdui-text-field{
+    margin-right: auto;
+    box-sizing: border-box;
+}
+.complex-con-controls mdui-button{
+    margin-left: 10px;
+}
+mdui-chip{
+    margin-right: 5px;
+}
+.complex-con-controls mdui-icon{
+    margin: 5px;
+}
+.tabel-grid{
+    display: grid;
+    gap: 5px;
+    width: 100%;
+    padding: 10px;
+    justify-content: center;
+    grid-template-columns:auto 1fr;
+}
+.tabel-grid p{
+    margin: 0;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    display: inline-block;
+}
+.tabel-grid mdui-segmented-button-group{
+    margin-left: 5px;
+}
