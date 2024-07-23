@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypeTo</title>
+    <!---->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap">  
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/mdui/mdui.css">
+    <script src="https://jsd.cdn.zzko.cn/npm/mdui/mdui.global.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!---->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="main-divide">
+        <div class="control-area">
+            <h1>TypeTo</h1>
+            <p>仅限电脑使用，因为需要监听键盘，触屏设备没有键盘，而且也没有做窄屏适配</p>
+            <mdui-button icon="add" class="add-btn">添加</mdui-button><!--TODO:-->
+            <mdui-list class="events-list">
+                <mdui-list-item>
+                    <div class="list-item">
+                        <mdui-text-field label="按键" class="key"></mdui-text-field>
+                        <mdui-text-field label="映射" class="value"></mdui-text-field>
+                        <mdui-button-icon icon="clear"></mdui-button-icon>
+                    </div><!--TODO:-->
+                </mdui-list-item>
+            </mdui-list>
+        </div>
+        <div class="show-area">
+            <mdui-card readonly variant="outlined"></mdui-card>
+            <div class="show-btn"><!--TODO:-->
+                <mdui-button-icon icon="delete" class="clear-btn"></mdui-button-icon>
+                <mdui-button-icon icon="content_copy" class="copy-btn"></mdui-button-icon>
+            </div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
