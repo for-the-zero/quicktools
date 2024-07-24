@@ -23,16 +23,25 @@
     <div class="main-divide">
         <div class="control-area">
             <h1>TypeTo</h1>
-            <p>仅限电脑使用，因为需要监听键盘，触屏设备没有键盘，而且也没有做窄屏适配</p>
-            <mdui-button icon="add" class="add-btn">添加</mdui-button><!--TODO:-->
+            <p class="mdui-prose">
+                仅限电脑使用，因为需要监听键盘，触屏设备没有键盘，而且也没有做窄屏适配<br>
+                左边是keyboardEvent.key对应的，右边是按下按键后输出的内容<br>
+                键盘上的单个字符直接放上去就行，特殊按键一般是它的名称<br>
+                其它的参考<a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values">Key values for keyboard events | MDN</a>，
+                懒人可以去<a target="_blank" href="https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent/key#%E7%BB%93%E6%9E%9C">这个</a>直接测出来
+            </p>
+            <mdui-button icon="add" class="add-btn">添加</mdui-button>
             <mdui-list class="events-list">
+                <!--
                 <mdui-list-item>
                     <div class="list-item">
                         <mdui-text-field label="按键" class="key"></mdui-text-field>
                         <mdui-text-field label="映射" class="value"></mdui-text-field>
                         <mdui-button-icon icon="clear"></mdui-button-icon>
-                    </div><!--TODO:-->
+                    </div>
                 </mdui-list-item>
+                ...
+                -->
             </mdui-list>
         </div>
         <div class="show-area">
