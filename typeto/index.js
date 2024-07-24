@@ -12,7 +12,7 @@ $('.add-btn').on('click',function(){
 function get_events(){
     let events_list = {};
     $('.list-item').each(function(){
-        events_list[ $(this).find('.key').val().trim() ] = $(this).find('.value').val();
+        events_list[ $(this).find('.key').val() ] = $(this).find('.value').val();
     });
     return events_list;
 };
