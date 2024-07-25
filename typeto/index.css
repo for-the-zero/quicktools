@@ -23,7 +23,7 @@ body{
     overflow-y: auto;
     box-sizing: border-box;
     word-break: break-all;
-    white-space: normal;
+    white-space: pre;
     padding: 20px;
     font-size: 20px;
 }
