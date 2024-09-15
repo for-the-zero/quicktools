@@ -26,5 +26,5 @@ div.on('touchmove',function(e){
         lastX = x;
         lastY = y;
         console.log(d);
-   }
+    }
 });

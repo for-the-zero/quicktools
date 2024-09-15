@@ -4,7 +4,7 @@ audio_1.src = 'bestmusic.mp3';
 audio_1.load();
 
 var audio_2 = new Audio();
-audio_2.src = 'Valence-Infinity.mp3';
+audio_2.src = 'Grievous-Lady.mp3';
 audio_2.load();
 
 var audio_s; // 动态加载的音频
