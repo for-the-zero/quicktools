@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassKey</title>
+    <link rel="preload" href="0.svg" as="image">
+    <link rel="preload" href="1.svg" as="image">
+    <link rel="preload" href="2.svg" as="image">
+    <link rel="preload" href="3.svg" as="image">
+    <link rel="preload" href="4.svg" as="image">
+    <link rel="preload" href="5.svg" as="image">
+    <link rel="preload" href="6.svg" as="image">
+    <link rel="preload" href="7.svg" as="image">
+    <link rel="preload" href="8.svg" as="image">
+    <link rel="preload" href="9.svg" as="image">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script> -->
+</head>
+<body>
+    <h1>PassKey</h1>
+    <p>
+        <del>是的，你没看错，我又不想写css了</del><br>
+        这是一个密文生成器……其实是图片
+        只支持英文、数字、空格、部分符号<br>
+        其它符号可以使用.,():!?其中的一个或两个代替
+    </p>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <input type="text" class="input-text" style="flex: 4;font-size: 30px;">
+        <button class="gen-btn" style="flex: 1;font-size: 20px;margin-left: 5px;">生成</button>
+    </div>
+
+    <table style="margin-top: 50px;
+        border: none;border-collapse: collapse;border-spacing: 0; gap: 0;line-height: 0;"
+        cellpadding="0" cellspacing="0"
+    >
+        <style>td,tr{padding: 0;margin: 0;border: none;}</style>
+        <tr class="r1" style="padding: 0;"></tr>
+        <tr class="r2" style="padding: 0;"></tr>
+        <tr class="r3" style="padding: 0;"></tr>
+    </table>
+    
+    <hr>
+    <canvas style="margin-top: 50px;"></canvas>
+
+    <script src="index.js"></script>
+</body>
+</html>
