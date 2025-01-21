@@ -1,0 +1,169 @@
+@font-face{
+    font-family: 'Wanted Sans Std';
+    src: url('./WantedSansStd-Regular.otf');
+}
+body{
+    font-family: 'Wanted Sans Std','Noto Sans SC';
+    color: #303030;
+    background-color: #E6E6E6;
+    margin: 0;
+    padding: 0;
+}
+.controls-bar,.add-bar,.material-icons,.material-icons-outlined{
+    user-select: none;
+}
+
+.controls-bar,.add-bar{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 114514;
+    background-color: white;
+    border-radius: 15px;
+    gap: 5px;
+    padding: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.controls-bar{
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.controls-bar button,.add-bar button{
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    aspect-ratio: 1/1;
+}
+.controls-bar button.selected-controls,.add-bar button.selected-add{
+    background-color: lightseagreen;
+    color: white;
+    transition: all 0.3s cubic-bezier(0.3, 0.35, 0, 1.11);
+}
+.add-bar{
+    transform: translateX(-50%) translateY(calc(100% + 10px));
+}
+.menu, .editpanel{
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    background-color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(114.514%);
+    z-index: 114514191810;
+    padding: 20px;
+    width: 65vw;
+    max-height: 70vw;
+    transition: all 0.3s cubic-bezier(0.3, 0.35, 0, 1.00);
+    overflow-y: auto;
+}
+.menu.show, .editpanel.show{
+    transform: translateX(-50%) translateY(0);
+    transition: all 0.3s cubic-bezier(0.3, 0.35, 0, 1.00);
+    /* transition: all 0.3s cubic-bezier(0.38, 0, 0.19, 1.03); */
+}
+.as-list{
+    list-style: none;
+    gap: 5px;
+    padding: 0;
+}
+.as-list li{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 10px;
+    padding: 2.5px;
+    cursor: pointer;
+    height: 40px;
+}
+.as-list li:hover{
+    background-color: #d3d3d3;
+}
+#canvas{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+
+.celledit-ctrlcont{
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    height: 35px;
+    box-sizing: border-box;
+}
+.celledit-ctrlcont p{margin: 0;}
+.celledit-ctrlcont input, .celledit-ctrlcont textarea{width: 70%;}
+.celledit-ctrlcont input[type="range"]{cursor: pointer;}
+.celledit-ctrlcont textarea{
+    border-radius: 18px;
+    padding: 5px;
+    border: 2px solid #ccc;
+    resize: none;
+    transition: all 0.1s cubic-bezier(0.76, 0.08, 0.71, 0.91);
+    box-sizing: border-box;
+    font-family: 'Wanted Sans Std','Noto Sans SC';
+}
+.celledit-ctrlcont textarea:focus{
+    outline: none;
+    border-radius: 7px;
+    border: 3px solid lightseagreen;
+    transition: all 0.1s cubic-bezier(0.76, 0.08, 0.71, 0.91);
+    box-sizing: border-box;
+}
+.celledit-btn{
+    right: 65px;
+    display: inline-block;
+    position: absolute;
+    width: 40px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    background-color: #efefef;
+    color: black;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+    animation: all 0.3s cubic-bezier(0.3, 0.35, 0, 1.00);
+}
+.celledit-btn:hover{
+    box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.5);
+    animation: all 0.3s cubic-bezier(0.3, 0.35, 0, 1.00);
+}
+.celledit-btn:active{
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7);
+    animation: all 0.3s cubic-bezier(0.3, 0.35, 0, 1.00);
+}
+
+.floating-merge-tip{
+    position: fixed;
+    right: 30px;
+    bottom: -70px;
+    z-index: 114514191810;
+    background-color: white;
+    border-radius: 10px;
+    width: 100px;
+    height: 40px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    user-select: none;
+    transition: all 0.15s cubic-bezier(0.3, 0.35, 0, 1.00);
+}
+.floating-merge-tip.show{
+    bottom: 30px;
+    transition: all 0.15s cubic-bezier(0.3, 0.35, 0, 1.00);
+}

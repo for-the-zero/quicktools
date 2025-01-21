@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taple</title>
+    <link rel="stylesheet" href="https://cdn.jsdmirror.com/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans-std/fonts/webfonts/variable/split/WantedSansStdVariable.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap">  
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="controls-bar">
+        <button id="menu-btn" class="material-icons-outlined">menu</button>
+        <!--tools-->
+        <button id="move-btn" class="material-icons-outlined">control_camera</button>
+        <button id="edit-btn" class="material-icons-outlined">edit_note</button>
+        <button id="merge-btn" class="material-icons-outlined">merge</button>
+        <button id="split-btn" class="material-icons-outlined">call_split</button>
+        <button id="add-btn" class="material-icons-outlined">add</button>
+        <button id="del-btn" class="material-icons-outlined">remove</button>
+    </div>
+    <div class="add-bar">
+        <button id="add-down" class="selected-add material-icons-outlined">arrow_circle_down</button>
+        <button id="add-right" class="material-icons-outlined">arrow_circle_right</button>
+    </div>
+    <div class="menu">
+        <h1>Help</h1>
+        <p>
+            toolbar: move canvas ; open this panel ; edit text and resize ; merge cells ; split cells ; add row or column ; del row or column
+            <br>
+            add bar: add row or column up or down or left or right
+            <br>
+            Ctrl + Z : undo ; Ctrl + Y : redo
+        </p>
+        <hr>
+        <h1>Action&Settings</h1>
+        <ul class="as-list">
+            <li id="save-img"><span class="material-icons-outlined" style="margin-right: 5px;">save_as</span><span>Save As PNG</span></li>
+            <li id="save-json"><span class="material-icons-outlined" style="margin-right: 5px;">data_object</span><span>Save As JSON</span></li>
+            <li id="load-json"><span class="material-icons-outlined" style="margin-right: 5px;">file_upload</span><span>Load JSON</span></li>
+            <li id="cell-divider" style="user-select: none;"><span class="material-icons-outlined" style="margin-right: 5px;">shape_line</span><span id="scd_text">Cell Divider : ON</span></li>
+        </ul>
+    </div>
+    <div class="editpanel">
+        <h1>Edit<button class="celledit-btn material-icons-outlined">minimize</button></h1>
+        <div class="celledit-ctrlcont">
+            <p>Text of cell:</p>
+            <textarea class="celledit-text-input" width="70%" rows="1"></textarea>
+        </div>
+        <div class="celledit-ctrlcont">
+            <p>Width of cell: <span>100</span></p>
+            <input type="range" class="celledit-size-input-x" min="40" max="800" value="100">
+        </div class="celledit-ctrlcont">
+        <div class="celledit-ctrlcont">
+            <p>Height of cell: <span>100</span></p>
+            <input type="range" class="celledit-size-input-y" min="40" max="800" value="100">
+        </div>
+    </div>
+    <div class="floating-merge-tip"><span></span></div>
+    <canvas id="canvas"></canvas>
+
+
+    <script src="https://cdn.jsdmirror.com/npm/jquery"></script>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/p5.js/1.9.4/p5.min.js"></script> -->
+    <script src="renderer.js"></script>
+    <script src="ui.js"></script>
+</body>
+</html>
