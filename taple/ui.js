@@ -263,8 +263,26 @@ natele_canvas.addEventListener('mousedown',()=>{mouse_down = true;});
 natele_canvas.addEventListener('mouseup',()=>{mouse_down = false;});
 natele_canvas.addEventListener('mousemove',function(e){
     if(tool == 'move' && mouse_down){
+        e.preventDefault();
         view_x += e.movementX * 1.5;
         view_y += e.movementY * 1.5;
+    };
+});
+var last_pos_x = 0;
+var last_pos_y = 0;
+natele_canvas.addEventListener('touchstart',function(e){
+    mouse_down = true;
+    last_pos_x = e.touches[0].clientX;
+    last_pos_y = e.touches[0].clientY;
+});
+natele_canvas.addEventListener('touchend',function(e){mouse_down = false;});
+natele_canvas.addEventListener('touchmove',function(e){
+    if(tool == 'move' && mouse_down){
+        e.preventDefault();
+        view_x += (e.touches[0].clientX - last_pos_x) * 1.5;
+        view_y += (e.touches[0].clientY - last_pos_y) * 1.5;
+        last_pos_x = e.touches[0].clientX;
+        last_pos_y = e.touches[0].clientY;
     };
 });
 
