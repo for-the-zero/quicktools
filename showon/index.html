@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ShowOn</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/mdui/mdui.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap"> 
+    <script src="https://jsd.cdn.zzko.cn/npm/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div>
+        <h1 class="mdui-prose">ShowOn</h1>
+        <div class="container">
+            <div class="selections">
+                <span>文本：</span>
+                <mdui-text-field autosize max-rows="3" label="输入文本"></mdui-text-field>
+            </div>
+            <div class="selections">
+                <span>字体颜色：</span>
+                <input type="color" class="font-color" value="#202020">
+                <span>背景颜色：</span>
+                <input type="color" class="background-color" value="#dfdfdf">
+            </div>
+            <div class="selections">
+                <span>模式：</span>
+                <mdui-radio-group class="mode" value="full">
+                    <mdui-radio value="full">全部显示</mdui-radio>
+                    <mdui-radio value="scroll">滚动显示</mdui-radio>
+                </mdui-radio-group>
+            </div>
+            <mdui-button>启动！</mdui-button>
+        </div>
+
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>

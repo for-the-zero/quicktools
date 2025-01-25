@@ -1,0 +1,46 @@
+body{
+    font-family: 'Google Sans','Noto Sans SC';
+    color: #202020;
+    background-color: #dfdfdf;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    overflow-y: hidden;
+}
+h1{
+    font-size: 3rem;
+    margin: 10px 0;
+}
+span{
+    font-size: 1.25rem;
+    width: 20%;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    max-height: 70vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-width: 525px;
+}
+.selections{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 70vw;
+    max-width: 525px;
+    align-items: center;
+    box-sizing: border-box;
+}
+input[type="color"]{
+    border-radius: 0px;
+    border-color: transparent;
+    background-color: #dfdfdf;
+    width: 20%;
+}
