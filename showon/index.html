@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>ShowOn</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
-    <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/mdui/mdui.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap"> 
-    <script src="https://jsd.cdn.zzko.cn/npm/mdui/mdui.global.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap">
+    <script src="https://jsd.cdn.zzko.cn/npm/@material/web/all.js/+esm" type="module"></script>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <div>
-        <h1 class="mdui-prose">ShowOn</h1>
+        <div class="header">
+            <h1 class="mdui-prose">ShowOn</h1>
+            <md-icon-button onclick="$('.dialog').attr('open', true)">
+                <md-icon>info</md-icon>
+            </md-icon-button>
+        </div>
         <div class="container">
             <div class="selections">
                 <span>文本：</span>
-                <mdui-text-field autosize max-rows="3" label="输入文本"></mdui-text-field>
+                <md-outlined-text-field type="textarea" label="输入文本" rows="1"></mdui-text-field>
             </div>
             <div class="selections">
                 <span>字体颜色：</span>
@@ -27,15 +30,34 @@
             </div>
             <div class="selections">
                 <span>模式：</span>
-                <mdui-radio-group class="mode" value="full">
-                    <mdui-radio value="full">全部显示</mdui-radio>
-                    <mdui-radio value="scroll">滚动显示</mdui-radio>
-                </mdui-radio-group>
+                <form class="mode" value="full">
+                    <md-radio name="mode" value="full" id="full"></md-radio>
+                    <label for="full">全部显示</label>
+                    <md-radio name="mode" value="scroll" id="scroll"></md-radio>
+                    <label for="scroll">滚动显示</label>
+                </form>
             </div>
-            <mdui-button>启动！</mdui-button>
+            <md-filled-tonal-button>
+                启动！
+                <md-icon slot="icon">send</md-icon>
+            </md-filled-tonal-button>
         </div>
-
     </div>
+
+    <md-dialog class="dialog">
+        <div slot="headline">关于</div>
+        <div slot="content">
+            这个其实没什么的，就是一个展示文本的工具，可以自定义字体颜色、背景颜色、显示模式等<br>
+            其实可以自己探索的<br>
+            这个东西用了material-web，好看吧<br>
+            cdn用了zzko.cn的jsDelivr镜像，用了jsDeliver的esm.run，这个速度，斯……
+        </div>
+        <div slot="actions">
+            <md-text-button onclick="$('.dialog').removeAttr('open')">关闭</md-text-button>
+        </div>
+    </md-dialog>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="index.js"></script>
 </body>
 </html>
