@@ -59,5 +59,12 @@ function create_cvs(){
         useCORS:true,
     }).then(canvas => {
         $('canvas').replaceWith(canvas);
+        $('canvas').on('click',()=>{
+            let img = canvas.toDataURL("image/png");
+            let a = document.createElement("a");
+            a.href = img;
+            a.download = "passkey.png";
+            a.click();
+        });
     });
 };
