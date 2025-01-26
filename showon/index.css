@@ -31,7 +31,7 @@
 body{
     font-family: 'Google Sans', 'Noto Sans SC';
     color: #202020;
-    background-color: #dfdfdf;
+    background-color: var(--md-sys-color-background);
     margin: 0;
     padding: 0;
     display: flex;
@@ -39,6 +39,7 @@ body{
     align-items: center;
     justify-content: center;
     overflow-y: hidden;
+    box-sizing: border-box;
 }
 h1{
     font-size: 3rem;
@@ -53,7 +54,7 @@ span{
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
     max-height: 90vh;
     overflow-y: auto;
     overflow-x: hidden;
@@ -72,7 +73,7 @@ span{
 input[type="color"]{
     border-radius: 0px;
     border-color: transparent;
-    background-color: #dfdfdf;
+    background-color: var(--md-sys-color-background);
     width: 20%;
 }
 md-outlined-text-field{
@@ -87,4 +88,20 @@ md-outlined-text-field{
     width: 100%;
     max-width: 525px;
     margin-bottom: 20px;
+}
+.start-btn{
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+}
+
+@media screen and (max-aspect-ratio: 1/1){
+    .header,.container{
+        width: 90vw;
+        max-width: 90vw;
+    }
+    .selections{
+        width: 100%;
+        max-width: 100%;
+    }
 }

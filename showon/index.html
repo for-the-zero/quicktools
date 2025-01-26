@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>ShowOn</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap">
@@ -18,7 +19,7 @@
             </md-icon-button>
         </div>
         <div class="container">
-            <div class="selections">
+            <div class="selections text">
                 <span>文本：</span>
                 <md-outlined-text-field type="textarea" label="输入文本" rows="1"></mdui-text-field>
             </div>
@@ -26,7 +27,7 @@
                 <span>字体颜色：</span>
                 <input type="color" class="font-color" value="#202020">
                 <span>背景颜色：</span>
-                <input type="color" class="background-color" value="#dfdfdf">
+                <input type="color" class="background-color" value="#fcfcff">
             </div>
             <div class="selections">
                 <span>模式：</span>
@@ -37,7 +38,7 @@
                     <label for="scroll">滚动显示</label>
                 </form>
             </div>
-            <md-filled-tonal-button>
+            <md-filled-tonal-button class="start-btn">
                 启动！
                 <md-icon slot="icon">send</md-icon>
             </md-filled-tonal-button>
