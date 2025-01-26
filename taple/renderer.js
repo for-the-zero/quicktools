@@ -55,7 +55,7 @@ function draw_text(ctx, text, x, y, width, height) {
                 };
             };
             text_lines.push(text_line);
-            line_height = ctx.measureText('哈').width * 1.5;
+            line_height = ctx.measureText('哈').width * 1.05;
             lines_height = line_height * text_lines.length;
             if (lines_height > height) {
                 font_size -= 1;
@@ -81,7 +81,7 @@ function draw_text(ctx, text, x, y, width, height) {
             };
         };
         text_lines.push(text_line);
-        line_height = ctx.measureText('哈').width * 1.5;
+        line_height = ctx.measureText('哈').width * 1.05;
         lines_height = line_height * text_lines.length;
         ctx.textBaseline = 'top';
         for (let i = 0; i < text_lines.length; i++) {
