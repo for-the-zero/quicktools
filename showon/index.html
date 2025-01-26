@@ -14,7 +14,7 @@
     <div>
         <div class="header">
             <h1 class="mdui-prose">ShowOn</h1>
-            <md-icon-button onclick="$('.dialog').attr('open', true)">
+            <md-icon-button onclick="document.querySelector('.dialog').setAttribute('open', '');">
                 <md-icon>info</md-icon>
             </md-icon-button>
         </div>
@@ -32,9 +32,9 @@
             <div class="selections">
                 <span>模式：</span>
                 <form class="mode" value="full">
-                    <md-radio name="mode" value="full" id="full"></md-radio>
+                    <md-radio name="mode" id="full"></md-radio>
                     <label for="full">全部显示</label>
-                    <md-radio name="mode" value="scroll" id="scroll"></md-radio>
+                    <md-radio name="mode" id="scroll"></md-radio>
                     <label for="scroll">滚动显示</label>
                 </form>
             </div>
@@ -54,11 +54,10 @@
             cdn用了zzko.cn的jsDelivr镜像，用了jsDeliver的esm.run，这个速度，斯……
         </div>
         <div slot="actions">
-            <md-text-button onclick="$('.dialog').removeAttr('open')">关闭</md-text-button>
+            <md-text-button onclick="document.querySelector('.dialog').removeAttribute('open');">关闭</md-text-button>
         </div>
     </md-dialog>
 
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="index.js"></script>
 </body>
 </html>
