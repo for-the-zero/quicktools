@@ -328,7 +328,7 @@ function check_finished(){
 function obj2dom(){
     for(let i=0;i<dyn_obj.length;i++){
         let user = dyn_obj[i];
-        let tab = `<mdui-tab value="${i}"><mdui-avatar src="https://api.allorigins.win/raw?url=${user.avatar}" slot="icon"></mdui-avatar>${user.name}</mdui-tab>`;
+        let tab = `<mdui-tab value="${i}"><mdui-avatar src="https://wsrv.nl/?url=${user.avatar}" slot="icon"></mdui-avatar>${user.name}</mdui-tab>`;
         e_tabs_containter.append(tab);
         let panel = `<mdui-tab-panel value="${i}" class="dyn-panel" slot="panel">`;
         for(let j=0;j<user.dyns.length;j++){
@@ -367,7 +367,7 @@ function dyn2card(dyn){
                 <mdui-button-icon icon="open_in_new" href="${dyn.link}" target="_blank"></mdui-button-icon></div>
                 <div class="content">${dyn.text}</div><div class="more-details"><ul class="pics">`;
                 for(let j=0;j<dyn.det.length;j++){
-                    card += `<li><img data-original="https://api.allorigins.win/raw?url=${dyn.det[j]}" src="https://api.allorigins.win/raw?url=${dyn.det[j]}" loading="lazy"></li>`;
+                    card += `<li><img data-original="https://wsrv.nl/?url=${dyn.det[j]}" src="https://wsrv.nl/?url=${dyn.det[j]}" loading="lazy"></li>`;
                 };
             card += `</ul></div></mdui-card>`;
             break;
@@ -376,7 +376,7 @@ function dyn2card(dyn){
                 <mdui-button-icon icon="open_in_new" href="${dyn.link}" target="_blank"></mdui-button-icon></div>
                 <div class="content">${dyn.text}</div><div class="more-details video">
                 <mdui-tooltip content="${dyn.det.desc}">
-                <img src="https://api.allorigins.win/raw?url=${dyn.det.cover}" loading="lazy"></mdui-tooltip>
+                <img src="https://wsrv.nl/?url=${dyn.det.cover}" loading="lazy"></mdui-tooltip>
                 <div><b>${dyn.det.title}</b>
                 <mdui-chip href="https://www.bilibili.com/video/${dyn.det.bv}" target="_blank" icon="movie--outlined">原视频链接</mdui-chip>
                 <mdui-chip href="https://player.bilibili.com/player.html?bvid=${dyn.det.bv}" target="_blank" icon="movie--outlined">iframe视频链接</mdui-chip>
