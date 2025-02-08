@@ -1,0 +1,79 @@
+body{
+    font-family: 'Google Sans', 'Noto Sans SC';
+}
+mdui-tabs{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+mdui-tab-panel{
+    padding: 20px;
+    overflow-y: auto;
+}
+mdui-card{
+    width: calc(100% - 30px);
+    margin: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+.top-details{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.top-details p{
+    font-size: 12px;
+}
+ul.pics{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 150px;
+    list-style-type: none;
+    margin: 0;
+    margin-top: 10px;
+    padding: 0;
+}
+ul.pics li{
+    width: 20%;
+    height: 100%;
+    position: relative;
+}
+ul.pics li img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.more-details.video{
+    margin-top: 10px;
+    width: 100%;
+    height: 180px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.more-details.video > mdui-tooltip > img{
+    max-width: 40%;
+    max-height: 100%;
+    object-fit: contain;
+}
+.more-details.video > div > b{
+    font-size: 20px;
+}
+.more-details.video > div{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    gap: 5px;
+    width: 60%;
+}
+mdui-chip{
+    width: fit-content;
+}

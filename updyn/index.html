@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UP主动态查看器</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
+    <link href="https://cdn.bootcdn.net/ajax/libs/viewerjs/1.11.7/viewer.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <mdui-tabs value="set" placement="top-start">
+        <mdui-tab value="set">
+            <mdui-icon name="home" slot="icon"></mdui-icon>
+            主页
+        </mdui-tab>
+        <!--TODO: <mdui-tab value="test">
+            <mdui-avatar src="https://avatars.githubusercontent.com/u/3030330?s=40&v=4" slot="icon"></mdui-avatar>
+            test
+        </mdui-tab> -->
+
+
+        <mdui-tab-panel slot="panel" value="set">
+            <h1>UP主动态查看器 - 主页</h1>
+            <p>仅提供查看动态功能，不提供互动功能，方便大家查看几个自己喜欢的UP主的动态</p>
+            <p>该项目使用了我在pythonanywhere封装的api，可能不稳定，如果过期了要及时提醒我（pythonanywhere免费服务需要点击按钮续期三个月保活）</p>
+            <p>b站图片加载还没完全解决，暂时先用allorigin，加载有点慢</p>
+
+
+            <mdui-button variant="filled" class="uid-add">添加</mdui-button>
+            <mdui-button variant="text" class="uid-import">导入</mdui-button>
+            <mdui-button variant="text" class="uid-export">导出</mdui-button>
+            <mdui-list class="uid-list">
+                <!-- <mdui-list-item>
+                    UID
+                    <mdui-button-icon icon="keyboard_arrow_up" slot="end-icon" class="uid-top"></mdui-button-icon>
+                    <mdui-button-icon icon="clear" slot="end-icon" class="uid-del"></mdui-button-icon>
+                </mdui-list-item> -->
+            </mdui-list>
+            <mdui-button variant="elevated" class="uid-save">请求</mdui-button>
+
+        </mdui-tab-panel>
+
+
+        <!--TODO: <mdui-tab-panel slot="panel" value="test" class="dyn-panel">
+
+            <mdui-card clickable>
+                <div class="top-details">
+                    <p>1900-01-01 00:00:00</p>
+                    <mdui-button-icon icon="open_in_new" href="about:blank" target="_blank"></mdui-button-icon>
+                </div>
+                <div class="content">
+                    1145141919810<br>1145141919810<br>1145141919810<br>1145141919810<br>1145141919810<br>
+                    纯文本动态卡片
+                </div>
+            </mdui-card>
+
+            <mdui-card clickable>
+                <div class="top-details">
+                    <p>1900-01-01 00:00:00</p>
+                    <mdui-button-icon icon="open_in_new" href="about:blank" target="_blank"></mdui-button-icon>
+                </div>
+                <div class="content">
+                    转发动态卡片
+                </div>
+                <div class="more-details">
+                    <mdui-card clickable>
+                        <div class="top-details">
+                            <p>1900-01-01 00:00:00</p>
+                            <mdui-button-icon icon="open_in_new" href="about:blank" target="_blank"></mdui-button-icon>
+                        </div>
+                        <div class="content">
+                            1145141919810<br>1145141919810<br>1145141919810<br>1145141919810<br>1145141919810<br>
+                            纯文本动态卡片
+                        </div>
+                    </mdui-card>
+                </div>
+            </mdui-card>
+
+            <mdui-card clickable>
+                <div class="top-details">
+                    <p>1900-01-01 00:00:00</p>
+                    <mdui-button-icon icon="open_in_new" href="about:blank" target="_blank"></mdui-button-icon>
+                </div>
+                <div class="content">
+                    图片动态卡片
+                </div>
+                <div class="more-details">
+                    <ul class="pics">
+                        <li><img data-original="https://fengyuanchen.github.io/viewerjs/images/tibet-1.jpg" src="https://fengyuanchen.github.io/viewerjs/images/thumbnails/tibet-1.jpg"></li>
+                        <li><img data-original="https://fengyuanchen.github.io/viewerjs/images/tibet-2.jpg" src="https://fengyuanchen.github.io/viewerjs/images/thumbnails/tibet-2.jpg"></li>
+                        <li><img data-original="https://fengyuanchen.github.io/viewerjs/images/tibet-3.jpg" src="https://fengyuanchen.github.io/viewerjs/images/thumbnails/tibet-3.jpg"></li>
+                        <li><img data-original="https://fengyuanchen.github.io/viewerjs/images/tibet-4.jpg" src="https://fengyuanchen.github.io/viewerjs/images/thumbnails/tibet-4.jpg"></li>
+                        <li><img data-original="https://fengyuanchen.github.io/viewerjs/images/tibet-5.jpg" src="https://fengyuanchen.github.io/viewerjs/images/thumbnails/tibet-5.jpg"></li>
+                        <li><img data-original="https://fengyuanchen.github.io/viewerjs/images/tibet-6.jpg" src="https://fengyuanchen.github.io/viewerjs/images/thumbnails/tibet-6.jpg"></li>
+                        <li><img data-original="https://fengyuanchen.github.io/viewerjs/images/tibet-7.jpg" src="https://fengyuanchen.github.io/viewerjs/images/thumbnails/tibet-7.jpg"></li>
+                        <li><img data-original="https://fengyuanchen.github.io/viewerjs/images/tibet-8.jpg" src="https://fengyuanchen.github.io/viewerjs/images/thumbnails/tibet-8.jpg"></li>
+                        <li><img data-original="https://fengyuanchen.github.io/viewerjs/images/tibet-9.jpg" src="https://fengyuanchen.github.io/viewerjs/images/thumbnails/tibet-9.jpg"></li>
+                    </ul>
+                </div>
+            </mdui-card>
+
+            <mdui-card clickable>
+                <div class="top-details">
+                    <p>1900-01-01 00:00:00</p>
+                    <mdui-button-icon icon="open_in_new" href="about:blank" target="_blank"></mdui-button-icon>
+                </div>
+                <div class="content">
+                    视频动态卡片
+                </div>
+                <div class="more-details video">
+                    <mdui-tooltip content="1145141919810">
+                        <img src="https://fengyuanchen.github.io/viewerjs/images/thumbnails/tibet-1.jpg">
+                    </mdui-tooltip>
+                    <div>
+                        <b>视频标题</b>
+                        <mdui-chip href="about:blank" target="_blank" icon="movie--outlined">原视频链接</mdui-chip>
+                        <mdui-chip href="https://bilibili.com/s/video/BV... 你妈的几年前还有的，现在没了" target="_blank" icon="movie--outlined">简版视频链接</mdui-chip>
+                        <mdui-chip href="about:blank" target="_blank" icon="movie--outlined">iframe视频链接</mdui-chip>
+                        <mdui-chip href="about:blank" target="_blank" icon="movie--outlined">复制BV号</mdui-chip>
+                    </div>
+                </div>
+            </mdui-card>
+
+        </mdui-tab-panel> -->
+
+
+    </mdui-tabs>
+
+    <mdui-dialog class="req-dia"
+        headline="请求中……"
+        description="为防止触发api风控，请求有速率限制，请耐心等待"
+    >
+        <mdui-linear-progress value="0.5"></mdui-linear-progress>
+    </mdui-dialog>
+
+
+    
+    <script src="http://unpkg.com/jquery/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/viewerjs@1.11.7/dist/viewer.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
