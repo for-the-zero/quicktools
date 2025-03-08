@@ -5,13 +5,20 @@ body{
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    overflow-x: hidden;
 }
 mdui-card{
     padding: 8px;
     margin: 10px;
-    width: 150px;
-    min-height: 200px;
+    width: 240px;
+    min-height: 240px;
     vertical-align: top;
+}
+@media screen and (max-aspect-ratio: 3/5) {
+    mdui-card{
+        width: 150px;
+        min-height: 200px;
+    }
 }
 .item-icon{
     font-size: 40px;

@@ -9,7 +9,8 @@ var links = [
             time: 0,
             recommend: -20,
             lang: "cn",
-            ui: "mdb"
+            ui: "mdb",
+            device: "both"
         }
     },
 
@@ -23,7 +24,8 @@ var links = [
             time: 1,
             recommend: -15,
             lang: "en",
-            ui: "css"
+            ui: "css",
+            device: "both"
         }
     },
 
@@ -37,7 +39,8 @@ var links = [
             time: 2,
             recommend: -65,
             lang: "cn",
-            ui: "material-web"
+            ui: "material-web",
+            device: "both"
         }
     },
 
@@ -51,7 +54,8 @@ var links = [
             time: 3,
             recommend: 0,
             lang: "cn",
-            ui: "mdui"
+            ui: "mdui",
+            device: "both"
         }
     },
 
@@ -65,7 +69,8 @@ var links = [
             time: 4,
             recommend: -70,
             lang: "cn",
-            ui: "no"
+            ui: "no",
+            device: "mobile"
         }
     },
 
@@ -79,7 +84,8 @@ var links = [
             time: 5,
             recommend: 1,
             lang: "cn",
-            ui: "mdui"
+            ui: "mdui",
+            device: "both"
         }
     },
 
@@ -93,7 +99,8 @@ var links = [
             time: 6,
             recommend: -30,
             lang: "cn",
-            ui: "mdui"
+            ui: "mdui",
+            device: "desktop"
         }
     },
 
@@ -107,7 +114,8 @@ var links = [
             time: 7,
             recommend: -100,
             lang: "cn",
-            ui: "no"
+            ui: "no",
+            device: "both"
         }
     },
 
@@ -121,7 +129,8 @@ var links = [
             time: 8,
             recommend: -80,
             lang: "en",
-            ui: "no"
+            ui: "no",
+            device: "both"
         }
     },
 
@@ -135,7 +144,8 @@ var links = [
             time: 9,
             recommend: 100,
             lang: "en",
-            ui: "css"
+            ui: "css",
+            device: "both"
         }
     },
 
@@ -149,7 +159,8 @@ var links = [
             time: 10,
             recommend: -60,
             lang: "cn",
-            ui: "material-web"
+            ui: "material-web",
+            device: "both"
         }
     },
 
@@ -163,7 +174,8 @@ var links = [
             time: 11,
             recommend: 50,
             lang: "cn",
-            ui: "mdui"
+            ui: "mdui",
+            device: "both"
         }
     }
 ];
@@ -175,6 +187,11 @@ const cate_order = {
         ['css','自己写的css/css by myself'],
         ['material-web','material-web'],
         ['mdb','MDBootstrap'],
-        ['no','无样式/No Style']
+        ['no','无样式/No Style'],
+    ],
+    device: [
+        ['both','两者都适用/Both'],
+        ['desktop','桌面/desktop'],
+        ['mobile','移动/mobile']
     ]
 };

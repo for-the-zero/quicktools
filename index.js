@@ -1,30 +1,3 @@
-/*
-var list(已经导入了，无需创建)中的每一项都是一个项目，格式如下：
-{
-    name: "Taple",
-    icon: "table_chart--outlined",
-    desc: "一个好看的表格，用canvas绘制",
-    url: "./taple/index.html",
-    github: "https://github.com/for-the-zero/Taple",
-    slot: {
-        time: 9,
-        recommend: 100,
-        lang: "cn",
-        ui: "css"
-    }
-},
-
-<mdui-card clickable href="#"><mdui-icon name="video_library--outlined" class="item-icon"></mdui-icon>
-    <h1>114514</h1>
-    <p>114514</p><mdui-chip href="#" icon="link" target="_blank">Github</mdui-chip>
-</mdui-card>
-
-<mdui-collapse-item value="item-2">
-    <mdui-list-item slot="header" icon="folder--outlined">Item 1</mdui-list-item>
-    <mdui-card clickable href="#"><mdui-icon name="video_library--outlined"class="item-icon"></mdui-icon><h1>114514</h1><p>114514</p><mdui-chip href="#" icon="link" target="_blank">Github</mdui-chip></mdui-card>
-</mdui-collapse-item>
-*/
-
 //elements
 const e_tooltip = $('mdui-tooltip');
 const e_sort = $('.sort');
