@@ -9,7 +9,7 @@ body{
 mdui-card{
     padding: 8px;
     margin: 10px;
-    width: 180px;
+    width: 150px;
     min-height: 200px;
     vertical-align: top;
 }
@@ -60,7 +60,7 @@ mdui-circular-progress{
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    max-width: 80%;
+    /* max-width: 80%; */
     min-width: 200px;
     box-sizing: border-box;
     margin-top: 5px;
@@ -79,6 +79,4 @@ mdui-icon{
 mdui-divider{
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 43%;
-    box-sizing: border-box;
 }
