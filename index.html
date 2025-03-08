@@ -35,91 +35,42 @@
     <div class="main">
 
         <p>这是一个简单小工具合集，会不断更新</p>
+        <div class="sort-cate">
+            <div class="sort-cate-item">
+                <mdui-icon name="sort"></mdui-icon>
+                <mdui-select variant="outlined" value="recommend" class="sort" end-icon="keyboard_arrow_down">
+                    <mdui-menu-item value="recommend">推荐/recommend</mdui-menu-item>
+                    <mdui-menu-item value="time">最新/newest</mdui-menu-item>
+                </mdui-select>
+            </div>
+            <div class="sort-cate-item">
+                <mdui-icon name="category--outlined"></mdui-icon>
+                <mdui-select variant="outlined" value="no" class="category" end-icon="keyboard_arrow_down">
+                    <mdui-menu-item value="no">不分类/no</mdui-menu-item>
+                    <mdui-menu-item value="lang">语言/languages</mdui-menu-item>
+                    <mdui-menu-item value="ui">UI库/UI library</mdui-menu-item>
+                </mdui-select>
+            </div>
+        </div>
+        <mdui-divider></mdui-divider>
 
-        <mdui-card clickable href="https://forthezero.pythonanywhere.com/ab">
-            <mdui-icon name="video_library--outlined" class="item-icon"></mdui-icon>
-            <h1>Alan Becker视频列表</h1>
-            <p>（站外）免_获取Alan Becker的YouTube视频列表（标题时间链接）</p>
-        </mdui-card>
+        <!--再见旧代码<mdui-card clickable href="https://forthezero.pythonanywhere.com/ab"><mdui-icon name="video_library--outlined"class="item-icon"></mdui-icon><h1>Alan Becker视频列表</h1><p>（站外）免_获取Alan Becker的YouTube视频列表（标题时间链接）</p></mdui-card><mdui-card clickable href="./todo/index.html"><mdui-icon name="task_alt--outlined"class="item-icon"></mdui-icon><h1>Todo</h1><p>模仿别人做的todo，左键标记右键删除，手机长按=右键</p></mdui-card><mdui-card clickable href="./zen/index.html"><mdui-icon name="timer--outlined"class="item-icon"></mdui-icon><h1>Zen</h1><p><del>带记录功能的计时器……</del>一个Material3风格的简约专注网页，可显示一言句子，可以对专注计时进行统计</p></mdui-card><mdui-card clickable href="./calendar/index.html"><mdui-icon name="date_range--outlined"class="item-icon"></mdui-icon><h1>简单日历</h1><p>简约的日历，就只由简单的日历功能</p></mdui-card><mdui-card clickable href="./playvib/1.html"><mdui-icon name="vibration--outlined"class="item-icon"></mdui-icon><h1>震动测试</h1><p>仅限带线性马达的手机，随便搞的，更新了2.0版本，但还是不如意……</p></mdui-card><mdui-card clickable href="./form/index.html"><mdui-icon name="question_answer--outlined"class="item-icon"></mdui-icon><h1>QpenForm</h1><p>此处仅限前端部分</p><mdui-chip href="https://github.com/for-the-zero/QpenForm"target="_blank">Github</mdui-chip></mdui-card><mdui-card clickable href="./typeto/index.html"><mdui-icon name="keyboard--outlined"class="item-icon"></mdui-icon><h1>TypeTo</h1><p>（仅限电脑使用，需要键盘）将键盘上的按键映射成其它字符，可以拿来整活</p></mdui-card><mdui-card clickable href="./passkey/index.html"><mdui-icon name="password"class="item-icon"></mdui-icon><h1>Passkey</h1><p>生成图像密文，不提供解密（懒）</p></mdui-card><mdui-card clickable href="./vv/index.html"><mdui-icon name="voicemail"class="item-icon"></mdui-icon><h1>VisualVoice</h1><p>将声音转换成颜色</p></mdui-card><mdui-card clickable href="./taple/index.html"><mdui-icon name="table_chart--outlined"class="item-icon"></mdui-icon><h1>Taple</h1><p>一个好看的表格，用canvas绘制</p><mdui-chip href="https://github.com/for-the-zero/Taple"target="_blank">Github</mdui-chip></mdui-card><mdui-card clickable href="./showon/index.html"><mdui-icon name="smart_screen--outlined"class="item-icon"></mdui-icon><h1>文本展示</h1><p>将文本展示在屏幕上</p></mdui-card><mdui-card clickable href="./updyn/index.html"><mdui-icon name="post_add"class="item-icon"></mdui-icon><h1>UP主动态查看器</h1><p>查看UP主的动态</p><mdui-chip href="https://github.com/for-the-zero/UpDyn"target="_blank">Github</mdui-chip></mdui-card><mdui-card clickable variant="outlined"style="text-align: center; user-select: none;"><h1>Coming Soon...</h1></mdui-card>-->
+        <mdui-collapse class="tools">
+
+            <!-- <mdui-card clickable href="#"><mdui-icon name="video_library--outlined"class="item-icon"></mdui-icon><h1>114514</h1><p>114514</p><mdui-chip href="#" icon="link" target="_blank">Github</mdui-chip></mdui-card>
+
+            <mdui-collapse-item value="item-2">
+                <mdui-list-item slot="header" icon="folder--outlined">Item 1</mdui-list-item>
+                <mdui-card clickable href="#"><mdui-icon name="video_library--outlined"class="item-icon"></mdui-icon><h1>114514</h1><p>114514</p><mdui-chip href="#" icon="link" target="_blank">Github</mdui-chip></mdui-card>
+            </mdui-collapse-item> -->
+
+            <mdui-circular-progress></mdui-circular-progress>
+        </mdui-collapse>
         
-        <mdui-card clickable href="./todo/index.html">
-            <mdui-icon name="task_alt--outlined" class="item-icon"></mdui-icon>
-            <h1>Todo</h1>
-            <p>模仿别人做的todo，左键标记右键删除，手机长按=右键</p>
-        </mdui-card>
-
-        <mdui-card clickable href="./zen/index.html">
-            <mdui-icon name="timer--outlined" class="item-icon"></mdui-icon>
-            <h1>Zen</h1>
-            <p><del>带记录功能的计时器……</del>一个Material3风格的简约专注网页，可显示一言句子，可以对专注计时进行统计</p>
-        </mdui-card>
-
-        <mdui-card clickable href="./calendar/index.html">
-            <mdui-icon name="date_range--outlined" class="item-icon"></mdui-icon>
-            <h1>简单日历</h1>
-            <p>简约的日历，就只由简单的日历功能</p>
-        </mdui-card>
-
-        <mdui-card clickable href="./playvib/1.html">
-            <mdui-icon name="vibration--outlined" class="item-icon"></mdui-icon>
-            <h1>震动测试</h1>
-            <p>仅限带线性马达的手机，随便搞的，更新了2.0版本，但还是不如意……</p>
-        </mdui-card>
-
-        <mdui-card clickable href="./form/index.html">
-            <mdui-icon name="question_answer--outlined" class="item-icon"></mdui-icon>
-            <h1>QpenForm</h1>
-            <p>此处仅限前端部分</p>
-            <mdui-chip href="https://github.com/for-the-zero/QpenForm" target="_blank">Github</mdui-chip>
-        </mdui-card>
-
-        <mdui-card clickable href="./typeto/index.html">
-            <mdui-icon name="keyboard--outlined" class="item-icon"></mdui-icon>
-            <h1>TypeTo</h1>
-            <p>（仅限电脑使用，需要键盘）将键盘上的按键映射成其它字符，可以拿来整活</p>
-        </mdui-card>
-
-        <mdui-card clickable href="./passkey/index.html">
-            <mdui-icon name="password" class="item-icon"></mdui-icon>
-            <h1>Passkey</h1>
-            <p>生成图像密文，不提供解密（懒）</p>
-        </mdui-card>
-
-        <mdui-card clickable href="./vv/index.html">
-            <mdui-icon name="voicemail" class="item-icon"></mdui-icon>
-            <h1>VisualVoice</h1>
-            <p>将声音转换成颜色</p>
-        </mdui-card>
-
-        <mdui-card clickable href="./taple/index.html">
-            <mdui-icon name="table_chart--outlined" class="item-icon"></mdui-icon>
-            <h1>Taple</h1>
-            <p>一个好看的表格，用canvas绘制</p>
-            <mdui-chip href="https://github.com/for-the-zero/Taple" target="_blank">Github</mdui-chip>
-        </mdui-card>
-
-        <mdui-card clickable href="./showon/index.html">
-            <mdui-icon name="smart_screen--outlined" class="item-icon"></mdui-icon>
-            <h1>文本展示</h1>
-            <p>将文本展示在屏幕上</p>
-        </mdui-card>
-
-        <mdui-card clickable href="./updyn/index.html">
-            <mdui-icon name="post_add" class="item-icon"></mdui-icon>
-            <h1>UP主动态查看器</h1>
-            <p>查看UP主的动态</p>
-            <mdui-chip href="https://github.com/for-the-zero/UpDyn" target="_blank">Github</mdui-chip>
-        </mdui-card>
-
-        <mdui-card clickable variant="outlined"
-            style="text-align: center; user-select: none;">
-            <h1>Coming Soon...</h1>
-        </mdui-card>
-
-
     </div>
-    
-
     <script>mdui.setColorScheme('#59ffee')</script>
+    <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+    <script src="./links.js"></script>
+    <script src="./index.js"></script>
 </body>
 </html>
