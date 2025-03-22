@@ -14,14 +14,17 @@ mdui-card{
     min-height: 240px;
     vertical-align: top;
 }
-@media screen and (max-aspect-ratio: 3/5) {
+@media screen and (max-width: 550px) {
     mdui-card{
         width: 150px;
         min-height: 200px;
     }
+    .item-icon{
+        font-size: 40px;
+    }
 }
 .item-icon{
-    font-size: 40px;
+    font-size: 50px;
 }
 h1, p{
     margin-top: 7px;

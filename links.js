@@ -17,7 +17,7 @@ var links = [
     {
         name: "Todo",
         icon: "task_alt--outlined",
-        desc: "模仿别人做的todo，左键标记右键删除，手机长按=右键",
+        desc: "An imitative todo app, trigger ctx menu to del item",
         url: "./todo/index.html",
         github: null,
         slot: {
@@ -122,7 +122,7 @@ var links = [
     {
         name: "VisualVoice",
         icon: "voicemail",
-        desc: "将声音转换成颜色",
+        desc: "convert voice to color",
         url: "./vv/index.html",
         github: null,
         slot: {
@@ -137,7 +137,7 @@ var links = [
     {
         name: "Taple",
         icon: "table_chart--outlined",
-        desc: "一个好看的表格，用canvas绘制",
+        desc: "A pretty sinple table app based on canvas",
         url: "./taple/index.html",
         github: "https://github.com/for-the-zero/Taple",
         slot: {

@@ -48,6 +48,7 @@ e_cate.on('change',function(){
     show_tools(links, e_sort.val(), e_cate.val());
 });
 show_tools(links, e_sort.val(), e_cate.val());
+print_rcm();
 
 function show_tools(list, sort, cate) {
     // prepare
@@ -112,4 +113,15 @@ function show_tools(list, sort, cate) {
     };
 };
 
-
+function print_rcm(){
+    //console.log按recommand顺序打印出推荐列表，格式为：[{'键是name':'值是slot.recommend（可以为0和负数）'},...]
+    let rcm_list = [];
+    for(let i=0;i<links.length;i++){
+        let item = links[i];
+        rcm_list.push({'name':item.name,'recommend':item.slot.recommend});
+    };
+    rcm_list.sort(function(a,b){
+        return b.recommend - a.recommend;
+    });
+    console.log(rcm_list);
+};
