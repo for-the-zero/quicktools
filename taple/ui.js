@@ -15,6 +15,8 @@ const ele_saveimg = $('.as-list #save-img');
 const ele_savejson = $('.as-list #save-json');
 const ele_loadjson= $('.as-list #load-json');
 const ele_divider_switch = $('.as-list #cell-divider');
+const ele_default = $('.as-list #default-table');
+const ele_openaipanel = $('.as-list #open-aipanel');
 
 const ele_fmt = $('.floating-merge-tip');
 
@@ -24,10 +26,13 @@ const ele_ce_height = $('.celledit-size-input-y');
 const ele_ce_btn = $('.celledit-btn');
 const ele_ce_panel = $('.editpanel');
 
+const ele_aipanel = $('.aipanel');
+
 const natele_canvas = document.getElementById('canvas');
 
 var view_x = 0;
 var view_y = 90;
+const dpr = window.devicePixelRatio || 1.5;
 
 // tool selection
 var tool = 'move';
@@ -157,8 +162,7 @@ ele_loadjson.on('click',function(){
             let json_str = e.target.result;
             let json_obj = JSON.parse(json_str);
             now_table = json_obj;
-            undo_history = [json_str];
-            undo_index = -1;
+            new_change();
         };
         reader.readAsText(file);
     };
@@ -175,6 +179,24 @@ ele_divider_switch.on('click',function(){
     } else {
         cell_divider = true;
         ele_divider_switch.find('#scd_text').text('Cell Divider : ON');
+    };
+});
+ele_default.on('click',function(){
+    let d1 = {heads:{col:[['c1',300],['c2',200],['c3',150],],row: [['r1',100],['r2',100],['r3',100],],colh_height: 80,rowh_height: 70},cells: {'0-0': ['cell1',true,'parent'],'0-1': ['cell2',false,null],'0-2': ['cell3',false,null],'1-0': ['cell9',true,'0-0'],'1-1': ['cell4',false,null],'1-2': ['cell5',false,null],'2-0': ['cell6',false,null],'2-1': ['cell8',false,null],'2-2': ['cell7',false,null],}};
+    let d2 = {heads:{col:[['col',100]],row:[['row',100]],colh_height:100,rowh_height:100},cells:{"0-0":["cell",false,null]}};
+    if(Math.random() < 0.5){
+        now_table = d1;
+    } else {
+        now_table = d2;
+    };
+    new_change();
+});
+ele_openaipanel.on('click',function(){
+    if(ele_aipanel.hasClass('show')){
+        ele_aipanel.removeClass('show');
+    } else {
+        ele_menu.removeClass('show');
+        ele_aipanel.addClass('show');
     };
 });
 
@@ -241,16 +263,20 @@ if(localStorage.getItem('taple_table')){
     localStorage.setItem('taple_table',JSON.stringify(now_table));
 };
 undo_history.push(JSON.stringify(now_table));
-natele_canvas.width = window.innerWidth * 1.5;
-natele_canvas.height = window.innerHeight * 1.5;
+natele_canvas.width = window.innerWidth * dpr;
+natele_canvas.height = window.innerHeight * dpr;
 window.addEventListener('resize',function(){
-    natele_canvas.width = window.innerWidth * 1.5;
-    natele_canvas.height = window.innerHeight * 1.5;
+    natele_canvas.width = window.innerWidth * dpr;
+    natele_canvas.height = window.innerHeight * dpr;
 });
 function draw(){
     cvs_ctx.clearRect(0,0,natele_canvas.width,natele_canvas.height);
-    cvs_ctx.stokeStyle = 'black';
-    taple(cvs_ctx,now_table,view_x,view_y,cell_divider);
+    cvs_ctx.strokeStyle = 'black';
+    try{
+        taple(cvs_ctx,now_table,view_x,view_y,cell_divider);
+    }catch(e){
+        // Fuck U man
+    };
     let testing = false;
     if(!testing){
         requestAnimationFrame(draw);
@@ -264,8 +290,8 @@ natele_canvas.addEventListener('mouseup',()=>{mouse_down = false;});
 natele_canvas.addEventListener('mousemove',function(e){
     if(tool == 'move' && mouse_down){
         e.preventDefault();
-        view_x += e.movementX * 1.5;
-        view_y += e.movementY * 1.5;
+        view_x += e.movementX * dpr;
+        view_y += e.movementY * dpr;
     };
 });
 var last_pos_x = 0;
@@ -279,8 +305,8 @@ natele_canvas.addEventListener('touchend',function(e){mouse_down = false;});
 natele_canvas.addEventListener('touchmove',function(e){
     if(tool == 'move' && mouse_down){
         e.preventDefault();
-        view_x += (e.touches[0].clientX - last_pos_x) * 1.5;
-        view_y += (e.touches[0].clientY - last_pos_y) * 1.5;
+        view_x += (e.touches[0].clientX - last_pos_x) * dpr;
+        view_y += (e.touches[0].clientY - last_pos_y) * dpr;
         last_pos_x = e.touches[0].clientX;
         last_pos_y = e.touches[0].clientY;
     };
@@ -289,8 +315,8 @@ natele_canvas.addEventListener('touchmove',function(e){
 var merge_select = null;
 var editing_cell = '';
 natele_canvas.addEventListener('click',function(e){
-    let x = e.offsetX * 1.5 - view_x;
-    let y = e.offsetY * 1.5 - view_y;
+    let x = e.offsetX * dpr - view_x;
+    let y = e.offsetY * dpr - view_y;
     let clicked_cell = { x: -1, y: -1 };
     let col_head_height = now_table.heads.colh_height;
     let row_head_width = now_table.heads.rowh_height;

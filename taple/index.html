@@ -33,6 +33,10 @@
             add bar: add row or column up or down or left or right
             <br>
             Ctrl + Z : undo ; Ctrl + Y : redo
+            <br>
+            GitHub: <a href="https://github.com/for-the-zero/Taple" target="_blank">for-the-zero/Taple</a>
+            <br>
+            Get free apis: <a href="https://github.com/for-the-zero/Free-LLM-Collection" target="_blank">for-the-zero/Free-LLM-Collection</a>
         </p>
         <hr>
         <h1>Action&Settings</h1>
@@ -41,6 +45,8 @@
             <li id="save-json"><span class="material-icons-outlined" style="margin-right: 5px;">data_object</span><span>Save As JSON</span></li>
             <li id="load-json"><span class="material-icons-outlined" style="margin-right: 5px;">file_upload</span><span>Load JSON</span></li>
             <li id="cell-divider" style="user-select: none;"><span class="material-icons-outlined" style="margin-right: 5px;">shape_line</span><span id="scd_text">Cell Divider : ON</span></li>
+            <li id="default-table"><span class="material-icons-outlined" style="margin-right: 5px;">refresh</span><span>Use Default Table</span></li>
+            <li id="open-aipanel" style="user-select: none;"><span class="material-icons-outlined" style="margin-right: 5px;">auto_awesome</span><span id="csd_text">Open AI Panel</span></li>
         </ul>
     </div>
     <div class="editpanel">
@@ -58,13 +64,56 @@
             <input type="range" class="celledit-size-input-y" min="40" max="800" value="100">
         </div>
     </div>
+    <div class="aipanel">
+        <h1>Taple's AI</h1>
+        <p>Each request consumes approximately 1000+ to 2100+ tokens in system prompts.</p>
+        <div class="ai-settings">
+            <div class="ai-api-url">
+                <p>API URL:</p>
+                <input type="text" placeholder="OpenAI type API ('/chat/completions' will be added automatically)">
+            </div>
+            <div class="ai-api-key">
+                <p>API Key:</p>
+                <input type="password" placeholder="Your OpenAI API key">
+            </div>
+            <div class="ai-api-model">
+                <p>Model:</p>
+                <input type="text" placeholder="Model name">
+            </div>
+            <div class="ai-pmt-lang">
+                <p>Prompt Language:</p>
+                <input type="radio" value="en" id="ai-pmt-t-en" name="ai-lang" checked><lable for="ai-pmt-t-en">English</lable>
+                <input type="radio" value="ch" id="ai-pmt-t-ch" name="ai-lang"><lable for="ai-pmt-t-ch">Chinese</lable>
+            </div>
+            <div class="ai-pmt-thinking">
+                <p>Thinking Prompt(don't 'select if your model is a thinking model):</p>
+                <input type="checkbox" checked>
+            </div>
+            <div class="ai-pmt-include">
+                <p>Include Current Table:</p>
+                <input type="checkbox" checked>
+            </div>
+            <div class="ai-order">
+                <p>Your order:</p>
+                <textarea type="text" placeholder="Tell AI what should it do"></textarea>
+            </div>
+        </div>
+        <div class="ai-btns">
+            <button class="ai-btn-close material-icons-outlined">close</button>
+            <span class="material-icons-outlined">subdirectory_arrow_right</span>
+            <button class="ai-btn-generate material-icons-outlined">play_arrow</button>
+            <span class="material-icons-outlined">arrow_forward</span>
+            <button class="ai-btn-apply material-icons-outlined">check</button>
+        </div>
+        <div class="ai-result">Here's AI's response.<br>Click the 2nd button to request API, click the 3rd button to apply the response</div>
+    </div>
     <div class="floating-merge-tip"><span></span></div>
     <canvas id="canvas"></canvas>
 
 
     <script src="https://cdn.jsdmirror.com/npm/jquery"></script>
-    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/p5.js/1.9.4/p5.min.js"></script> -->
     <script src="renderer.js"></script>
     <script src="ui.js"></script>
+    <script src="ai.js"></script>
 </body>
 </html>
