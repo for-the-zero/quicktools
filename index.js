@@ -82,7 +82,7 @@ function show_tools(list, sort, cate) {
                     <mdui-icon name="${item.icon}" class="item-icon"></mdui-icon>
                     <h1>${item.name}</h1>
                     <p>${item.desc}</p>
-                    ${item.github ? `<mdui-chip href="${item.github}" icon="link" target="_blank">Github</mdui-chip>` : ''}
+                    ${item.github ? `<mdui-chip href="${item.github}" icon="code" target="_blank">Github</mdui-chip>` : ''}
                 </mdui-card>`);
             e_toollist.append(card);
         };
