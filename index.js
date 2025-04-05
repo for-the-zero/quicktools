@@ -103,7 +103,7 @@ function show_tools(list, sort, cate) {
                             <mdui-icon name="${item.icon}" class="item-icon"></mdui-icon>
                             <h1>${item.name}</h1>
                             <p>${item.desc}</p>
-                            ${item.github ? `<mdui-chip href="${item.github}" icon="link" target="_blank">Github</mdui-chip>` : ''}
+                            ${item.github ? `<mdui-chip href="${item.github}" icon="code" target="_blank">Github</mdui-chip>` : ''}
                         </mdui-card>`);
                     group.append(card);
                 };
@@ -114,7 +114,6 @@ function show_tools(list, sort, cate) {
 };
 
 function print_rcm(){
-    //console.log按recommand顺序打印出推荐列表，格式为：[{'键是name':'值是slot.recommend（可以为0和负数）'},...]
     let rcm_list = [];
     for(let i=0;i<links.length;i++){
         let item = links[i];

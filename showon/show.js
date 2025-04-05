@@ -1,5 +1,6 @@
 const nele_cvs = document.querySelector('#canvas');
 const ctx = nele_cvs.getContext('2d');
+const dpr = window.devicePixelRatio || 1.5;
 var text = '';
 var fontc = '#000000';
 var bgc = '#FFFFFF';
@@ -66,19 +67,19 @@ function draw_text(ctx, text, x, y, width, height) {
 };
 
 if(window.innerWidth < window.innerHeight){
-    nele_cvs.width = window.innerHeight * 1.5;
-    nele_cvs.height = window.innerWidth * 1.5;
+    nele_cvs.width = window.innerHeight * dpr;
+    nele_cvs.height = window.innerWidth * dpr;
 } else {
-    nele_cvs.width = window.innerWidth * 1.5;
-    nele_cvs.height = window.innerHeight * 1.5;
+    nele_cvs.width = window.innerWidth * dpr;
+    nele_cvs.height = window.innerHeight * dpr;
 };
 window.addEventListener('resize',function(){
     if(window.innerWidth < window.innerHeight){
-        nele_cvs.width = window.innerHeight * 1.5;
-        nele_cvs.height = window.innerWidth * 1.5;
+        nele_cvs.width = window.innerHeight * dpr;
+        nele_cvs.height = window.innerWidth * dpr;
     } else {
-        nele_cvs.width = window.innerWidth * 1.5;
-        nele_cvs.height = window.innerHeight * 1.5;
+        nele_cvs.width = window.innerWidth * dpr;
+        nele_cvs.height = window.innerHeight * dpr;
     };
     if(mode == 'full'){
         draw();
