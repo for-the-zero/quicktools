@@ -312,7 +312,7 @@ function process_ai_request(raw){
                 res_text += data.choices[0].delta.content;
             };
             ele_ai_res.text(res_text);
-            console.log(res_text);
+            //console.log(res_text);
         } catch(e) {
             console.error(e);
         };
@@ -323,15 +323,18 @@ function process_ai_request(raw){
 ele_ai_apply.on('click',()=>{
     if((!ele_ai_apply.prop('disabled')) && res_text){
         let processing_var = res_text;
+        let temp = '';
         // <result>提取
-        processing_var = processing_var.match(/.*<result>([\s\S]*)$/s);
-        if(processing_var.length <= 0){return null;};
-        processing_var = processing_var[processing_var.length - 1];
+        temp = processing_var.match(/.*<result>([\s\S]*)$/s);
+        if(temp.length >0){
+            processing_var = temp[temp.length - 1];
+        };
         processing_var = processing_var.replace(/<\/result>[\s\S]*$/s,'');
         // JSON提取
-        processing_var = processing_var.match(/(\{.*\})/s);
-        if(processing_var.length <= 0){return null;};
-        processing_var = processing_var[processing_var.length - 1];
+        temp = processing_var.match(/(\{.*\})/s);
+        if(temp.length > 0){
+            processing_var = temp[temp.length - 1];
+        };
         processing_var = JSON.parse(processing_var);
         // 应用
         now_table = processing_var;

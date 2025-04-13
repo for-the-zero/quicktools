@@ -1,5 +1,9 @@
 function draw_text(ctx, text, x, y, width, height) {
     if (text.length > 0 && text.trim().length > 0) {
+        // 超过画布了的跳过
+        if (x > ctx.canvas.width || y > ctx.canvas.height || x + width < 0 || y + height < 0) {
+            return null;
+        };
         // 自适应字体大小
         let font_family = 'Wanted Sans Std,Noto Sans SC';
         let font_size = '50'; // max
