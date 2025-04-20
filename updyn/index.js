@@ -94,6 +94,7 @@ function reflash_uid_list(){
         let item = $(`<mdui-list-item>
             ${uid_list[i]}
             <mdui-button-icon icon="keyboard_arrow_up" slot="end-icon" class="uid-top"></mdui-button-icon>
+            <mdui-button-icon icon="open_in_new" slot="end-icon" href="https://space.bilibili.com/${uid_list[i]}/dynamic" target="_blank"></mdui-button-icon>
             <mdui-button-icon icon="clear" slot="end-icon" class="uid-del"></mdui-button-icon>
             </mdui-list-item>`
         );
