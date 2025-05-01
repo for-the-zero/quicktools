@@ -15,6 +15,7 @@ const ele_saveimg = $('.as-list #save-img');
 const ele_savejson = $('.as-list #save-json');
 const ele_loadjson= $('.as-list #load-json');
 const ele_divider_switch = $('.as-list #cell-divider');
+// const ele_cp_json = $('.as-list #copypaste-json');
 const ele_default = $('.as-list #default-table');
 const ele_openaipanel = $('.as-list #open-aipanel');
 
@@ -181,6 +182,21 @@ ele_divider_switch.on('click',function(){
         ele_divider_switch.find('#scd_text').text('Cell Divider : ON');
     };
 });
+// ele_cp_json.on('click',function(){
+//     let pasted = prompt('Copy or Paste JSON here:',JSON.stringify(now_table));
+//     if(pasted){
+//         try{
+//             pasted = pasted.trim();
+//             console.dir(pasted); //太长了
+//             let json_obj = JSON.parse(pasted);
+//             taple(cvs_ctx,json_obj,0,0,cell_divider)
+//             now_table = json_obj;
+//             new_change();
+//         } catch(e){
+//             alert(e.message);
+//         };
+//     };
+// });
 ele_default.on('click',function(){
     let d1 = {heads:{col:[['c1',300],['c2',200],['c3',150],],row: [['r1',100],['r2',100],['r3',100],],colh_height: 80,rowh_height: 70},cells: {'0-0': ['cell1',true,'parent'],'0-1': ['cell2',false,null],'0-2': ['cell3',false,null],'1-0': ['cell9',true,'0-0'],'1-1': ['cell4',false,null],'1-2': ['cell5',false,null],'2-0': ['cell6',false,null],'2-1': ['cell8',false,null],'2-2': ['cell7',false,null],}};
     let d2 = {heads:{col:[['col',100]],row:[['row',100]],colh_height:100,rowh_height:100},cells:{"0-0":["cell",false,null]}};
@@ -314,9 +330,9 @@ natele_canvas.addEventListener('touchmove',function(e){
 
 var merge_select = null;
 var editing_cell = '';
-natele_canvas.addEventListener('click',function(e){
-    let x = e.offsetX * dpr - view_x;
-    let y = e.offsetY * dpr - view_y;
+function get_clicked_cell(ox,oy){
+    let x = ox * dpr - view_x;
+    let y = oy * dpr - view_y;
     let clicked_cell = { x: -1, y: -1 };
     let col_head_height = now_table.heads.colh_height;
     let row_head_width = now_table.heads.rowh_height;
@@ -336,6 +352,35 @@ natele_canvas.addEventListener('click',function(e){
         };
         vcursor_y += now_table.heads.row[j][1];
     };
+    return clicked_cell;
+};
+natele_canvas.addEventListener('contextmenu',function(e){
+    if(tool == 'edit' || tool == 'move'){
+        e.preventDefault();
+        let clicked_cell = get_clicked_cell(e.offsetX,e.offsetY);
+        if(clicked_cell.x !== -1 && clicked_cell.y !== -1){
+            if(now_table.cells[`${clicked_cell.y}-${clicked_cell.x}`][1] === false){
+                navigator.clipboard.writeText(
+                    now_table.cells[`${clicked_cell.y}-${clicked_cell.x}`][0]
+                );
+            } else {
+                navigator.clipboard.writeText(
+                    now_table.cells[now_table.cells[`${clicked_cell.y}-${clicked_cell.x}`][2]][0]
+                );
+            };
+        } else if (clicked_cell.x !== -1 && clicked_cell.y === -1){
+            navigator.clipboard.writeText(
+                now_table.heads.col[clicked_cell.x][0]
+            );
+        } else {
+            navigator.clipboard.writeText(
+                now_table.heads.row[clicked_cell.y][0]
+            );
+        };
+    };
+});
+natele_canvas.addEventListener('click',function(e){
+    let clicked_cell = get_clicked_cell(e.offsetX,e.offsetY);
 
     if(tool == 'merge'){
         if(merge_select){
