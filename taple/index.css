@@ -187,13 +187,13 @@ a[href]:hover{
     gap: 7px;
     margin-bottom: 10px
 }
-.ai-api-url, .ai-api-key, .ai-api-model, .ai-pmt-lang, .ai-pmt-thinking, .ai-pmt-include, .ai-order{
+.ai-api-url, .ai-api-key, .ai-api-model, .ai-pmt-lang, .ai-pmt-thinking, .ai-pmt-include, .ai-pmt-stream, .ai-order{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
 }
-.ai-api-url > p, .ai-api-key > p, .ai-api-model > p, .ai-pmt-lang > p, .ai-pmt-thinking > p, .ai-pmt-include > p, .ai-order > p{margin: 0;margin-right: 7px;}
+.ai-api-url > p, .ai-api-key > p, .ai-api-model > p, .ai-pmt-lang > p, .ai-pmt-thinking > p, .ai-pmt-include > p, .ai-pmt-stream > p, .ai-order > p{margin: 0;margin-right: 7px;}
 .ai-api-key > label, .ai-pmt-lang > label{margin-left: 2px;}
 .ai-api-key > input, .ai-pmt-lang > input{margin-right: 2px;}
 .ai-pmt-lang{

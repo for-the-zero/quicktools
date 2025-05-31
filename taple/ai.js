@@ -193,6 +193,7 @@ const ele_ai_pmtlang_en = $('.ai-pmt-lang > input[value="en"]#ai-pmt-t-en'); // 
 const ele_ai_pmtlang_ch = $('.ai-pmt-lang > input[value="ch"]#ai-pmt-t-ch'); // radio
 const ele_ai_thinking = $('.ai-pmt-thinking > input'); // checkbox
 const ele_ai_inc = $('.ai-pmt-include > input'); // checkbox
+const ele_ai_stream = $('.ai-pmt-stream > input'); // checkbox
 const ele_ai_order = $('.ai-order > textarea'); // text
 
 const ele_ai_close = $('.ai-btn-close');
@@ -203,11 +204,13 @@ const ele_ai_res = $('.ai-result');
 
 var ai_pmt_lang = 'en';
 var ai_pmt_thinking = true;
+var ai_pmt_stream = true;
 var ai_pmt_inc = true;
 
 ele_ai_pmtlang_en.on('change',function(){ai_pmt_lang = 'en';});
 ele_ai_pmtlang_ch.on('change',function(){ai_pmt_lang = 'ch';});
 ele_ai_thinking.on('change',function(){ai_pmt_thinking = this.checked;});
+ele_ai_stream.on('change',function(){ai_pmt_stream = this.checked;});
 ele_ai_inc.on('change',function(){ai_pmt_inc = this.checked;});
 ele_ai_close.on('click',()=>{
     ele_aipanel.removeClass('show');
@@ -224,45 +227,80 @@ ele_ai_gen.on('click',()=>{
             let data = {
                 model: ai_model,
                 messages: msg,
-                stream: true,
                 temperature: 0.9,
             };
             ele_ai_gen.prop('disabled',true);
             ele_ai_apply.prop('disabled',true);
             ele_ai_res.text('Requesting...');
-            $.ajax({
-                url: ai_url + '/chat/completions',
-                type: 'POST',
-                headers: {
-                    'Authorization': 'Bearer ' + ai_key,
-                    'Content-Type': 'application/json',
-                },
-                data: JSON.stringify(data),
-                xhrFields: {onprogress: function(e){
-                    let raw = e.currentTarget.responseText;
-                    process_ai_request(raw);
-                }},
-                success: function(res){
-                    ele_ai_gen.prop('disabled',false);
-                    ele_ai_apply.prop('disabled',false);
-                },
-                error: function(xhr,status,error){
-                    ele_ai_gen.prop('disabled',false);
-                    ele_ai_apply.prop('disabled',false);
-                    res_text = '';
-                    let err_text = 'Something went wrong\n';
-                    err_text += `Code: ${xhr.status}\n`;
-                    err_text += `Status: ${status}\n`;
-                    err_text += `Error: ${error}\n`;
-                    if(xhr.responseJSON){
-                        err_text += `Message: ${xhr.responseJSON.message}\n`;
-                    } else if (xhr.responseText){
-                        err_text += `Message: ${xhr.responseText}\n`;
-                    };
-                    console.error(err_text);
-                    ele_ai_res.text(err_text);
-                },
-            });
+            if(ai_pmt_stream){
+                data.stream = true;
+                $.ajax({
+                    url: ai_url + '/chat/completions',
+                    type: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + ai_key,
+                        'Content-Type': 'application/json',
+                    },
+                    data: JSON.stringify(data),
+                    xhrFields: {onprogress: function(e){
+                        let raw = e.currentTarget.responseText;
+                        process_ai_request(raw);
+                    }},
+                    success: function(res){
+                        ele_ai_gen.prop('disabled',false);
+                        ele_ai_apply.prop('disabled',false);
+                    },
+                    error: function(xhr,status,error){
+                        ele_ai_gen.prop('disabled',false);
+                        ele_ai_apply.prop('disabled',false);
+                        res_text = '';
+                        let err_text = 'Something went wrong\n';
+                        err_text += `Code: ${xhr.status}\n`;
+                        err_text += `Status: ${status}\n`;
+                        err_text += `Error: ${error}\n`;
+                        if(xhr.responseJSON){
+                            err_text += `Message: ${xhr.responseJSON.message}\n`;
+                        } else if (xhr.responseText){
+                            err_text += `Message: ${xhr.responseText}\n`;
+                        };
+                        console.error(err_text);
+                        ele_ai_res.text(err_text);
+                    },
+                });
+            } else {
+                data.stream = false;
+                $.ajax({
+                    url: ai_url + '/chat/completions',
+                    type: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + ai_key,
+                        'Content-Type': 'application/json',
+                    },
+                    data: JSON.stringify(data),
+                    success: function(res){
+                        res_text = res.choices[0].message.content;
+                        ele_ai_res.text(res_text);
+                        ele_ai_gen.prop('disabled',false);
+                        ele_ai_apply.prop('disabled',false);
+                    },
+                    error: function(xhr,status,error){
+                        ele_ai_gen.prop('disabled',false);
+                        ele_ai_apply.prop('disabled',false);
+                        res_text = '';
+                        let err_text = 'Something went wrong\n';
+                        err_text += `Code: ${xhr.status}\n`;
+                        err_text += `Status: ${status}\n`;
+                        err_text += `Error: ${error}\n`;
+                        if(xhr.responseJSON){
+                            err_text += `Message: ${xhr.responseJSON.message}\n`;
+                        } else if (xhr.responseText){
+                            err_text += `Message: ${xhr.responseText}\n`;
+                        };
+                        console.error(err_text);
+                        ele_ai_res.text(err_text);
+                    },
+                });
+            };
         } else {
             return null;
         };

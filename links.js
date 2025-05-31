@@ -137,7 +137,7 @@ var links = [
     {
         name: "Taple",
         icon: "table_chart--outlined",
-        desc: "A pretty sinple table app based on canvas",
+        desc: "A pretty simple table app based on canvas",
         url: "./taple/index.html",
         github: "https://github.com/for-the-zero/Taple",
         slot: {

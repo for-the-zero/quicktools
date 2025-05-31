@@ -15,7 +15,7 @@ const ele_saveimg = $('.as-list #save-img');
 const ele_savejson = $('.as-list #save-json');
 const ele_loadjson= $('.as-list #load-json');
 const ele_divider_switch = $('.as-list #cell-divider');
-// const ele_cp_json = $('.as-list #copypaste-json');
+const ele_cp_json = $('.as-list #copypaste-json');
 const ele_default = $('.as-list #default-table');
 const ele_openaipanel = $('.as-list #open-aipanel');
 
@@ -182,21 +182,21 @@ ele_divider_switch.on('click',function(){
         ele_divider_switch.find('#scd_text').text('Cell Divider : ON');
     };
 });
-// ele_cp_json.on('click',function(){
-//     let pasted = prompt('Copy or Paste JSON here:',JSON.stringify(now_table));
-//     if(pasted){
-//         try{
-//             pasted = pasted.trim();
-//             console.dir(pasted); //太长了
-//             let json_obj = JSON.parse(pasted);
-//             taple(cvs_ctx,json_obj,0,0,cell_divider)
-//             now_table = json_obj;
-//             new_change();
-//         } catch(e){
-//             alert(e.message);
-//         };
-//     };
-// });
+ele_cp_json.on('click',function(){
+    let pasted = prompt('If it\'s empty, it will copy the current table as JSON.');
+    if(pasted){
+        try{
+            let json_obj = JSON.parse(pasted);
+            now_table = json_obj;
+            new_change();
+        }catch(e){
+            alert('Invalid JSON format.');
+        };
+    } else {
+        let json_str = JSON.stringify(now_table);
+        navigator.clipboard.writeText(json_str);
+    };
+});
 ele_default.on('click',function(){
     let d1 = {heads:{col:[['c1',300],['c2',200],['c3',150],],row: [['r1',100],['r2',100],['r3',100],],colh_height: 80,rowh_height: 70},cells: {'0-0': ['cell1',true,'parent'],'0-1': ['cell2',false,null],'0-2': ['cell3',false,null],'1-0': ['cell9',true,'0-0'],'1-1': ['cell4',false,null],'1-2': ['cell5',false,null],'2-0': ['cell6',false,null],'2-1': ['cell8',false,null],'2-2': ['cell7',false,null],}};
     let d2 = {heads:{col:[['col',100]],row:[['row',100]],colh_height:100,rowh_height:100},cells:{"0-0":["cell",false,null]}};
