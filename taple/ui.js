@@ -20,6 +20,10 @@ const ele_default = $('.as-list #default-table');
 const ele_openaipanel = $('.as-list #open-aipanel');
 
 const ele_fmt = $('.floating-merge-tip');
+const ele_zin = $('.zoom-in');
+const ele_zout = $('.zoom-out');
+const ele_zreset = $('.zoom-reset');
+const ele_zvalue = $('.zoom-value');
 
 const ele_ce_text = $('.celledit-text-input');
 const ele_ce_width = $('.celledit-size-input-x');
@@ -34,6 +38,7 @@ const natele_canvas = document.getElementById('canvas');
 var view_x = 0;
 var view_y = 90;
 const dpr = window.devicePixelRatio || 1.5;
+var zoom_scale = 100;
 
 // tool selection
 var tool = 'move';
@@ -131,11 +136,13 @@ ele_saveimg.on('click',function(){
     for(let i in now_table.heads.row){
         height += now_table.heads.row[i][1];
     };
+    width = width * zoom_scale / 100;
+    height = height * zoom_scale / 100;
     let canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
     let ctx = canvas.getContext('2d');
-    taple(ctx,now_table,10,10,cell_divider);
+    taple(ctx,now_table,10*zoom_scale/100,10*zoom_scale/100,cell_divider,zoom_scale / 100);
     let a = document.createElement('a');
     a.style.display = 'none';
     a.href = canvas.toDataURL();
@@ -289,7 +296,7 @@ function draw(){
     cvs_ctx.clearRect(0,0,natele_canvas.width,natele_canvas.height);
     cvs_ctx.strokeStyle = 'black';
     try{
-        taple(cvs_ctx,now_table,view_x,view_y,cell_divider);
+        taple(cvs_ctx,now_table,view_x,view_y,cell_divider, zoom_scale / 100);
     }catch(e){
         // Fuck U man
     };
@@ -308,6 +315,15 @@ natele_canvas.addEventListener('mousemove',function(e){
         e.preventDefault();
         view_x += e.movementX * dpr;
         view_y += e.movementY * dpr;
+    };
+});
+natele_canvas.addEventListener('wheel',function(e){
+    if(e.shiftKey){
+        view_x -= e.deltaY * dpr;
+        view_y -= e.deltaX * dpr;
+    } else {
+        view_x -= e.deltaX * dpr;
+        view_y -= e.deltaY * dpr;
     };
 });
 var last_pos_x = 0;
@@ -331,22 +347,21 @@ natele_canvas.addEventListener('touchmove',function(e){
 var merge_select = null;
 var editing_cell = '';
 function get_clicked_cell(ox,oy){
-    let x = ox * dpr - view_x;
-    let y = oy * dpr - view_y;
+    const scale = zoom_scale / 100;
+    const table_x = (ox * dpr - view_x) / scale;
+    const table_y = (oy * dpr - view_y) / scale;
     let clicked_cell = { x: -1, y: -1 };
-    let col_head_height = now_table.heads.colh_height;
-    let row_head_width = now_table.heads.rowh_height;
-    let vcursor_x = row_head_width;
-    let vcursor_y = col_head_height;
+    let vcursor_x = now_table.heads.rowh_height;
     for (let i = 0; i < now_table.heads.col.length; i++) {
-        if (x >= vcursor_x && x < vcursor_x + now_table.heads.col[i][1]) {
+        if (table_x >= vcursor_x && table_x < vcursor_x + now_table.heads.col[i][1]) {
             clicked_cell.x = i;
             break;
         };
         vcursor_x += now_table.heads.col[i][1];
     };
+    let vcursor_y = now_table.heads.colh_height;
     for (let j = 0; j < now_table.heads.row.length; j++) {
-        if (y >= vcursor_y && y < vcursor_y + now_table.heads.row[j][1]) {
+        if (table_y >= vcursor_y && table_y < vcursor_y + now_table.heads.row[j][1]) {
             clicked_cell.y = j;
             break;
         };
@@ -725,4 +740,31 @@ ele_ce_text.on('input',function(){
 ele_ce_btn.on('click',function(){
     ele_ce_panel.removeClass('show');
     new_change();
+});
+
+// zoom
+ele_zin.on('click',function(){
+    zoom_scale += 10;
+    ele_zvalue.text(zoom_scale);
+});
+ele_zout.on('click',function(){
+    zoom_scale -= 10;
+    if(zoom_scale < 10){
+        zoom_scale = 10;
+    };
+    ele_zvalue.text(zoom_scale);
+});
+ele_zreset.on('click',function(){
+    zoom_scale = 100;
+    ele_zvalue.text(zoom_scale);
+});
+ele_zvalue.on('click',function(){
+    let val = prompt('Input zoom scale(%):', zoom_scale);
+    if(val!== null && val){
+        val = parseInt(val);
+        if(val > 0){
+            zoom_scale = val;
+            ele_zvalue.text(val);
+        };
+    };
 });

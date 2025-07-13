@@ -72,7 +72,7 @@
     </div>
     <div class="aipanel">
         <h1>Taple's AI</h1>
-        <p>Each request consumes approximately 1000+ to 2100+ tokens in system prompts.</p>
+        <p>Each request thousands of tokens in system prompts.</p>
         <div class="ai-settings">
             <div class="ai-api-url">
                 <p>API URL:</p>
@@ -91,9 +91,16 @@
                 <input type="radio" value="en" id="ai-pmt-t-en" name="ai-lang" checked><lable for="ai-pmt-t-en">English</lable>
                 <input type="radio" value="ch" id="ai-pmt-t-ch" name="ai-lang"><lable for="ai-pmt-t-ch">Chinese</lable>
             </div>
-            <div class="ai-pmt-thinking">
-                <p>Thinking Prompt(don't 'select if your model is a thinking model):</p>
-                <input type="checkbox" checked>
+            <div class="ai-pmt-type">
+                <p>Type of Prompt:</p>
+                <select>
+                    <!-- <option value="normal" title="Normal">Normal (To completely re-generate the table)</option>
+                    <option value="thinking" title="Thinking">Thinking (Same as normal, but for non-thinking models only)</option>
+                    <option value="editing" title="Editing">Editing (Generate JS to edit the table (dangerous) )</option> -->
+                    <option value="normal" title="To completely re-generate the table">Normal</option>
+                    <option value="thinking" title="Same as normal, but for non-thinking models only">Thinking</option>
+                    <option value="edit" title="Generate JS to edit the table (dangerous) ">Editing</option>
+                </select>
             </div>
             <div class="ai-pmt-include">
                 <p>Include Current Table:</p>
@@ -118,6 +125,12 @@
         <div class="ai-result">Here's AI's response.<br>Click the 2nd button to request API, click the 3rd button to apply the response</div>
     </div>
     <div class="floating-merge-tip"><span></span></div>
+    <div class="floating-zoom">
+        <button class="material-icons-outlined zoom-in">zoom_in</button>
+        <button class="material-icons-outlined zoom-reset">zoom_out_map</button>
+        <button class="zoom-value">100</button>
+        <button class="material-icons-outlined zoom-out">zoom_out</button>
+    </div>
     <canvas id="canvas"></canvas>
 
 

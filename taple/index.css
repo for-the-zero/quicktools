@@ -160,7 +160,7 @@ a[href]:hover{
 
 .floating-merge-tip{
     position: fixed;
-    right: 30px;
+    right: 25px;
     bottom: -70px;
     z-index: 114514191810;
     background-color: white;
@@ -176,7 +176,42 @@ a[href]:hover{
     transition: all 0.15s cubic-bezier(0.3, 0.35, 0, 1.00);
 }
 .floating-merge-tip.show{
-    bottom: 30px;
+    bottom: 25px;
+    transition: all 0.15s cubic-bezier(0.3, 0.35, 0, 1.00);
+}
+.floating-zoom{
+    position: fixed;
+    left: 25px;
+    bottom: 25px;
+    z-index: 114514;
+    background-color: white;
+    border-radius: 10px;
+    width: 35px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+    user-select: none;
+    transition: all 0.15s cubic-bezier(0.3, 0.35, 0, 1.00);
+}
+.floating-zoom button{
+    border-radius: 5px;
+    border: 0;
+    aspect-ratio: 1/1;
+    padding: 0;
+    background-color: #FFFFFF;
+    width: 100%;
+    font-size: 25px;
+}
+.floating-zoom button:nth-child(3){
+    font-size: 17px;
+    font-family: 'Wanted Sans Std';
+}
+.floating-zoom button:hover{
+    background-color: lightgray;
     transition: all 0.15s cubic-bezier(0.3, 0.35, 0, 1.00);
 }
 
@@ -187,15 +222,22 @@ a[href]:hover{
     gap: 7px;
     margin-bottom: 10px
 }
-.ai-api-url, .ai-api-key, .ai-api-model, .ai-pmt-lang, .ai-pmt-thinking, .ai-pmt-include, .ai-pmt-stream, .ai-order{
+.ai-api-url, .ai-api-key, .ai-api-model, .ai-pmt-lang, .ai-pmt-type, .ai-pmt-include, .ai-pmt-stream, .ai-order{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    max-width: 100%;
 }
-.ai-api-url > p, .ai-api-key > p, .ai-api-model > p, .ai-pmt-lang > p, .ai-pmt-thinking > p, .ai-pmt-include > p, .ai-pmt-stream > p, .ai-order > p{margin: 0;margin-right: 7px;}
+.ai-api-url > p, .ai-api-key > p, .ai-api-model > p, .ai-pmt-lang > p, .ai-pmt-type > p, .ai-pmt-include > p, .ai-pmt-stream > p, .ai-order > p{margin: 0;margin-right: 7px;}
 .ai-api-key > label, .ai-pmt-lang > label{margin-left: 2px;}
 .ai-api-key > input, .ai-pmt-lang > input{margin-right: 2px;}
+.ai-pmt-type > select{
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    white-space: pre-line;
+    word-break: break-all;
+}
 .ai-pmt-lang{
     flex-wrap: wrap;
 }

@@ -184,6 +184,89 @@ Key Concept - Cell Merging:
 Requirements: Strictly follow the format of the task prompt. Output the contents of the \`<think>\` and \`<result>\` XML tags in sequence without violation.  
 </task>`; // 1672 tokens(OpenAI)
 // -------------------------------------------
+const pmt_ch_edit = `<task>
+你是一个表格数据修改器。你的任务是根据用户的描述，修改特定格式的表格对象，这个表格对象被一个绘图函数用来绘制表格
+你需要做的就是生成js代码对表格对象进行修改
+<table-object-structure>
+下面提到的内容再对象中必须全部包含且不能为空（除了字符串可以为空字符串）
+该对象包含两个顶级键：\`heads\` 和 \`cells\`
+1. \`heads\` (对象): 定义表头信息和尺寸
+1.1. \`heads.col\` (数组): 包含多个 \`[列标题文本（字符串，可为空）, 列宽度（数字）]\`
+1.2. \`heads.row\` (数组): 包含多个 \`[行标题文本（字符串，可为空）, 行高度（数字）]\`
+1.3. \`heads.colh_height\` (数字): 列标题高度
+1.4. \`heads.rowh_height\` (数字): 行标题宽度
+2. \`cells\` (对象): 定义表格主体单元格的内容和属性（数量为行数×列数，不可缺少或比行数×列数多）
+2.1. 键 (字符串): 格式为 \`'行索引-列索引'\`，即\`y坐标-x坐标\` (索引从 0 开始，例如\`3-1\`)，表示单元格的位置
+2.2. 值 (数组): 包含三个元素 \`[文本内容（字符串，可为空）, 是否是合并单元格的一部分（布尔值）, 合并信息]\`
+2.2.1. \`文本内容\` (字符串): 该单元格显示的文字。对于合并单元格中的非主单元格，通常为空字符串 \`''\`
+2.2.2. \`是否合并单元格的一部分\` (布尔值): \`true\` 表示该单元格参与了合并，\`false\` 表示是独立单元格
+2.2.3. \`合并信息\` (字符串 或 \`null\`): 如果布尔值为 \`false\`，则此项为 \`null\`；如果布尔值为 \`true\` 且该单元格是合并区域的“父”单元格（即显示文本、决定合并范围起始的单元格），则此项为字符串 \`'parent'\`；如果布尔值为 \`true\` 且该单元格是合并区域的“子”单元格，则此项为指向其父单元格键名的字符串，例如 \`'0-0'\`
+<key-concept>
+关键概念 - 单元格合并:
+- 一个合并单元格区域由一个标记为 \`'parent'\` 的父单元格和若干个指向该父单元格键名的子单元格组成
+- 所有参与合并的单元格（父和子）的第二个元素（布尔值）都应为 \`true\`
+- 父单元格的第一个元素包含要在合并区域显示的文本。子单元格的第一个元素通常为空字符串
+- 合并单元格的形状不一定是矩形，可以拐弯、回环等复杂形状
+- 同一个合并单元格内的所有单元格必须在位置上连在一起（上下左右贴靠），例如\`4-3\`和\`4-4\`是连在一起的。但是如果一个单元格只有斜对角连接其他处在同一个合并单元格的单元格，如\`3-9\`和\`4-10\`和\`4-11\`，其中出现了\`3-9\`无法和其他单元格贴靠在一起，这种情况是不允许的，需要避免生成该情况
+</key-concept>
+<object-example>
+{"heads":{"col":[["c1",300],["c2",200],["c3",150]],"row":[["r1",100],["r2",100],["r3",100]],"colh_height":80,"rowh_height":70},"cells":{"0-0":["cell1",true,"parent"],"0-1":["cell2",true,"0-2"],"0-2":["cell3",true,"parent"],"1-0":["cell9",true,"0-0"],"1-1":["cell4",true,"0-0"],"1-2":["cell5",true,"0-2"],"2-0":["cell6",false,null],"2-1":["cell8",true,"0-0"],"2-2":["cell7",true,"0-0"]}}
+</object-example>
+</table-object-structure>
+用户将会向你发送用户的工作区当前的表格数据和要求，你需要按照用户的要求生成JavaScript编辑表格
+被编辑的对象名叫\`now_table\`，对它进行修改即可
+<how-to-edit>
+返回如下内容：
+\`\`\`javascript
+now_table.cells['0-0'][0] = 'new_content';
+now_table.heads.col[2][1] = 100;
+\`\`\`
+即可完成表格内容的修改
+注意你要返回的是Markdown格式的文本且在代码块中
+</how-to-edit>
+</task>`;
+const pmt_en_edit = `<task>
+You are a table data modifier. Your task is to modify a table object of a specific format based on the user's description. This table object is used by a plotting function to draw a table
+Your job is to generate JavaScript code to modify the table object
+<table-object-structure>
+All of the following content mentioned must be included in the object and cannot be empty (except for strings, which can be empty strings)
+The object contains two top-level keys: \`heads\` and \`cells\`
+1. \`heads\` (Object): Defines the table header information and dimensions
+1.1. \`heads.col\` (Array): Contains multiple \`[column_title_text (string, can be empty), column_width (number)]\`
+1.2. \`heads.row\` (Array): Contains multiple \`[row_title_text (string, can be empty), row_height (number)]\`
+1.3. \`heads.colh_height\` (Number): The height of the column headers
+1.4. \`heads.rowh_height\` (Number): The width of the row headers
+2. \`cells\` (Object): Defines the content and properties of the main table cells (the quantity must be rows × columns, no more, no less).
+2.1. Key (String): The format is \`'row_index-column_index'\`, i.e., \`'y-coordinate-x-coordinate'\` (indices start from 0, e.g., \`'3-1'\`), representing the cell's position
+2.2. Value (Array): Contains three elements \`[text_content (string, can be empty), is_part_of_merged_cell (boolean), merge_info]\`
+2.2.1. \`text_content\` (String): The text displayed in this cell. For non-parent cells in a merged area, this is usually an empty string \`''\`
+2.2.2. \`is_part_of_merged_cell\` (Boolean): \`true\` indicates that the cell is part of a merge; \`false\` indicates it is an independent cell
+2.2.3. \`merge_info\` (String or \`null\`): If the boolean is \`false\`, this item is \`null\`; if the boolean is \`true\` and the cell is the "parent" of the merged region (i.e., the cell that displays the text and determines the start of the merge range), this item is the string \`'parent'\`; if the boolean is \`true\` and the cell is a "child" of the merged region, this item is a string pointing to its parent's key name, for example, \`'0-0'\`
+<key-concept>
+Key Concept - Cell Merging:
+- A merged cell region consists of one parent cell marked as \`'parent'\` and several child cells pointing to that parent's key name.
+- All cells participating in the merge (both parent and children) should have the second element (the boolean) set to \`true\`
+- The parent cell's first element contains the text to be displayed in the merged area. The child cells' first element is usually an empty string
+- The shape of a merged cell is not necessarily rectangular; it can have complex shapes like L-bends, loops, etc
+- All cells within the same merged group must be contiguous (adjacent up, down, left, or right). For example, \`4-3\` and \`4-4\` are contiguous. However, if a cell is only diagonally connected to other cells in the same merged group, such as \`3-9\` with \`4-10\` and \`4-11\`, where \`3-9\` cannot be adjacently connected to the others, this situation is not allowed and should be avoided
+</key-concept>
+<object-example>
+{"heads":{"col":[["c1",300],["c2",200],["c3",150]],"row":[["r1",100],["r2",100],["r3",100]],"colh_height":80,"rowh_height":70},"cells":{"0-0":["cell1",true,"parent"],"0-1":["cell2",true,"0-2"],"0-2":["cell3",true,"parent"],"1-0":["cell9",true,"0-0"],"1-1":["cell4",true,"0-0"],"1-2":["cell5",true,"0-2"],"2-0":["cell6",false,null],"2-1":["cell8",true,"0-0"],"2-2":["cell7",true,"0-0"]}}
+</object-example>
+</table-object-structure>
+The user will send you the current table data in their workspace and their request. You need to generate JavaScript to edit the table according to the user's request
+The object to be edited is named \`now_table\`. You just need to modify it
+<how-to-edit>
+Return the following content:
+\`\`\`javascript
+now_table.cells['0-0'][0] = 'new_content';
+now_table.heads.col[2][1] = 100;
+\`\`\`
+This will complete the modification of the table content
+Please note that the content should be in Markdown format and in a code block
+</how-to-edit>
+</task>`;
+// -------------------------------------------
 
 //const ele_aipanel = $('.aipanel');
 const ele_ai_url = $('.ai-api-url > input'); // text
@@ -191,7 +274,7 @@ const ele_ai_key = $('.ai-api-key > input'); // password
 const ele_ai_model = $('.ai-api-model > input'); // text
 const ele_ai_pmtlang_en = $('.ai-pmt-lang > input[value="en"]#ai-pmt-t-en'); // radio(checked)
 const ele_ai_pmtlang_ch = $('.ai-pmt-lang > input[value="ch"]#ai-pmt-t-ch'); // radio
-const ele_ai_thinking = $('.ai-pmt-thinking > input'); // checkbox
+const ele_ai_type = $('.ai-pmt-type > select'); // select
 const ele_ai_inc = $('.ai-pmt-include > input'); // checkbox
 const ele_ai_stream = $('.ai-pmt-stream > input'); // checkbox
 const ele_ai_order = $('.ai-order > textarea'); // text
@@ -203,13 +286,13 @@ const ele_ai_apply = $('.ai-btn-apply');
 const ele_ai_res = $('.ai-result');
 
 var ai_pmt_lang = 'en';
-var ai_pmt_thinking = true;
+var ai_pmt_type = 'normal';
 var ai_pmt_stream = true;
 var ai_pmt_inc = true;
 
 ele_ai_pmtlang_en.on('change',function(){ai_pmt_lang = 'en';});
 ele_ai_pmtlang_ch.on('change',function(){ai_pmt_lang = 'ch';});
-ele_ai_thinking.on('change',function(){ai_pmt_thinking = this.checked;});
+ele_ai_type.on('change',function(){ai_pmt_type = this.value;});
 ele_ai_stream.on('change',function(){ai_pmt_stream = this.checked;});
 ele_ai_inc.on('change',function(){ai_pmt_inc = this.checked;});
 ele_ai_close.on('click',()=>{
@@ -311,18 +394,18 @@ function generate_msg(){
     let msg = [];
     let msg_sys = {role:'system', content: ""};
     let msg_usr = {role: 'user', content: ""};
-    if(ai_pmt_lang == 'en'){
-        if(ai_pmt_thinking){
-            msg_sys.content = pmt_en_thinking;
-        } else {
-            msg_sys.content = pmt_en;
-        };
-    } else {
-        if(ai_pmt_thinking){
-            msg_sys.content = pmt_ch_thinking;
-        } else {
-            msg_sys.content = pmt_ch;
-        };
+    switch(ai_pmt_type){
+        case 'normal':
+            if(ai_pmt_lang === 'en'){ msg_sys.content = pmt_en; }
+            else if(ai_pmt_lang === 'ch'){ msg_sys.content = pmt_ch; };
+            break;
+        case 'thinking':
+            if(ai_pmt_lang === 'en'){ msg_sys.content = pmt_en_thinking; }
+            else if(ai_pmt_lang === 'ch'){ msg_sys.content = pmt_ch_thinking; };
+        case 'edit':
+            if(ai_pmt_lang === 'en'){ msg_sys.content = pmt_en_edit; }
+            else if(ai_pmt_lang === 'ch'){ msg_sys.content = pmt_ch_edit; };
+            break;
     };
     if(ai_pmt_inc){
         msg_usr.content = `<correct-table-data>\n${JSON.stringify(now_table)}\n</correct-table-data>\n`;
@@ -362,22 +445,35 @@ ele_ai_apply.on('click',()=>{
     if((!ele_ai_apply.prop('disabled')) && res_text){
         let processing_var = res_text;
         let temp = '';
-        // <result>提取
-        temp = processing_var.match(/.*<result>([\s\S]*)$/s);
-        if(temp.length >0){
-            processing_var = temp[temp.length - 1];
+        if(ai_pmt_type === 'thinking' || ai_pmt_type === 'normal'){
+            // <result>提取
+            temp = processing_var.match(/.*<result>([\s\S]*)$/s);
+            if(temp.length >0){
+                processing_var = temp[temp.length - 1];
+            };
+            processing_var = processing_var.replace(/<\/result>[\s\S]*$/s,'');
+            // JSON提取
+            temp = processing_var.match(/(\{.*\})/s);
+            if(temp.length > 0){
+                processing_var = temp[temp.length - 1];
+            };
+            processing_var = JSON.parse(processing_var);
+            // 应用
+            now_table = processing_var;
+            new_change();
+            ele_aipanel.removeClass('show')
+        } else if(ai_pmt_type === 'edit'){
+            // 获取最后一个javascript（或没有代码名或js）代码块
+            let pat = /```(?:js|javascript)?\s*[\r\n]+([\s\S]*?)\s*```/gim;
+            let match = pat.exec(processing_var);
+            // 应用
+            try{
+                eval(match[1]);
+            }catch(e){
+                console.error(e);
+                alert(e.message);
+            };
         };
-        processing_var = processing_var.replace(/<\/result>[\s\S]*$/s,'');
-        // JSON提取
-        temp = processing_var.match(/(\{.*\})/s);
-        if(temp.length > 0){
-            processing_var = temp[temp.length - 1];
-        };
-        processing_var = JSON.parse(processing_var);
-        // 应用
-        now_table = processing_var;
-        new_change();
-        ele_aipanel.removeClass('show');
     };
 });
 
