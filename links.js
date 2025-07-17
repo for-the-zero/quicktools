@@ -1,18 +1,4 @@
 var links = [
-    {
-        name: "Alan Becker视频列表",
-        icon: "video_library--outlined",
-        desc: "（站外）免_获取Alan Becker的YouTube视频列表（标题时间链接）",
-        url: "https://forthezero.pythonanywhere.com/ab",
-        github: null,
-        slot: {
-            time: 0,
-            recommend: -20,
-            lang: "cn",
-            ui: "mdb",
-            device: "both"
-        }
-    },
 
     {
         name: "Todo",
@@ -177,7 +163,23 @@ var links = [
             ui: "mdui",
             device: "both"
         }
-    }
+    },
+
+    
+    {
+        name: "Alan Becker视频列表",
+        icon: "video_library--outlined",
+        desc: "免_获取Alan Becker的YouTube视频列表（标题时间链接）",
+        url: "./abvl/index.html",
+        github: null,
+        slot: {
+            time: 12,
+            recommend: -20,
+            lang: "cn",
+            ui: "mdui",
+            device: "both"
+        }
+    },
 ];
 
 const cate_order = {
@@ -186,7 +188,6 @@ const cate_order = {
         ['mdui','mdui'],
         ['css','自己写的css/css by myself'],
         ['material-web','material-web'],
-        ['mdb','MDBootstrap'],
         ['no','无样式/No Style'],
     ],
     device: [
