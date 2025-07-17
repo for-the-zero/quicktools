@@ -169,7 +169,7 @@ var links = [
     {
         name: "Alan Becker视频列表",
         icon: "video_library--outlined",
-        desc: "免_获取Alan Becker的YouTube视频列表（标题时间链接）",
+        desc: "免_获取Alan Becker的YouTube视频列表",
         url: "./abvl/index.html",
         github: null,
         slot: {
@@ -180,6 +180,20 @@ var links = [
             device: "both"
         }
     },
+    {
+        name: "asak viewer",
+        icon: "view_comfy_alt--outlined",
+        desc: "To view asak config",
+        url: "./asak_viewer/index.html",
+        github: null,
+        slot: {
+            time: 13,
+            recommend: -7,
+            lang: "en",
+            ui: "mdui",
+            device: "both"
+        }
+    }
 ];
 
 const cate_order = {
