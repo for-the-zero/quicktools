@@ -1,0 +1,21 @@
+body {
+    font-family: 'Google Sans', 'Noto Sans SC';
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    padding-top: 0;
+}
+.configs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: min-content;
+    gap: 10px;
+    width: 100%;
+    align-items: start;
+}
+mdui-card{
+    padding: 10px;
+}

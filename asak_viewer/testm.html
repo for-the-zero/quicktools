@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Models</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <link rel="stylesheet" href="./testm.css">
+</head>
+<body>
+    <h1 class="mdui-prose" style="margin: 0;">Test Your Models</h1>
+    <div class="configs">
+        <mdui-text-field clearable variant="outlined" class="baseurl" label="Base URL" helper="{base_url}/chat/completions"></mdui-text-field>
+        <mdui-text-field clearable variant="outlined" class="apikey" label="API Key" type="password" toggle-password></mdui-text-field>
+        <mdui-text-field clearable variant="outlined" class="modelname" label="Model Name"></mdui-text-field>
+        <mdui-text-field clearable variant="outlined" class="message" label="message" helper="[{role: 'user', content: '{message}'}]"></mdui-text-field>
+    </div>
+    <mdui-button>Request!</mdui-button>
+    <mdui-card clickable></mdui-card>
+
+    <script src="https://cdn.jsdmirror.com/npm/jquery"></script>
+    <script src="./testm.js"></script>
+</body>
+</html>

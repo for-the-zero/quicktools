@@ -1,27 +1,3 @@
-/*
-config
-{
-    "providers": {
-        "任意名字的id": {
-            "base_url": "https://your-api.com/base_url",
-            "key": "your-api-key"
-        },
-        ...
-    },
-    "models": [
-        {
-            "provider": "providers中的id",
-            "model": "模型名称",
-            "tags": ["标签1", "标签2"],
-            "rate_limit": {
-                "rpm": 114514,
-                "rpd": 1919810
-            }
-        },
-        ...
-    ],
-}
-*/
 mdui.setColorScheme('#000000');
 
 const e_search = mdui.$('mdui-text-field');
