@@ -8,7 +8,7 @@ mdui.$.ajax({
         let element_html = '';
         for(let i=0;i<items.length;i++){
             let item = items[i];
-            let tmb = item.snippet.thumbnails.high.url;
+            let tmb = item.snippet.thumbnails.medium.url;
             let title = item.snippet.title;
             let time = item.snippet.publishTime;
             let description = item.snippet.description;
