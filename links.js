@@ -193,6 +193,20 @@ var links = [
             ui: "mdui",
             device: "both"
         }
+    },
+    {
+        name: "AI记事本",
+        icon: "auto_fix_normal--outlined",
+        desc: "AI驱动的简易记事本",
+        url: "./aiime/index.html",
+        github: null,
+        slot: {
+            time: 14,
+            recommend: 2,
+            lang: "cn",
+            ui: "css",
+            device: "both"
+        }
     }
 ];
 

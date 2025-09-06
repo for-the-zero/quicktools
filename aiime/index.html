@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Notepad</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap">
+
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <div class="body">
+        <div class="menu">
+            <button class="menu-new">新建</button>
+            <button class="menu-open">打开</button>
+            <button class="menu-save">保存</button>
+            <div style="width: 10px;"></div>
+            <button class="menu-swich switch-off">AI已开启</button>
+            <button class="menu-setting">设置</button>
+        </div>
+        <div class="workspace">
+            <textarea class="editor" resize="none" autocomplete="off" spellcheck="false"></textarea>
+            <div class="ime">
+                <div>1</div>
+            </div>
+        </div>
+        <div class="elon-show"></div>
+        <div class="asking asking-hide">
+            <input type="text" placeholder="询问……" autocomplete="off" spellcheck="false" />
+            <p>114514</p>
+        </div>
+        <div class="setting">
+            <h1>AI Notepad 设置</h1>
+            <p>输入可以是打错了的文本或拼音之类的，AI自动进行修正<br />效果好不好主要看你AI怎么样了</p>
+            <div class="setting-item">
+                <label>Base URL</label>
+                <input type="text" />
+            </div>
+            <div class="setting-item">
+                <label>API Key</label>
+                <input type="password" />
+            </div>
+            <div class="setting-item">
+                <label>Model</label>
+                <input type="text" />
+            </div>
+            <div class="setting-item">
+                <label>Prompt</label>
+                <textarea></textarea>
+            </div>
+            <button class="setting-save">保存</button>
+        </div>
+    </div>
+    <script src="./index.js"></script>
+</body>
+</html>
