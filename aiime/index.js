@@ -342,7 +342,7 @@ const ime_request = debounce(() => {
             e_imelist.appendChild(create_div('请求失败，详细信息请查看控制台'));
         });
     };
-}, 500);
+}, 1000);
 e_editor.addEventListener('input', ()=>{
     if(!e_editor.value){
         e_imelist.innerHTML = '';
@@ -403,6 +403,18 @@ e_editor.addEventListener('keyup', (e) => {
             last_cursor_pos = current_pos;
             e_imelist.innerHTML = '';
             ime_list = [];
+        };
+    };
+});
+e_editor.addEventListener('keydown', (e) => {
+    if (is_ai_mode && e.key === 'Enter') {
+        const current_input = e_editor.value.slice(last_confirmed_pos, e_editor.selectionStart);
+        if (current_input.trim() === '') {
+            setTimeout(() => {
+                last_confirmed_pos = e_editor.selectionStart;
+                e_imelist.innerHTML = '';
+                ime_list = [];
+            }, 50);
         };
     };
 });

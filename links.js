@@ -205,7 +205,7 @@ var links = [
             recommend: 2,
             lang: "cn",
             ui: "css",
-            device: "both"
+            device: "desktop"
         }
     }
 ];
