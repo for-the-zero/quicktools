@@ -2,7 +2,7 @@
 const e_menu_new = document.querySelector('.menu-new');
 const e_menu_open = document.querySelector('.menu-open');
 const e_menu_save = document.querySelector('.menu-save');
-const e_modeswitch = document.querySelector('.menu-swich');
+const e_modeswitch = document.querySelector('.menu-switch');
 const e_menu_setting = document.querySelector('.menu-setting');
 
 const e_editor = document.querySelector('.editor');
@@ -55,6 +55,18 @@ const default_setting = {
 
 var is_ai_mode = false;
 var setting = {...default_setting};
+
+function debounce(func, delay) {
+    let timer = null;
+    return function (...args) {
+        if (timer) {
+            clearTimeout(timer);
+        };
+        timer = setTimeout(() => {
+            func.apply(this, args);
+        }, delay);
+    };
+};
 
 if(localStorage.getItem('aiime')){
     setting = JSON.parse(localStorage.getItem('aiime'));
@@ -110,6 +122,47 @@ e_modeswitch.addEventListener('click', ()=>{
     };
 });
 
+e_menu_new.addEventListener('click', ()=>{
+    if(confirm('是否清空编辑器内容？')){
+        e_editor.value = '';
+        e_editor.focus();
+    };
+});
+e_menu_open.addEventListener('click', ()=>{
+    let select_ele = document.createElement('input');
+    select_ele.type = 'file';
+    select_ele.addEventListener('change', (e)=>{
+        let file = e.target.files[0];
+        if(!file){
+            select_ele.remove();
+            return;
+        };
+        if(file.size > 1024*5){
+            if(!confirm('文件大小超过5KB，是否继续？')){
+                select_ele.remove();
+                return;
+            };
+        };
+        let reader = new FileReader();
+        reader.readAsText(file);
+        reader.onload = (e)=>{
+            let content = e.target.result;
+            e_editor.value = content;
+            e_editor.focus();
+        };
+        select_ele.remove();
+    });
+    select_ele.click();
+});
+e_menu_save.addEventListener('click', ()=>{
+    let content = e_editor.value;
+    let a = document.createElement('a');
+    a.download = 'quicktools.txt';
+    a.href = URL.createObjectURL(new Blob([content]));
+    a.click();
+    URL.revokeObjectURL(a.href);
+});
+
 var is_asking_mode = false;
 function show_asking(){
     e_asking.classList.remove('asking-hide');
@@ -138,9 +191,82 @@ document.addEventListener('keydown', (e)=>{
             };
         } else if(/^[1-9]$/.test(e.key)){
             e.preventDefault();
-            //TODO:
+            confirm_ime(e.key);
         } else if(e.key === 'Alt'){
             e.preventDefault();
         };
     };
 });
+
+var asking_result = '';
+const asking_request = debounce(() => {
+    const input = e_asking_input.value;
+    if(input){
+        asking_result = '';
+        e_asking_p.textContent = '(请求中)';
+        fetch(setting.burl + '/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + setting.key,
+            },
+            body: JSON.stringify({
+                model: setting.model,
+                stream: false,
+                messages:[
+                    { role: 'system', content: setting.pmt_asking },
+                    { role: 'user', content: input }
+                ]
+            })
+        }).then((response)=>{
+            if (!response.ok || response.status !== 200) {
+                console.error(response);
+                e_asking_p.textContent = '请求失败，详细信息请查看控制台';
+                return;
+            };
+            return response.json();
+        }).then((data)=>{
+            //console.log(data);
+            let answer = data.choices[0].message.content;
+            console.log(answer);
+            const code_block = answer.match(/```json\n([\s\S]*?)\n```/);
+            if(code_block){
+                answer = code_block[1];
+            };
+            try{
+                let result = JSON.parse(answer).result;
+                console.log(result);
+                if(result){
+                    asking_result = result;
+                    e_asking_p.textContent = result;
+                } else {
+                    e_asking_p.textContent = '无结果';
+                };
+            }catch(e){
+                e_asking_p.textContent = '无结果';
+            };
+        }).catch((error)=>{
+            console.error(error);
+            e_asking_p.textContent = '请求失败，详细信息请查看控制台';
+        });
+    };
+}, 1000);
+e_asking_input.addEventListener('input', asking_request);
+e_asking_input.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter'){
+        e.preventDefault();
+        e_editor.focus();
+        let editor_value = e_editor.value;
+        let cursor_pos = e_editor.selectionStart;
+        e_editor.value = editor_value.substring(0, cursor_pos) + asking_result + editor_value.substring(cursor_pos);
+        hide_asking();
+    } else if(e.key === 'Escape'){
+        e.preventDefault();
+        hide_asking();
+    };
+});
+
+var last_confirmed_pos = 0;
+var ime_list = [];
+function confirm_ime(index){};
+//TODO:
