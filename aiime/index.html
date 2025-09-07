@@ -16,7 +16,7 @@
             <button class="menu-open">打开</button>
             <button class="menu-save">保存</button>
             <div style="width: 10px;"></div>
-            <button class="menu-swich switch-off">AI已开启</button>
+            <button class="menu-swich switch-off">AI已关闭</button>
             <button class="menu-setting">设置</button>
         </div>
         <div class="workspace">
@@ -25,30 +25,40 @@
                 <div>1</div>
             </div>
         </div>
-        <div class="elon-show"></div>
+        <div class="elon elon-hide"></div>
         <div class="asking asking-hide">
             <input type="text" placeholder="询问……" autocomplete="off" spellcheck="false" />
             <p>114514</p>
         </div>
-        <div class="setting">
+        <div class="setting setting-hide">
             <h1>AI Notepad 设置</h1>
-            <p>输入可以是打错了的文本或拼音之类的，AI自动进行修正<br />效果好不好主要看你AI怎么样了</p>
+            <p>
+                输入可以是打错了的文本或拼音之类的，AI自动进行修正<br />
+                效果好不好主要看你AI怎么样了<br />
+                使用Alt+X打开询问面板快速向AI询问，得到答复后回车插入<br />
+                使用Alt+数字键选词
+            </p>
             <div class="setting-item">
                 <label>Base URL</label>
-                <input type="text" />
+                <input class="setting-burl" type="text" />
             </div>
             <div class="setting-item">
                 <label>API Key</label>
-                <input type="password" />
+                <input class="setting-key" type="password" />
             </div>
             <div class="setting-item">
                 <label>Model</label>
-                <input type="text" />
+                <input class="setting-model" type="text" />
             </div>
             <div class="setting-item">
-                <label>Prompt</label>
-                <textarea></textarea>
+                <label>编辑器Prompt</label>
+                <textarea class="setting-pmt1"></textarea>
             </div>
+            <div class="setting-item">
+                <label>询问Prompt</label>
+                <textarea class="setting-pmt2"></textarea>
+            </div>
+            <button class="setting-default">恢复默认</button>
             <button class="setting-save">保存</button>
         </div>
     </div>

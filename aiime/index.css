@@ -79,6 +79,7 @@ body{
     transform: none;
 }
 .menu button.switch-off{
+    background-color: var(--bg-color);
     border: 2px solid var(--p2nd-color);
     font-size: 10px;
 }
@@ -108,7 +109,7 @@ body{
 .editor{
     background-color: var(--p2nd-color);
     color: var(--text-color);
-    border: 2px solid var(--active-color);
+    border: 5px solid var(--active-color);
     border-radius: 10px;
     padding: 10px;
     box-sizing: border-box;
@@ -184,6 +185,7 @@ input, textarea{
     font-size: 14px;
     box-sizing: border-box;
     resize: none;
+    font-family: 'Google Sans', 'Noto Sans SC';
 }
 input:focus, textarea:focus{
     outline: none;
@@ -194,7 +196,7 @@ input:focus, textarea:focus{
 }
 .setting{
     position: fixed;
-    transition: all 0.3s cubic-bezier(0.3, 0.35, 0, 1.00);
+    transition: all 0.5s cubic-bezier(0.3, 0.35, 0, 1.00);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -205,6 +207,7 @@ input:focus, textarea:focus{
     padding: 15px;
     border-radius: 15px;
     gap: 10px;
+    overflow-y: auto;
 }
 .setting p, .setting h1{
     margin: 0;
@@ -223,7 +226,7 @@ input:focus, textarea:focus{
 .setting-item label{
     width: 15%;
 }
-.setting-save{
+.setting-default, .setting-save{
     background-color: var(--bg-color);
     color: var(--text-color);
     border: none;
