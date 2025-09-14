@@ -1,0 +1,92 @@
+body{
+    background-color: var(--mdui-color-background);
+    font-family: 'Google Sans', 'Noto Sans SC';
+    color: var(--mdui-color-on-background);
+    padding: 15px;
+}
+.main{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+h2{
+    font-weight: 400;
+    margin: 0;
+}
+mdui-tab-panel{
+    margin: 10px;
+}
+.drop-image-card{
+    height: 2.5rem;
+    padding: 10px;
+}
+.upload-image-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+    flex-wrap: wrap;
+}
+.image-preview{
+    max-height: 100px;
+    margin: auto;
+}
+.result-items{
+    display: flex;
+    flex-direction: column;
+}
+.result-item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+}
+.result-text{
+    flex-grow: 1;
+    max-height: 200px;
+    overflow-y: auto;
+}
+.result-image{
+    flex-grow: 0;
+    max-height: 200px;
+    max-width: 200px;
+}
+@media screen and (max-width: 375px) {
+    .result-text{
+        max-height: 150px;
+    }
+    .result-image{
+        max-height: 150px;
+        max-width: 150px;
+    }
+}
+.log-text{
+    white-space: warp;
+}
+.settings-dialog{
+    flex-direction: column;
+    gap: 10px;
+}
+.settings-dialog::part(panel){
+    width: 80%;
+}
+.api-solving-tabs::part(container), .api-image-tabs::part(container){
+    background-color: var(--mdui-color-background);
+}
+.settings-items{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+p{
+    margin: 10px 0;
+}
+.switch{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+}
+.api-solving-tabs > mdui-tab-panel, .api-image-tabs > mdui-tab-panel{
+    overflow-y: hidden;
+}

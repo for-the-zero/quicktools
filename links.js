@@ -207,6 +207,20 @@ var links = [
             ui: "css",
             device: "desktop"
         }
+    },
+    {
+        name: "NBVS",
+        icon: "draw--outlined",
+        desc: "NanoBanana Vision Solver: Vision problem solver powered by Gemini-2.5-Flash-Image or other",
+        url: "./nbvs/index.html",
+        github: null,
+        slot: {
+            time: 15,
+            recommend: 3,
+            lang: "cn",
+            ui: "mdui",
+            device: "both"
+        }
     }
 ];
 
