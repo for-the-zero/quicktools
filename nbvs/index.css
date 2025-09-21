@@ -68,7 +68,7 @@ mdui-tab-panel{
     gap: 10px;
 }
 .settings-dialog::part(panel){
-    width: 80%;
+    min-width: 80%;
 }
 .api-solving-tabs::part(container), .api-image-tabs::part(container){
     background-color: var(--mdui-color-background);
