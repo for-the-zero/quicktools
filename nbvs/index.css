@@ -60,9 +60,6 @@ mdui-tab-panel{
         max-width: 150px;
     }
 }
-.log-text{
-    white-space: warp;
-}
 .settings-dialog{
     flex-direction: column;
     gap: 10px;

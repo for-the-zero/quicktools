@@ -202,7 +202,7 @@ var links = [
         github: null,
         slot: {
             time: 14,
-            recommend: 2,
+            recommend: -5,
             lang: "cn",
             ui: "css",
             device: "desktop"
@@ -216,7 +216,7 @@ var links = [
         github: null,
         slot: {
             time: 15,
-            recommend: 3,
+            recommend: -25,
             lang: "cn",
             ui: "mdui",
             device: "both"
