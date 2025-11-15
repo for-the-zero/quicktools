@@ -221,6 +221,20 @@ var links = [
             ui: "mdui",
             device: "both"
         }
+    },
+    {
+        name: "Copic",
+        icon: "content_paste_go",
+        desc: "按下Ctrl+V保存图片(Vibe Coding)",
+        url: "./copic/index.html",
+        github: null,
+        slot: {
+            time: 16,
+            recommend: -2,
+            lang: "cn",
+            ui: "css",
+            device: "desktop"
+        }
     }
 ];
 

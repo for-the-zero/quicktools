@@ -1,5 +1,5 @@
 # Open It
 
-[Github Pages](https://for-the-zero.github.io/quicktools)
+[t.ftz.is-a.dev](https://t.ftz.is-a.dev/)
 or
-[Netlify](https://ftz-tools.netlify.app/)
+[ftz-tools.netlify.app](https://ftz-tools.netlify.app/)

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片粘贴下载器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hint {
+            position: absolute;
+            top: 80px;
+            text-align: center;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .breathing-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .orb-1 {
+            width: 100px;
+            height: 100px;
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 70px;
+            height: 70px;
+            top: -15px;
+            left: 15px;
+            animation: breathe 4s ease-in-out infinite 0.8s;
+        }
+
+        .orb-3 {
+            width: 50px;
+            height: 50px;
+            bottom: -8px;
+            right: 12px;
+            animation: breathe 4s ease-in-out infinite 1.6s;
+        }
+
+        .orb-4 {
+            width: 35px;
+            height: 35px;
+            top: 8px;
+            right: 8px;
+            animation: breathe 4s ease-in-out infinite 2.4s;
+        }
+
+        .orb-5 {
+            width: 25px;
+            height: 25px;
+            bottom: 15px;
+            left: 8px;
+            animation: breathe 4s ease-in-out infinite 3.2s;
+        }
+
+        @keyframes breathe {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.15);
+                opacity: 1;
+            }
+        }
+
+        .orb-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.5rem;
+            z-index: 10;
+            opacity: 0.9;
+            animation: breathe-icon 4s ease-in-out infinite;
+        }
+
+        @keyframes breathe-icon {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.9;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.15);
+                opacity: 1;
+            }
+        }
+
+        .breathing-container.pasting .orb {
+            animation: bounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.4) rotate(-8deg);
+            }
+            50% {
+                transform: scale(1.6) rotate(8deg);
+            }
+            75% {
+                transform: scale(1.2) rotate(-4deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .breathing-container.fading-out {
+            animation: fadeOut 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.7);
+            }
+        }
+
+        .breathing-container.image-mode .orb {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            background-clip: padding-box;
+        }
+
+        .breathing-container.image-mode .orb-icon {
+            display: none;
+        }
+
+        .status {
+            position: absolute;
+            bottom: 80px;
+            text-align: center;
+            font-size: 0.95rem;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.3s ease;
+            font-weight: 400;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .status.show {
+            opacity: 0.9;
+            transform: translateY(0);
+        }
+
+        .glm-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .background-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            animation: float-particle 12s infinite ease-in-out;
+        }
+
+        @keyframes float-particle {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(30px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-particles"></div>
+    
+    <div class="hint">按 Ctrl + V 粘贴图片</div>
+    
+    <div class="breathing-container" id="breathingContainer">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+        <div class="orb orb-5"></div>
+        <div class="orb-icon">📋</div>
+    </div>
+    
+    <div class="status" id="status"></div>
+    
+    <div class="glm-badge">由GLM-4.6制作</div>
+
+    <script>
+        // 创建背景粒子效果
+        function createBackgroundParticles() {
+            const container = document.querySelector('.background-particles');
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 12 + 's';
+                particle.style.animationDuration = (Math.random() * 6 + 12) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // 显示状态消息
+        function showStatus(message) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.classList.add('show');
+            
+            setTimeout(() => {
+                status.classList.remove('show');
+            }, 2500);
+        }
+
+        // 重置圆球状态
+        function resetBreathingContainer() {
+            const container = document.getElementById('breathingContainer');
+            container.classList.remove('pasting', 'image-mode', 'fading-out');
+            
+            const orbs = container.querySelectorAll('.orb');
+            orbs.forEach(orb => {
+                orb.style.backgroundImage = '';
+            });
+        }
+
+        // 处理剪贴板粘贴事件
+        function handlePaste(e) {
+            e.preventDefault();
+            
+            const items = e.clipboardData.items;
+            let foundImage = false;
+            
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].type.indexOf('image') !== -1) {
+                    foundImage = true;
+                    const blob = items[i].getAsFile();
+                    
+                    // 创建对象URL
+                    const imageUrl = URL.createObjectURL(blob);
+                    
+                    // 获取呼吸容器
+                    const container = document.getElementById('breathingContainer');
+                    const orbs = container.querySelectorAll('.orb');
+                    
+                    // 添加粘贴动画
+                    container.classList.add('pasting');
+                    
+                    // 设置圆球为图片
+                    setTimeout(() => {
+                        orbs.forEach(orb => {
+                            orb.style.backgroundImage = `url(${imageUrl})`;
+                            orb.style.backgroundSize = 'cover';
+                            orb.style.backgroundPosition = 'center';
+                        });
+                        container.classList.add('image-mode');
+                        container.classList.remove('pasting');
+                        
+                        // 立即下载图片
+                        downloadImage(blob, getFileName());
+                        
+                        // 淡出消失
+                        setTimeout(() => {
+                            container.classList.add('fading-out');
+                            
+                            // 重置状态
+                            setTimeout(() => {
+                                resetBreathingContainer();
+                            }, 800);
+                        }, 400);
+                    }, 600);
+                    
+                    showStatus('图片已下载');
+                    break;
+                }
+            }
+            
+            if (!foundImage) {
+                showStatus('剪贴板中没有找到图片');
+            }
+        }
+
+        // 生成文件名
+        function getFileName() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            return `image_${year}${month}${day}_${hours}${minutes}${seconds}.png`;
+        }
+
+        // 下载图片
+        function downloadImage(blob, filename) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            createBackgroundParticles();
+            
+            // 监听粘贴事件
+            document.addEventListener('paste', handlePaste);
+            
+            // 添加键盘提示动画
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.key === 'v') {
+                    const container = document.getElementById('breathingContainer');
+                    container.classList.add('pasting');
+                    setTimeout(() => {
+                        container.classList.remove('pasting');
+                    }, 600);
+                }
+            });
+
+            // 点击圆球也可以提示
+            const container = document.getElementById('breathingContainer');
+            container.addEventListener('click', function() {
+                container.classList.add('pasting');
+                setTimeout(() => {
+                    container.classList.remove('pasting');
+                }, 600);
+            });
+        });
+    </script>
+</body>
+</html>
