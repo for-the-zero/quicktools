@@ -1,0 +1,40 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- 
+    此SVG为透明背景。
+    "width" 和 "height" 属性定义了文件的尺寸，
+    "viewBox" 定义了内部坐标系。
+    你可以根据需要调整 width 和 height，而图标本身不会失真。
+  -->
+
+  <!-- 故障层 - 青色 (Cyan) -->
+  <g transform="translate(-1.5, 1)">
+    <!-- F 的主体部分 -->
+    <path d="M22 16 H38 V22 H30 V31 H36 V37 H30 V50 H22 V16 Z" fill="#00F6FF"/>
+    <!-- 分解出的像素 -->
+    <rect x="40" y="16" width="6" height="6" fill="#00F6FF"/>
+    <rect x="48" y="19" width="3" height="3" fill="#00F6FF"/>
+    <rect x="38" y="31" width="5" height="5" fill="#00F6FF"/>
+  </g>
+
+  <!-- 故障层 - 品红色 (Magenta) -->
+  <g transform="translate(1.5, -1)">
+    <!-- F 的主体部分 -->
+    <path d="M22 16 H38 V22 H30 V31 H36 V37 H30 V50 H22 V16 Z" fill="#FF00E5"/>
+    <!-- 分解出的像素 -->
+    <rect x="40" y="16" width="6" height="6" fill="#FF00E5"/>
+    <rect x="48" y="19" width="3" height="3" fill="#FF00E5"/>
+    <rect x="38" y="31" width="5" height="5" fill="#FF00E5"/>
+  </g>
+
+  <!-- 主体层 - 白色 (White) -->
+  <g>
+    <!-- F 的主体部分 -->
+    <path d="M22 16 H38 V22 H30 V31 H36 V37 H30 V50 H22 V16 Z" fill="#FFFFFF"/>
+    <!-- 分解出的像素 -->
+    <rect x="40" y="16" width="6" height="6" fill="#FFFFFF"/>
+    <rect x="48" y="19" width="3" height="3" fill="#FFFFFF"/>
+    <rect x="52" y="15" width="2" height="2" fill="#FFFFFF"/>
+    <rect x="38" y="31" width="5" height="5" fill="#FFFFFF"/>
+    <rect x="45" y="35" width="2.5" height="2.5" fill="#FFFFFF"/>
+  </g>
+</svg>

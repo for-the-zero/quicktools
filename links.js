@@ -235,15 +235,30 @@ var links = [
             ui: "css",
             device: "desktop"
         }
+    },
+    {
+        name: "FakeNET",
+        icon: "social_distance",
+        desc: "Can you imagine a network platform where you are the only human?",
+        url: "./builts/fakenet/index.html",
+        github: 'https://github.com/for-the-zero/FakeNET',
+        slot: {
+            time: 17,
+            recommend: -3,
+            lang: "both",
+            ui: "rv",
+            device: "both"
+        }
     }
 ];
 
 const cate_order = {
-    lang: [['cn','中文'],['en','English']],
+    lang: [['both','可切换 / Switchable'],['cn','中文'],['en','English']],
     ui: [
         ['mdui','mdui'],
         ['css','自己写的css/css by myself'],
         ['material-web','material-web'],
+        ['rv', 'React || Vue || ...'],
         ['no','无样式/No Style'],
     ],
     device: [
