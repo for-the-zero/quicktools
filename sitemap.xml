@@ -71,6 +71,10 @@
     </url>
     
     <url>
+        <loc>https://t.ftz.is-a.dev/asak_viewer/testm.html</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
         <loc>https://t.ftz.is-a.dev/aiime/index.html</loc>
         <priority>0.8</priority>
     </url>

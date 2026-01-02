@@ -209,20 +209,6 @@ var links = [
         }
     },
     {
-        name: "NBVS",
-        icon: "draw--outlined",
-        desc: "NanoBanana Vision Solver: Vision problem solver powered by Gemini-2.5-Flash-Image or other",
-        url: "./nbvs/index.html",
-        github: null,
-        slot: {
-            time: 15,
-            recommend: -25,
-            lang: "cn",
-            ui: "mdui",
-            device: "both"
-        }
-    },
-    {
         name: "Copic",
         icon: "content_paste_go",
         desc: "按下Ctrl+V保存图片(Vibe Coding)",
