@@ -195,6 +195,20 @@ var links = [
         }
     },
     {
+        name: "长链接生成器",
+        icon: "link",
+        desc: "(站外)生成你的长链接",
+        url: "https://looooooooooooooooooooooooooooooooooooooooooooooooooooooooooog.forthezero.dpdns.org/",
+        github: null,
+        slot: {
+            time: 13.5,
+            recommend: 25,
+            lang: "cn",
+            ui: "css",
+            device: "both"
+        }
+    },
+    {
         name: "AI记事本",
         icon: "auto_fix_normal--outlined",
         desc: "AI驱动的简易记事本",
