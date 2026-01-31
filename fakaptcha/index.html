@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just a moment...</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a4a4a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='2' y1='12' x2='22' y2='12'%3E%3C/line%3E%3Cpath d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'%3E%3C/path%3E%3C/svg%3E">
+    <link rel="stylesheet" href="./style.css">
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="8a96c320-b541-482f-acd4-6fc1b3ec22dc"></script>
+    <meta name="og:title" content="A Fake Captcha Demo" />
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="header">
+            <h1>Just a moment...</h1>
+            <p>Checking your browser before accessing <span id="domain-name"></span>.</p>
+        </div>
+
+        <div class="cf-turnstile-wrapper">
+            <div class="cf-turnstile" id="turnstile-widget">
+                <div class="cf-checkbox-wrapper">
+                    <input type="checkbox" id="cf-checkbox">
+                    <label for="cf-checkbox"></label>
+                </div>
+                <div class="cf-label">Verify you are human</div>
+                <div class="cf-spinner" id="cf-spinner"></div>
+                <div class="cf-success" id="cf-success">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <div class="cf-error" id="cf-error">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ff3b30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+            </div>
+            <div class="cf-message" id="cf-status-message"></div>
+        </div>
+        
+        <div class="footer">
+            <div class="ray-id">Ray ID: <span id="ray-id"></span></div>
+            <div class="joke-text">This is not a real captcha, just a joke</div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

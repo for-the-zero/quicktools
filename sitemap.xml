@@ -93,4 +93,9 @@
         <loc>https://t.ftz.is-a.dev/builts/fakenet/index.html</loc>
         <priority>0.8</priority>
     </url>
+
+    <url>
+        <loc>https://t.ftz.is-a.dev/builts/fakaptcha/index.html</loc>
+        <priority>0.8</priority>
+    </url>
 </urlset>

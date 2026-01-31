@@ -249,6 +249,20 @@ var links = [
             ui: "rv",
             device: "both"
         }
+    },
+    {
+        name: "Fackptcha",
+        icon: "verified_user--outlined",
+        desc: "Fake Cloudflare Turnstile Challenge (with a related egg)",
+        url: "./fakaptcha/index.html",
+        github: null,
+        slot: {
+            time: 18,
+            recommend: -25,
+            lang: "en",
+            ui: "css",
+            device: "both"
+        }
     }
 ];
 
