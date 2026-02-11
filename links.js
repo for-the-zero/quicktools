@@ -49,7 +49,7 @@ var links = [
         name: "震动测试",
         icon: "vibration--outlined",
         desc: "仅限带线性马达的手机，随便搞的，更新了2.0版本，但还是不如意……",
-        url: "./playvib/1.html",
+        url: "./vibe/playvib/1.html",
         github: null,
         slot: {
             time: 4,
@@ -109,7 +109,7 @@ var links = [
         name: "VisualVoice",
         icon: "voicemail",
         desc: "convert voice to color",
-        url: "./vv/index.html",
+        url: "./vibe/vv/index.html",
         github: null,
         slot: {
             time: 8,
@@ -225,8 +225,8 @@ var links = [
     {
         name: "Copic",
         icon: "content_paste_go",
-        desc: "按下Ctrl+V保存图片(Vibe Coding)",
-        url: "./copic/index.html",
+        desc: "按下Ctrl+V保存图片",
+        url: "./vibe/copic/index.html",
         github: null,
         slot: {
             time: 16,
@@ -254,7 +254,7 @@ var links = [
         name: "Fackptcha",
         icon: "verified_user--outlined",
         desc: "Fake Cloudflare Turnstile Challenge (with a related egg)",
-        url: "./fakaptcha/index.html",
+        url: "./vibe/fakaptcha/index.html",
         github: null,
         slot: {
             time: 18,

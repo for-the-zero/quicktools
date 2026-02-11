@@ -21,7 +21,7 @@
     </url>
     
     <url>
-        <loc>https://t.ftz.is-a.dev/playvib/1.html</loc>
+        <loc>https://t.ftz.is-a.dev/vibe/playvib/1.html</loc>
         <priority>0.7</priority>
     </url>
     
@@ -41,7 +41,7 @@
     </url>
     
     <url>
-        <loc>https://t.ftz.is-a.dev/vv/index.html</loc>
+        <loc>https://t.ftz.is-a.dev/vibe/vv/index.html</loc>
         <priority>0.7</priority>
     </url>
     
@@ -80,12 +80,7 @@
     </url>
     
     <url>
-        <loc>https://t.ftz.is-a.dev/nbvs/index.html</loc>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://t.ftz.is-a.dev/copic/index.html</loc>
+        <loc>https://t.ftz.is-a.dev/vibe/copic/index.html</loc>
         <priority>0.7</priority>
     </url>
     
@@ -95,7 +90,7 @@
     </url>
 
     <url>
-        <loc>https://t.ftz.is-a.dev/builts/fakaptcha/index.html</loc>
+        <loc>https://t.ftz.is-a.dev/vibe/fakaptcha/index.html</loc>
         <priority>0.8</priority>
     </url>
 </urlset>
