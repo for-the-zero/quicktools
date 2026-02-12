@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>速读器 - Speed Reader</title>
+    <link rel="preconnect" href="https://cdn.jsdmirror.com" crossorigin>
+    <link rel="stylesheet" href="./index.css">
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="8a96c320-b541-482f-acd4-6fc1b3ec22dc"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="setup-panel">
+            <h1>速读器</h1>
+            
+            <div class="input-section">
+                <textarea id="text-input" placeholder="在此输入文本，或导入文件..."></textarea>
+                <div class="file-actions">
+                    <label for="file-input" class="btn-file">
+                        导入 TXT / EPUB
+                        <input type="file" id="file-input" accept=".txt,.epub">
+                    </label>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="setting-group">
+                    <label>阅读模式</label>
+                    <div class="mode-selector">
+                        <button class="mode-btn active" data-mode="word">逐词显示</button>
+                        <button class="mode-btn" data-mode="rsvp">RSVP</button>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <label>速度: <span id="speed-value">300</span> 词/分</label>
+                    <input type="range" id="speed-slider" min="100" max="1000" value="300" step="10">
+                </div>
+
+                <div class="setting-group colors">
+                    <label>背景颜色</label>
+                    <input type="color" id="bg-color" value="#1a1a2e">
+                    <label>文字颜色</label>
+                    <input type="color" id="text-color" value="#eaeaea">
+                </div>
+            </div>
+
+            <button id="start-btn" class="btn-primary">开始阅读</button>
+        </div>
+
+        <div id="reader-panel" class="hidden">
+            <div class="reader-controls">
+                <button id="pause-btn" class="control-btn">暂停</button>
+                <button id="stop-btn" class="control-btn">停止</button>
+            </div>
+            
+            <div class="progress-container">
+                <input type="range" id="progress-slider" min="0" max="100" value="0">
+                <span id="progress-text">0 / 0</span>
+            </div>
+
+            <div id="display-area">
+                <div id="word-display"></div>
+            </div>
+
+            <div class="reader-controls bottom">
+                <div class="speed-control">
+                    <label>速度</label>
+                    <input type="range" id="reader-speed" min="100" max="1000" value="300" step="10">
+                    <span id="reader-speed-value">300</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdmirror.com/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script src="./index.js"></script>
+</body>
+</html>
