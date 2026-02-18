@@ -263,6 +263,34 @@ var links = [
             ui: "css",
             device: "both"
         }
+    },
+    {
+        name: "阅读器",
+        icon: "menu_book",
+        desc: "使用打字机或RSVP的方式阅读",
+        url: "./vibe/reading/index.html",
+        github: null,
+        slot: {
+            time: 19,
+            recommend: 30,
+            lang: "cn",
+            ui: "css",
+            device: "both"
+        }
+    },
+    {
+        name: "颜色抠图",
+        icon: "image--outlined",
+        desc: "选择颜色进行色度抠图",
+        url: "./vibe/bgrm/index.html",
+        github: null,
+        slot: {
+            time: 20,
+            recommend: 40,
+            lang: "cn",
+            ui: "css",
+            device: "desktop"
+        }
     }
 ];
 

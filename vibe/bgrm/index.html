@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>颜色抠图</title>
+    <style>
+        :root { --bg: #f0f2f5; --panel: #fff; --primary: #1890ff; --danger: #ff4d4f; --text: #333; }
+        body { margin: 0; display: flex; height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
+        aside { width: 320px; background: var(--panel); padding: 20px; box-shadow: 2px 0 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 15px; z-index: 10; }
+        h2 { margin: 0 0 10px; font-size: 18px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        main { flex: 1; position: relative; overflow: hidden; background-image: linear-gradient(45deg, #ccc 25%, transparent 25%), linear-gradient(-45deg, #ccc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ccc 75%), linear-gradient(-45deg, transparent 75%, #ccc 75%); background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px; cursor: grab; }
+        main.drag-over { background-color: rgba(24, 144, 255, 0.1); border: 2px dashed var(--primary); }
+        main.grabbing { cursor: grabbing; }
+        canvas { display: block; position: absolute; transform-origin: 0 0; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .btn { padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; transition: 0.2s; }
+        .btn-primary { background: var(--primary); color: #fff; }
+        .btn-danger { background: var(--danger); color: #fff; padding: 4px 8px; font-size: 12px; }
+        .btn-group { display: flex; gap: 5px; }
+        .btn-group .btn { flex: 1; }
+        #colorList { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 5px; }
+        .color-item { background: #f9f9f9; border: 1px solid #eee; padding: 10px; border-radius: 6px; display: flex; align-items: center; gap: 10px; }
+        .color-preview { width: 24px; height: 24px; border-radius: 4px; border: 1px solid #ddd; flex-shrink: 0; }
+        .slider-wrap { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+        .slider-wrap label { font-size: 12px; color: #666; display: flex; justify-content: space-between; }
+        input[type="range"] { width: 100%; cursor: pointer; }
+        #fileInput { display: none; }
+        .hint { font-size: 12px; color: #999; text-align: center; margin-top: 10px; }
+        .zoom-controls { position: absolute; bottom: 20px; right: 20px; background: #fff; padding: 5px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); display: flex; gap: 5px; }
+        .global-control { background: #f0f7ff; padding: 10px; border-radius: 6px; border: 1px solid #d6e4ff; }
+    </style>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="8a96c320-b541-482f-acd4-6fc1b3ec22dc"></script>
+</head>
+<body>
+
+<aside>
+    <h2>颜色抠图</h2>
+    <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">📁 选择图片</button>
+    <input type="file" id="fileInput" accept="image/*">
+    
+    <div class="global-control">
+        <div class="slider-wrap">
+            <label>边缘羽化 <span id="featherVal">0</span></label>
+            <input type="range" id="featherSlider" min="0" max="100" value="0">
+        </div>
+    </div>
+
+    <div style="font-size:13px; font-weight:bold;">已选颜色:</div>
+    <div id="colorList"></div>
+    
+    <div class="btn-group" style="margin-top: 10px;">
+        <button class="btn btn-primary" id="download" disabled>⬇ 下载</button>
+        <button class="btn" id="reset" disabled>↺ 重置</button>
+    </div>
+    <div class="hint">点击图片取色<br>拖拽文件至此上传<br>滚轮缩放 / 拖拽移动</div>
+</aside>
+
+<main id="viewport">
+    <canvas id="canvas"></canvas>
+    <div class="zoom-controls">
+        <button class="btn" id="zoomOut">-</button>
+        <button class="btn" id="zoomFit">适应</button>
+        <button class="btn" id="zoomIn">+</button>
+    </div>
+</main>
+
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const viewport = document.getElementById('viewport');
+    const colorList = document.getElementById('colorList');
+    const fileInput = document.getElementById('fileInput');
+    const featherSlider = document.getElementById('featherSlider');
+    const featherVal = document.getElementById('featherVal');
+    
+    let originalData = null;
+    let colors = [];
+    let scale = 1;
+    let panX = 0, panY = 0;
+    let isDragging = false;
+    let startPanX = 0, startPanY = 0;
+    let startX = 0, startY = 0;
+    let isProcessing = false;
+    let hasMoved = false;
+    let featherAmount = 0;
+
+    function init() {
+        fileInput.addEventListener('change', e => e.target.files[0] && loadImage(e.target.files[0]));
+        setupDrop();
+        setupZoom();
+        setupPan();
+        setupCanvasClick();
+        featherSlider.addEventListener('input', e => {
+            featherAmount = parseInt(e.target.value);
+            featherVal.innerText = featherAmount;
+            updateCanvas();
+        });
+        document.getElementById('download').onclick = download;
+        document.getElementById('reset').onclick = reset;
+        document.getElementById('zoomIn').onclick = () => adjustZoom(0.2);
+        document.getElementById('zoomOut').onclick = () => adjustZoom(-0.2);
+        document.getElementById('zoomFit').onclick = fitToScreen;
+    }
+
+    function loadImage(file) {
+        const img = new Image();
+        img.onload = () => {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            originalData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            colors = [];
+            colorList.innerHTML = '';
+            scale = 1;
+            panX = 0; panY = 0;
+            fitToScreen();
+            document.getElementById('download').disabled = false;
+            document.getElementById('reset').disabled = false;
+            renderColors();
+            updateCanvas();
+        };
+        img.src = URL.createObjectURL(file);
+    }
+
+    function setupDrop() {
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(e => viewport.addEventListener(e, ev => { ev.preventDefault(); ev.stopPropagation(); }, false));
+        viewport.addEventListener('dragover', () => viewport.classList.add('drag-over'));
+        viewport.addEventListener('dragleave', () => viewport.classList.remove('drag-over'));
+        viewport.addEventListener('drop', e => {
+            viewport.classList.remove('drag-over');
+            if (e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]);
+        });
+    }
+
+    function setupZoom() {
+        viewport.addEventListener('wheel', e => {
+            if (!originalData) return;
+            e.preventDefault();
+            const delta = e.deltaY > 0 ? -0.1 : 0.1;
+            adjustZoom(delta);
+        }, { passive: false });
+    }
+
+    function adjustZoom(delta) {
+        if (!originalData) return;
+        const newScale = Math.max(0.1, Math.min(5, scale + delta));
+        if (newScale === scale) return;
+        const rect = viewport.getBoundingClientRect();
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        panX = centerX - (centerX - panX) * (newScale / scale);
+        panY = centerY - (centerY - panY) * (newScale / scale);
+        scale = newScale;
+        updateTransform();
+    }
+
+    function fitToScreen() {
+        if (!originalData) return;
+        const rect = viewport.getBoundingClientRect();
+        const scaleX = rect.width / canvas.width;
+        const scaleY = rect.height / canvas.height;
+        scale = Math.min(scaleX, scaleY) * 0.9;
+        panX = (rect.width - canvas.width * scale) / 2;
+        panY = (rect.height - canvas.height * scale) / 2;
+        updateTransform();
+    }
+
+    function updateTransform() {
+        canvas.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
+    }
+
+    function setupPan() {
+        viewport.addEventListener('mousedown', e => {
+            if (e.button !== 0) return;
+            isDragging = true;
+            hasMoved = false;
+            startX = e.clientX;
+            startY = e.clientY;
+            startPanX = panX;
+            startPanY = panY;
+            viewport.classList.add('grabbing');
+        });
+        window.addEventListener('mousemove', e => {
+            if (!isDragging) return;
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+            if (Math.abs(dx) > 3 || Math.abs(dy) > 3) hasMoved = true;
+            panX = startPanX + dx;
+            panY = startPanY + dy;
+            updateTransform();
+        });
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+            viewport.classList.remove('grabbing');
+        });
+    }
+
+    function setupCanvasClick() {
+        canvas.addEventListener('click', e => {
+            if (!originalData || isProcessing || hasMoved) return;
+            e.stopPropagation();
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+            const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+            const idx = (Math.floor(y) * canvas.width + Math.floor(x)) * 4;
+            if (idx >= originalData.data.length) return;
+            const r = originalData.data[idx];
+            const g = originalData.data[idx+1];
+            const b = originalData.data[idx+2];
+            addColor(r, g, b);
+        });
+    }
+
+    function addColor(r, g, b) {
+        if (colors.some(c => Math.abs(c.r-r)<5 && Math.abs(c.g-g)<5 && Math.abs(c.b-b)<5)) return;
+        colors.push({ r, g, b, tolerance: 50, id: Date.now() });
+        renderColors();
+        updateCanvas();
+    }
+
+    function removeColor(id) {
+        colors = colors.filter(c => c.id !== id);
+        renderColors();
+        updateCanvas();
+    }
+
+    function updateColorTolerance(id, val) {
+        const c = colors.find(c => c.id === id);
+        if (c) { c.tolerance = parseInt(val); updateCanvas(); }
+    }
+
+    function renderColors() {
+        colorList.innerHTML = '';
+        colors.forEach(c => {
+            const div = document.createElement('div');
+            div.className = 'color-item';
+            div.innerHTML = `
+                <div class="color-preview" style="background:rgb(${c.r},${c.g},${c.b})"></div>
+                <div class="slider-wrap">
+                    <label>容差 <span>${c.tolerance}</span></label>
+                    <input type="range" min="0" max="200" value="${c.tolerance}">
+                </div>
+                <button class="btn btn-danger">✕</button>
+            `;
+            div.querySelector('input').oninput = e => {
+                div.querySelector('label span').innerText = e.target.value;
+                updateColorTolerance(c.id, e.target.value);
+            };
+            div.querySelector('button').onclick = () => removeColor(c.id);
+            colorList.appendChild(div);
+        });
+    }
+
+    function updateCanvas() {
+        if (!originalData) return;
+        if (isProcessing) return;
+        isProcessing = true;
+        requestAnimationFrame(() => {
+            const data = new Uint8ClampedArray(originalData.data);
+            const len = data.length;
+            const colorsCopy = [...colors];
+            const feather = featherAmount;
+            
+            for (let i = 0; i < len; i += 4) {
+                const r = data[i], g = data[i+1], b = data[i+2];
+                let pixelAlpha = 255;
+                
+                for (const c of colorsCopy) {
+                    const dist = Math.sqrt((r-c.r)**2 + (g-c.g)**2 + (b-c.b)**2);
+                    let keyAlpha = 255;
+                    
+                    if (dist <= c.tolerance) {
+                        keyAlpha = 0;
+                    } else if (dist <= c.tolerance + feather) {
+                        // 羽化区域：线性过渡
+                        keyAlpha = ((dist - c.tolerance) / feather) * 255;
+                    }
+                    
+                    // 取最小 alpha (只要有一个颜色匹配度高，就变透明)
+                    if (keyAlpha < pixelAlpha) pixelAlpha = keyAlpha;
+                    if (pixelAlpha === 0) break; 
+                }
+                data[i+3] = pixelAlpha;
+            }
+            ctx.putImageData(new ImageData(data, canvas.width, canvas.height), 0, 0);
+            isProcessing = false;
+        });
+    }
+
+    function download() {
+        if (!originalData) return;
+        const a = document.createElement('a');
+        a.download = '抠图结果.png';
+        a.href = canvas.toDataURL('image/png');
+        a.click();
+    }
+
+    function reset() {
+        if (originalData) {
+            ctx.putImageData(originalData, 0, 0);
+            colors = [];
+            featherAmount = 0;
+            featherSlider.value = 0;
+            featherVal.innerText = 0;
+            renderColors();
+            fitToScreen();
+        }
+    }
+
+    init();
+</script>
+</body>
+</html>
