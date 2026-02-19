@@ -244,7 +244,7 @@ var links = [
         github: 'https://github.com/for-the-zero/FakeNET',
         slot: {
             time: 17,
-            recommend: -3,
+            recommend: -4,
             lang: "both",
             ui: "rv",
             device: "both"
@@ -272,7 +272,7 @@ var links = [
         github: null,
         slot: {
             time: 19,
-            recommend: 30,
+            recommend: -3,
             lang: "cn",
             ui: "css",
             device: "both"
@@ -286,9 +286,23 @@ var links = [
         github: null,
         slot: {
             time: 20,
-            recommend: 40,
+            recommend: -1,
             lang: "cn",
             ui: "css",
+            device: "desktop"
+        }
+    },
+    {
+        name: "QzReader",
+        icon: "manage_search",
+        desc: "浏览你的QQ空间",
+        url: "./builts/qzreader/index.html",
+        github: 'https://github.com/for-the-zero/QzReader',
+        slot: {
+            time: 21,
+            recommend: 40,
+            lang: "cn",
+            ui: "rv",
             device: "desktop"
         }
     }
