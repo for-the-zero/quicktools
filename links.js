@@ -8,7 +8,7 @@ var links = [
         github: null,
         slot: {
             time: 1,
-            recommend: -15,
+            recommend: 15,
             lang: "en",
             ui: "css",
             device: "both"
@@ -23,7 +23,7 @@ var links = [
         github: null,
         slot: {
             time: 2,
-            recommend: -65,
+            recommend: -15,
             lang: "cn",
             ui: "material-web",
             device: "both"
@@ -38,7 +38,7 @@ var links = [
         github: null,
         slot: {
             time: 3,
-            recommend: 0,
+            recommend: 38,
             lang: "cn",
             ui: "mdui",
             device: "both"
@@ -53,7 +53,7 @@ var links = [
         github: null,
         slot: {
             time: 4,
-            recommend: -70,
+            recommend: -35,
             lang: "cn",
             ui: "no",
             device: "mobile"
@@ -68,7 +68,7 @@ var links = [
         github: "https://github.com/for-the-zero/QpenForm",
         slot: {
             time: 5,
-            recommend: 1,
+            recommend: 4,
             lang: "cn",
             ui: "mdui",
             device: "both"
@@ -83,7 +83,7 @@ var links = [
         github: null,
         slot: {
             time: 6,
-            recommend: -30,
+            recommend: 12,
             lang: "cn",
             ui: "mdui",
             device: "desktop"
@@ -98,7 +98,7 @@ var links = [
         github: null,
         slot: {
             time: 7,
-            recommend: -100,
+            recommend: -25,
             lang: "cn",
             ui: "no",
             device: "both"
@@ -113,7 +113,7 @@ var links = [
         github: null,
         slot: {
             time: 8,
-            recommend: -80,
+            recommend: -30,
             lang: "en",
             ui: "no",
             device: "both"
@@ -143,7 +143,7 @@ var links = [
         github: null,
         slot: {
             time: 10,
-            recommend: -60,
+            recommend: 20,
             lang: "cn",
             ui: "material-web",
             device: "both"
@@ -158,7 +158,7 @@ var links = [
         github: "https://github.com/for-the-zero/UpDyn",
         slot: {
             time: 11,
-            recommend: 50,
+            recommend: 30,
             lang: "cn",
             ui: "mdui",
             device: "both"
@@ -174,7 +174,7 @@ var links = [
         github: null,
         slot: {
             time: 12,
-            recommend: -20,
+            recommend: 32,
             lang: "cn",
             ui: "mdui",
             device: "both"
@@ -188,7 +188,7 @@ var links = [
         github: null,
         slot: {
             time: 13,
-            recommend: -7,
+            recommend: 6,
             lang: "en",
             ui: "mdui",
             device: "both"
@@ -202,7 +202,7 @@ var links = [
         github: null,
         slot: {
             time: 13.5,
-            recommend: 25,
+            recommend: 40,
             lang: "cn",
             ui: "css",
             device: "both"
@@ -216,7 +216,7 @@ var links = [
         github: null,
         slot: {
             time: 14,
-            recommend: -5,
+            recommend: 8,
             lang: "cn",
             ui: "css",
             device: "desktop"
@@ -230,7 +230,7 @@ var links = [
         github: null,
         slot: {
             time: 16,
-            recommend: -2,
+            recommend: 50,
             lang: "cn",
             ui: "css",
             device: "desktop"
@@ -244,21 +244,21 @@ var links = [
         github: 'https://github.com/for-the-zero/FakeNET',
         slot: {
             time: 17,
-            recommend: -4,
+            recommend: 70,
             lang: "both",
             ui: "rv",
             device: "both"
         }
     },
     {
-        name: "Fackptcha",
+        name: "Fakaptcha",
         icon: "verified_user--outlined",
         desc: "Fake Cloudflare Turnstile Challenge (with a related egg)",
         url: "./vibe/fakaptcha/index.html",
         github: null,
         slot: {
             time: 18,
-            recommend: -25,
+            recommend: -20,
             lang: "en",
             ui: "css",
             device: "both"
@@ -272,7 +272,7 @@ var links = [
         github: null,
         slot: {
             time: 19,
-            recommend: -3,
+            recommend: 55,
             lang: "cn",
             ui: "css",
             device: "both"
@@ -286,7 +286,7 @@ var links = [
         github: null,
         slot: {
             time: 20,
-            recommend: -1,
+            recommend: 45,
             lang: "cn",
             ui: "css",
             device: "desktop"
@@ -300,10 +300,24 @@ var links = [
         github: 'https://github.com/for-the-zero/QzReader',
         slot: {
             time: 21,
-            recommend: 40,
+            recommend: 28,
             lang: "cn",
             ui: "rv",
             device: "desktop"
+        }
+    },
+    {
+        name: "Kaomera",
+        icon: "camera_enhance--outlined",
+        desc: "把画面给AI生成颜文字吧",
+        url: "./builts/kaomera/index.html",
+        github: 'https://github.com/for-the-zero/kaomera',
+        slot: {
+            time: 22,
+            recommend: 42,
+            lang: "cn",
+            ui: "rv",
+            device: "both"
         }
     }
 ];
