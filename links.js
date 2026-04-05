@@ -4,7 +4,7 @@ var links = [
         name: "Todo",
         icon: "task_alt--outlined",
         desc: "An imitative todo app, trigger ctx menu to del item",
-        url: "./todo/index.html",
+        url: "./proj/todo/index.html",
         github: null,
         slot: {
             time: 1,
@@ -19,7 +19,7 @@ var links = [
         name: "Zen",
         icon: "timer--outlined",
         desc: "<del>带记录功能的计时器……</del>一个Material3风格的简约专注网页，可显示一言句子，可以对专注计时进行统计",
-        url: "./zen/index.html",
+        url: "./proj/zen/index.html",
         github: null,
         slot: {
             time: 2,
@@ -34,7 +34,7 @@ var links = [
         name: "简单日历",
         icon: "date_range--outlined",
         desc: "简约的日历，就只由简单的日历功能",
-        url: "./calendar/index.html",
+        url: "./proj/calendar/index.html",
         github: null,
         slot: {
             time: 3,
@@ -64,7 +64,7 @@ var links = [
         name: "QpenForm",
         icon: "question_answer--outlined",
         desc: "此处仅限前端部分",
-        url: "./form/index.html",
+        url: "./proj/form/index.html",
         github: "https://github.com/for-the-zero/QpenForm",
         slot: {
             time: 5,
@@ -79,7 +79,7 @@ var links = [
         name: "TypeTo",
         icon: "keyboard--outlined",
         desc: "（仅限电脑使用，需要键盘）将键盘上的按键映射成其它字符，可以拿来整活",
-        url: "./typeto/index.html",
+        url: "./proj/typeto/index.html",
         github: null,
         slot: {
             time: 6,
@@ -94,7 +94,7 @@ var links = [
         name: "Passkey",
         icon: "password",
         desc: "生成图像密文，不提供解密（懒）",
-        url: "./passkey/index.html",
+        url: "./proj/passkey/index.html",
         github: null,
         slot: {
             time: 7,
@@ -124,7 +124,7 @@ var links = [
         name: "Taple",
         icon: "table_chart--outlined",
         desc: "A pretty simple table app based on canvas",
-        url: "./taple/index.html",
+        url: "./proj/taple/index.html",
         github: "https://github.com/for-the-zero/Taple",
         slot: {
             time: 9,
@@ -139,7 +139,7 @@ var links = [
         name: "文本展示",
         icon: "smart_screen--outlined",
         desc: "将文本展示在屏幕上",
-        url: "./showon/index.html",
+        url: "./proj/showon/index.html",
         github: null,
         slot: {
             time: 10,
@@ -154,7 +154,7 @@ var links = [
         name: "UP主动态查看器",
         icon: "post_add",
         desc: "查看UP主的动态",
-        url: "./updyn/index.html",
+        url: "./proj/updyn/index.html",
         github: "https://github.com/for-the-zero/UpDyn",
         slot: {
             time: 11,
@@ -170,7 +170,7 @@ var links = [
         name: "Alan Becker视频列表",
         icon: "video_library--outlined",
         desc: "免_获取Alan Becker的YouTube视频列表",
-        url: "./abvl/index.html",
+        url: "./proj/abvl/index.html",
         github: null,
         slot: {
             time: 12,
@@ -184,7 +184,7 @@ var links = [
         name: "asak viewer",
         icon: "view_comfy_alt--outlined",
         desc: "To view asak config",
-        url: "./asak_viewer/index.html",
+        url: "./proj/asak_viewer/index.html",
         github: null,
         slot: {
             time: 13,
@@ -212,7 +212,7 @@ var links = [
         name: "AI记事本",
         icon: "auto_fix_normal--outlined",
         desc: "AI驱动的简易记事本",
-        url: "./aiime/index.html",
+        url: "./proj/aiime/index.html",
         github: null,
         slot: {
             time: 14,

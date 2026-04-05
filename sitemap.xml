@@ -1,116 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-        <loc>https://t.ftz.is-a.dev/</loc>
-        <priority>1.0</priority>
-    </url>
-    
-    <url>
-        <loc>https://t.ftz.is-a.dev/todo/index.html</loc>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://t.ftz.is-a.dev/zen/index.html</loc>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://t.ftz.is-a.dev/calendar/index.html</loc>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://t.ftz.is-a.dev/vibe/playvib/1.html</loc>
-        <priority>0.7</priority>
-    </url>
-    
-    <url>
-        <loc>https://t.ftz.is-a.dev/form/index.html</loc>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://t.ftz.is-a.dev/typeto/index.html</loc>
-        <priority>0.7</priority>
-    </url>
-    
-    <url>
-        <loc>https://t.ftz.is-a.dev/passkey/index.html</loc>
-        <priority>0.7</priority>
-    </url>
-    
-    <url>
-        <loc>https://t.ftz.is-a.dev/vibe/vv/index.html</loc>
-        <priority>0.7</priority>
-    </url>
-    
-    <url>
-        <loc>https://t.ftz.is-a.dev/taple/index.html</loc>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://t.ftz.is-a.dev/showon/index.html</loc>
-        <priority>0.7</priority>
-    </url>
-    
-    <url>
-        <loc>https://t.ftz.is-a.dev/updyn/index.html</loc>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://t.ftz.is-a.dev/abvl/index.html</loc>
-        <priority>0.7</priority>
-    </url>
-    
-    <url>
-        <loc>https://t.ftz.is-a.dev/asak_viewer/index.html</loc>
-        <priority>0.7</priority>
-    </url>
-    
-    <url>
-        <loc>https://t.ftz.is-a.dev/asak_viewer/testm.html</loc>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://t.ftz.is-a.dev/aiime/index.html</loc>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>https://t.ftz.is-a.dev/vibe/copic/index.html</loc>
-        <priority>0.7</priority>
-    </url>
-    
-    <url>
-        <loc>https://t.ftz.is-a.dev/builts/fakenet/index.html</loc>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>https://t.ftz.is-a.dev/vibe/fakaptcha/index.html</loc>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>https://t.ftz.is-a.dev/vibe/reading/index.html</loc>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>https://t.ftz.is-a.dev/vibe/bgrm/index.html</loc>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>https://t.ftz.is-a.dev/builts/qzreader/index.html</loc>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>https://t.ftz.is-a.dev/builts/kaomera/index.html</loc>
-        <priority>0.8</priority>
-    </url>
+    <url><loc>https://t.ftz.is-a.dev/</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/proj/todo/index.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/proj/zen/index.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/proj/zen/data.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/proj/calendar/index.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/vibe/playvib/1.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/vibe/playvib/2.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/proj/form/index.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/proj/typeto/index.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/proj/passkey/index.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/vibe/vv/index.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/proj/taple/index.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/proj/showon/index.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/proj/showon/show.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/proj/updyn/index.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/proj/abvl/index.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/proj/asak_viewer/index.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/proj/asak_viewer/testm.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/proj/aiime/index.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/vibe/copic/index.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/builts/fakenet/index.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/vibe/fakaptcha/index.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/vibe/reading/index.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/vibe/bgrm/index.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/builts/qzreader/index.html</loc></url>
+    <url><loc>https://t.ftz.is-a.dev/builts/kaomera/index.html</loc></url>
 </urlset>
