@@ -31,6 +31,9 @@
         .upload-area svg { width: 48px; height: 48px; color: var(--gray); margin-bottom: 16px; }
         .upload-area p { color: var(--gray); font-size: 15px; }
         .upload-area span { color: var(--primary); font-weight: 500; }
+        .upload-area.compact { padding: 20px; border-radius: 12px; }
+        .upload-area.compact svg { width: 32px; height: 32px; margin-bottom: 8px; }
+        .upload-area.compact p { font-size: 13px; }
         
         .preview-section { width: 100%; max-width: 1200px; margin-top: 24px; }
         .preview-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
@@ -180,11 +183,11 @@
     function updateUI() {
         if (images.length > 0) {
             previewSection.classList.remove('hidden');
-            uploadArea.classList.add('hidden');
+            uploadArea.classList.add('compact');
             exportBtn.disabled = false;
         } else {
             previewSection.classList.add('hidden');
-            uploadArea.classList.remove('hidden');
+            uploadArea.classList.remove('compact');
             exportBtn.disabled = true;
         }
         imageCount.textContent = images.length + ' 张图片';
@@ -231,14 +234,43 @@
     function renderResult() {
         if (images.length === 0) return;
         const ctx = resultCanvas.getContext('2d');
+        
+        // 计算最大宽度和高度
+        const maxWidth = Math.max(...images.map(i => i.width));
+        const maxHeight = Math.max(...images.map(i => i.height));
+        
+        // 计算缩放后的尺寸
+        const scaledImages = images.map(item => {
+            let scaledWidth = item.width;
+            let scaledHeight = item.height;
+            
+            if (currentMode === 'vertical') {
+                // 纵向拼接：所有图片缩放到最大宽度
+                if (item.width < maxWidth) {
+                    const scale = maxWidth / item.width;
+                    scaledWidth = maxWidth;
+                    scaledHeight = Math.round(item.height * scale);
+                }
+            } else {
+                // 横向拼接：所有图片缩放到最大高度
+                if (item.height < maxHeight) {
+                    const scale = maxHeight / item.height;
+                    scaledHeight = maxHeight;
+                    scaledWidth = Math.round(item.width * scale);
+                }
+            }
+            
+            return { ...item, scaledWidth, scaledHeight };
+        });
+        
         let canvasWidth, canvasHeight;
         
         if (currentMode === 'vertical') {
-            canvasWidth = Math.max(...images.map(i => i.width));
-            canvasHeight = images.reduce((sum, i) => sum + i.height, 0);
+            canvasWidth = maxWidth;
+            canvasHeight = scaledImages.reduce((sum, i) => sum + i.scaledHeight, 0);
         } else {
-            canvasWidth = images.reduce((sum, i) => sum + i.width, 0);
-            canvasHeight = Math.max(...images.map(i => i.height));
+            canvasWidth = scaledImages.reduce((sum, i) => sum + i.scaledWidth, 0);
+            canvasHeight = maxHeight;
         }
         
         resultCanvas.width = canvasWidth;
@@ -248,15 +280,15 @@
         ctx.fillRect(0, 0, canvasWidth, canvasHeight);
         
         let offset = 0;
-        images.forEach(item => {
+        scaledImages.forEach(item => {
             if (currentMode === 'vertical') {
-                const x = (canvasWidth - item.width) / 2;
-                ctx.drawImage(item.img, x, offset);
-                offset += item.height;
+                const x = (canvasWidth - item.scaledWidth) / 2;
+                ctx.drawImage(item.img, x, offset, item.scaledWidth, item.scaledHeight);
+                offset += item.scaledHeight;
             } else {
-                const y = (canvasHeight - item.height) / 2;
-                ctx.drawImage(item.img, offset, y);
-                offset += item.width;
+                const y = (canvasHeight - item.scaledHeight) / 2;
+                ctx.drawImage(item.img, offset, y, item.scaledWidth, item.scaledHeight);
+                offset += item.scaledWidth;
             }
         });
     }
