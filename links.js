@@ -319,6 +319,20 @@ var links = [
             ui: "rv",
             device: "both"
         }
+    },
+    {
+        name: "长图拼接",
+        icon: "merge",
+        desc: "简单的长图拼接工具",
+        url: "./vibe/longpic/index.html",
+        github: null,
+        slot: {
+            time: 23,
+            recommend: 43,
+            lang: "cn",
+            ui: "css",
+            device: "both"
+        }
     }
 ];
 
@@ -326,7 +340,7 @@ const cate_order = {
     lang: [['both','可切换 / Switchable'],['cn','中文'],['en','English']],
     ui: [
         ['mdui','mdui'],
-        ['css','自己写的css/css by myself'],
+        ['css','CSS Style'],
         ['material-web','material-web'],
         ['rv', 'React || Vue || ...'],
         ['no','无样式/No Style'],

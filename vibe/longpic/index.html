@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片拼接</title>
+    <style>
+        :root { --bg: #f5f5f7; --panel: #fff; --primary: #0071e3; --text: #1d1d1f; --gray: #86868b; --border: #e5e5e7; --hover: #f0f0f2; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+        
+        header { background: var(--panel); border-bottom: 1px solid var(--border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        header h1 { font-size: 20px; font-weight: 600; }
+        .header-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+        
+        .mode-toggle { display: flex; background: var(--hover); border-radius: 8px; padding: 2px; }
+        .mode-btn { padding: 6px 16px; border: none; background: transparent; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; color: var(--gray); transition: all 0.2s; }
+        .mode-btn.active { background: var(--panel); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        
+        .btn { padding: 8px 16px; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s; }
+        .btn-primary { background: var(--primary); color: #fff; }
+        .btn-primary:hover { background: #0077ed; }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .format-select { padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 13px; background: var(--panel); cursor: pointer; }
+        
+        main { flex: 1; padding: 24px; display: flex; flex-direction: column; align-items: center; }
+        
+        .upload-area { width: 100%; max-width: 800px; border: 2px dashed var(--border); border-radius: 16px; padding: 60px 20px; text-align: center; cursor: pointer; transition: all 0.2s; background: var(--panel); }
+        .upload-area:hover, .upload-area.dragover { border-color: var(--primary); background: #f5f9ff; }
+        .upload-area svg { width: 48px; height: 48px; color: var(--gray); margin-bottom: 16px; }
+        .upload-area p { color: var(--gray); font-size: 15px; }
+        .upload-area span { color: var(--primary); font-weight: 500; }
+        
+        .preview-section { width: 100%; max-width: 1200px; margin-top: 24px; }
+        .preview-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .preview-header h2 { font-size: 16px; font-weight: 600; }
+        .image-count { font-size: 13px; color: var(--gray); }
+        
+        .image-list { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+        .image-item { position: relative; width: 100px; height: 100px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); cursor: grab; }
+        .image-item img { width: 100%; height: 100%; object-fit: cover; }
+        .image-item .remove { position: absolute; top: 4px; right: 4px; width: 22px; height: 22px; border-radius: 50%; background: rgba(0,0,0,0.6); color: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; opacity: 0; transition: opacity 0.2s; }
+        .image-item:hover .remove { opacity: 1; }
+        .image-item.dragging { opacity: 0.5; }
+        .image-item.drag-over { box-shadow: 0 0 0 2px var(--primary); }
+        
+        .result-container { background: var(--panel); border-radius: 12px; padding: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .result-container canvas { max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 4px; }
+        
+        .hidden { display: none !important; }
+        #fileInput { display: none; }
+        
+        .quality-control { display: flex; align-items: center; gap: 8px; }
+        .quality-control label { font-size: 13px; color: var(--gray); }
+        .quality-slider { width: 80px; }
+    </style>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="8a96c320-b541-482f-acd4-6fc1b3ec22dc"></script>
+</head>
+<body>
+
+<header>
+    <h1>图片拼接</h1>
+    <div class="header-actions">
+        <div class="mode-toggle">
+            <button class="mode-btn active" data-mode="vertical">纵向拼接</button>
+            <button class="mode-btn" data-mode="horizontal">横向拼接</button>
+        </div>
+        <select class="format-select" id="formatSelect">
+            <option value="png">PNG</option>
+            <option value="jpeg">JPEG</option>
+            <option value="webp">WebP</option>
+            <option value="bmp">BMP</option>
+        </select>
+        <div class="quality-control hidden" id="qualityControl">
+            <label>质量</label>
+            <input type="range" class="quality-slider" id="qualitySlider" min="10" max="100" value="92">
+        </div>
+        <button class="btn btn-primary" id="exportBtn" disabled>导出图片</button>
+    </div>
+</header>
+
+<main>
+    <div class="upload-area" id="uploadArea">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        <p>拖拽图片到此处，或 <span>点击选择</span></p>
+    </div>
+    <input type="file" id="fileInput" accept="image/*" multiple>
+    
+    <div class="preview-section hidden" id="previewSection">
+        <div class="preview-header">
+            <h2>已添加图片</h2>
+            <span class="image-count" id="imageCount">0 张图片</span>
+        </div>
+        <div class="image-list" id="imageList"></div>
+        <div class="result-container">
+            <canvas id="resultCanvas"></canvas>
+        </div>
+    </div>
+</main>
+
+<script>
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput = document.getElementById('fileInput');
+    const imageList = document.getElementById('imageList');
+    const previewSection = document.getElementById('previewSection');
+    const imageCount = document.getElementById('imageCount');
+    const resultCanvas = document.getElementById('resultCanvas');
+    const exportBtn = document.getElementById('exportBtn');
+    const formatSelect = document.getElementById('formatSelect');
+    const qualityControl = document.getElementById('qualityControl');
+    const qualitySlider = document.getElementById('qualitySlider');
+    const modeBtns = document.querySelectorAll('.mode-btn');
+    
+    let images = [];
+    let currentMode = 'vertical';
+    let dragSrcIndex = null;
+    
+    function init() {
+        uploadArea.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', e => handleFiles(e.target.files));
+        setupDrop();
+        setupModeToggle();
+        setupFormatChange();
+        exportBtn.addEventListener('click', exportImage);
+        qualitySlider.addEventListener('input', () => renderResult());
+    }
+    
+    function setupDrop() {
+        ['dragenter', 'dragover'].forEach(e => {
+            uploadArea.addEventListener(e, ev => { ev.preventDefault(); uploadArea.classList.add('dragover'); });
+        });
+        ['dragleave', 'drop'].forEach(e => {
+            uploadArea.addEventListener(e, ev => { ev.preventDefault(); uploadArea.classList.remove('dragover'); });
+        });
+        uploadArea.addEventListener('drop', e => {
+            if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
+        });
+    }
+    
+    function setupModeToggle() {
+        modeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                modeBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentMode = btn.dataset.mode;
+                renderResult();
+            });
+        });
+    }
+    
+    function setupFormatChange() {
+        formatSelect.addEventListener('change', () => {
+            const fmt = formatSelect.value;
+            if (fmt === 'jpeg' || fmt === 'webp') {
+                qualityControl.classList.remove('hidden');
+            } else {
+                qualityControl.classList.add('hidden');
+            }
+        });
+    }
+    
+    function handleFiles(files) {
+        Array.from(files).forEach(file => {
+            if (!file.type.startsWith('image/')) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                const img = new Image();
+                img.onload = () => {
+                    images.push({ img, name: file.name, width: img.width, height: img.height });
+                    updateUI();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+        fileInput.value = '';
+    }
+    
+    function updateUI() {
+        if (images.length > 0) {
+            previewSection.classList.remove('hidden');
+            uploadArea.classList.add('hidden');
+            exportBtn.disabled = false;
+        } else {
+            previewSection.classList.add('hidden');
+            uploadArea.classList.remove('hidden');
+            exportBtn.disabled = true;
+        }
+        imageCount.textContent = images.length + ' 张图片';
+        renderImageList();
+        renderResult();
+    }
+    
+    function renderImageList() {
+        imageList.innerHTML = '';
+        images.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.className = 'image-item';
+            div.draggable = true;
+            div.dataset.index = index;
+            div.innerHTML = '<img src="' + item.img.src + '" alt="' + item.name + '"><button class="remove">&times;</button>';
+            div.querySelector('.remove').onclick = e => {
+                e.stopPropagation();
+                images.splice(index, 1);
+                updateUI();
+            };
+            div.addEventListener('dragstart', e => {
+                dragSrcIndex = index;
+                div.classList.add('dragging');
+            });
+            div.addEventListener('dragend', () => {
+                div.classList.remove('dragging');
+                document.querySelectorAll('.image-item').forEach(el => el.classList.remove('drag-over'));
+            });
+            div.addEventListener('dragover', e => { e.preventDefault(); div.classList.add('drag-over'); });
+            div.addEventListener('dragleave', () => div.classList.remove('drag-over'));
+            div.addEventListener('drop', e => {
+                e.preventDefault();
+                div.classList.remove('drag-over');
+                if (dragSrcIndex !== null && dragSrcIndex !== index) {
+                    const moved = images.splice(dragSrcIndex, 1)[0];
+                    images.splice(index, 0, moved);
+                    updateUI();
+                }
+            });
+            imageList.appendChild(div);
+        });
+    }
+    
+    function renderResult() {
+        if (images.length === 0) return;
+        const ctx = resultCanvas.getContext('2d');
+        let canvasWidth, canvasHeight;
+        
+        if (currentMode === 'vertical') {
+            canvasWidth = Math.max(...images.map(i => i.width));
+            canvasHeight = images.reduce((sum, i) => sum + i.height, 0);
+        } else {
+            canvasWidth = images.reduce((sum, i) => sum + i.width, 0);
+            canvasHeight = Math.max(...images.map(i => i.height));
+        }
+        
+        resultCanvas.width = canvasWidth;
+        resultCanvas.height = canvasHeight;
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+        
+        let offset = 0;
+        images.forEach(item => {
+            if (currentMode === 'vertical') {
+                const x = (canvasWidth - item.width) / 2;
+                ctx.drawImage(item.img, x, offset);
+                offset += item.height;
+            } else {
+                const y = (canvasHeight - item.height) / 2;
+                ctx.drawImage(item.img, offset, y);
+                offset += item.width;
+            }
+        });
+    }
+    
+    function exportImage() {
+        const format = formatSelect.value;
+        let mimeType, extension, quality;
+        
+        switch (format) {
+            case 'png':
+                mimeType = 'image/png'; extension = 'png'; break;
+            case 'jpeg':
+                mimeType = 'image/jpeg'; extension = 'jpg'; quality = qualitySlider.value / 100; break;
+            case 'webp':
+                mimeType = 'image/webp'; extension = 'webp'; quality = qualitySlider.value / 100; break;
+            case 'bmp':
+                exportBMP(); return;
+        }
+        
+        const dataUrl = resultCanvas.toDataURL(mimeType, quality);
+        downloadFile(dataUrl, '拼接图片.' + extension);
+    }
+    
+    function exportBMP() {
+        const canvas = resultCanvas;
+        const width = canvas.width;
+        const height = canvas.height;
+        const ctx = canvas.getContext('2d');
+        const imageData = ctx.getImageData(0, 0, width, height);
+        const data = imageData.data;
+        
+        const rowSize = Math.floor((24 * width + 31) / 32) * 4;
+        const pixelDataSize = rowSize * height;
+        const fileSize = 54 + pixelDataSize;
+        
+        const buffer = new ArrayBuffer(fileSize);
+        const view = new DataView(buffer);
+        
+        view.setUint8(0, 0x42);
+        view.setUint8(1, 0x4D);
+        view.setUint32(2, fileSize, true);
+        view.setUint32(6, 0, true);
+        view.setUint32(10, 54, true);
+        view.setUint32(14, 40, true);
+        view.setInt32(18, width, true);
+        view.setInt32(22, height, true);
+        view.setUint16(26, 1, true);
+        view.setUint16(28, 24, true);
+        view.setUint32(30, 0, true);
+        view.setUint32(34, pixelDataSize, true);
+        view.setInt32(38, 2835, true);
+        view.setInt32(42, 2835, true);
+        view.setUint32(46, 0, true);
+        view.setUint32(50, 0, true);
+        
+        for (let y = 0; y < height; y++) {
+            for (let x = 0; x < width; x++) {
+                const srcIdx = ((height - 1 - y) * width + x) * 4;
+                const destIdx = 54 + y * rowSize + x * 3;
+                view.setUint8(destIdx, data[srcIdx + 2]);
+                view.setUint8(destIdx + 1, data[srcIdx + 1]);
+                view.setUint8(destIdx + 2, data[srcIdx]);
+            }
+        }
+        
+        const blob = new Blob([buffer], { type: 'image/bmp' });
+        const url = URL.createObjectURL(blob);
+        downloadFile(url, '拼接图片.bmp');
+        URL.revokeObjectURL(url);
+    }
+    
+    function downloadFile(url, filename) {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+    
+    init();
+</script>
+</body>
+</html>
