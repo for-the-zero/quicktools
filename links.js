@@ -333,6 +333,20 @@ var links = [
             ui: "css",
             device: "both"
         }
+    },
+    {
+        name: "Selinkt",
+        icon: "add_link",
+        desc: "链接选择中转跳转器",
+        url: "./builts/selinkt",
+        github: null,
+        slot: {
+            time: 24,
+            recommend: 43,
+            lang: "en",
+            ui: "rv",
+            device: "both"
+        }
     }
 ];
 
