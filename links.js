@@ -338,7 +338,7 @@ var links = [
         name: "Selinkt",
         icon: "add_link",
         desc: "链接选择中转跳转器",
-        url: "./builts/selinkt",
+        url: "./builts/selinkt/",
         github: null,
         slot: {
             time: 24,
