@@ -347,6 +347,20 @@ var links = [
             ui: "rv",
             device: "both"
         }
+    },
+    {
+        name: "终末地提示词生成器",
+        icon: "generating_tokens--outlined",
+        desc: "生成最新版本关于工业配方的提示词",
+        url: "./proj/efhp/index.html",
+        github: null,
+        slot: {
+            time: 25,
+            recommend: 29,
+            lang: "cn",
+            ui: "css",
+            device: "both"
+        }
     }
 ];
 

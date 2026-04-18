@@ -38,7 +38,9 @@ document.querySelector('.btn-save-config').addEventListener('click', ()=>{
     localStorage.setItem('efhp', JSON.stringify({
         template: editor.getValue(),
         url: [document.getElementById('data-recipe').value, document.getElementById('data-i18n').value]
-    }))
+    }));
+    document.querySelector('.dia-content').innerHTML = '已保存';
+    document.querySelector('.dia').classList.add('open');
 });
 document.querySelector('.btn-fill-recipe').addEventListener('click', async()=>{
     if(!editor.getValue().includes('{{ recipes }}')){
@@ -47,11 +49,20 @@ document.querySelector('.btn-fill-recipe').addEventListener('click', async()=>{
         return;
     };
     let cb = await get_mdtable(config.url[0], config.url[1]);
+    if(!cb[2]){
+        document.querySelector('.dia-content').innerHTML = `数据获取失败<br>${cb[0]}`;
+        document.querySelector('.dia').classList.add('open');
+        return;
+    };
     editor.setValue(editor.getValue().replaceAll('{{ recipes }}', cb[1]).replaceAll('{{ version }}', cb[0]));
+    document.querySelector('.dia-content').innerHTML = '已完成填充';
+    document.querySelector('.dia').classList.add('open');
 });
 
 document.querySelector('.btn-save-copy').addEventListener('click', ()=>{
     navigator.clipboard.writeText(editor.getValue());
+    document.querySelector('.dia-content').innerHTML = '已复制';
+    document.querySelector('.dia').classList.add('open');
 });
 document.querySelector('.btn-save-md').addEventListener('click', ()=>{
     let a = document.createElement('a');
@@ -59,6 +70,27 @@ document.querySelector('.btn-save-md').addEventListener('click', ()=>{
     a.href = URL.createObjectURL(new Blob([editor.getValue()]));
     a.click();
     URL.revokeObjectURL(a.href);
+    document.querySelector('.dia-content').innerHTML = '已开始下载';
+    document.querySelector('.dia').classList.add('open');
+});
+
+function saveAs(blob, filename) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(a.href);
+};
+document.querySelector('.btn-save-docx').addEventListener('click', async ()=>{ 
+    const filled = editor.getValue();
+    const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+        body { font-family: 等线, Microsoft YaHei, sans-serif; }
+        table { border-collapse: collapse; width: 100%; }
+        table, th, td { border: 1px solid #000; }
+        th, td { padding: 4px 8px; }
+    </style></head><body>${window.marked.parse(filled)}</body></html>`;
+    const docx = window.htmlDocx.asBlob(html);
+    saveAs(docx, 'ENDFIELD.docx');
     document.querySelector('.dia-content').innerHTML = '已开始下载';
     document.querySelector('.dia').classList.add('open');
 });
