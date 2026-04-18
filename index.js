@@ -3,6 +3,7 @@ const e_tooltip = $('mdui-tooltip');
 const e_sort = $('.sort');
 const e_cate = $('.category');
 const e_toollist = $('.tools');
+const e_rand = $('mdui-button-icon[icon="shuffle"]');
 
 //egg
 var clk = 0;
@@ -43,6 +44,10 @@ e_tooltip.on('click',function(){
     if(eggs[clk]){
         $(this).attr('content',eggs[clk]);
     };
+});
+//random
+e_rand.on('hover mouseenter touchstart mouseup',()=>{
+    e_rand.attr('href', links[Math.floor(Math.random() * links.length)].url)
 });
 
 //trigger

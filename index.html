@@ -41,8 +41,8 @@
         <mdui-dropdown>
             <mdui-top-app-bar-title slot="trigger">WebTooys Quicktools</mdui-top-app-bar-title>
             <mdui-menu>
-                <mdui-menu-item href="https://t.ftz.is-a.dev/">Vercel + .is-a.dev</mdui-menu-item>
-                <mdui-menu-item href="https://t.ftz.cc.cd/">Cloudflare Pages + .cc.cd</mdui-menu-item>
+                <mdui-menu-item href="https://t.ftz.is-a.dev/">Netlify + .is-a.dev</mdui-menu-item>
+                <mdui-menu-item href="https://t.ftz.cc.cd/">Vercel + .cc.cd</mdui-menu-item>
                 <mdui-menu-item href="https://tooys.pages.dev/">Cloudflare Pages</mdui-menu-item>
                 <mdui-menu-item href="https://tooys.netlify.app/">Netlify</mdui-menu-item>
                 <mdui-menu-item href="https://tooys.vercel.app/">Vercel</mdui-menu-item>
@@ -50,7 +50,12 @@
             </mdui-menu>
         </mdui-dropdown>
         <div style="flex-grow: 1;"></div>
-        <mdui-button-icon icon="code" href="https://github.com/for-the-zero/quicktools" target="_blank"></mdui-button-icon>
+        <mdui-tooltip content="随机 Random">
+            <mdui-button-icon icon="shuffle" target="_blank"></mdui-button-icon>
+        </mdui-tooltip>
+        <mdui-tooltip content="Github">
+            <mdui-button-icon icon="code" href="https://github.com/for-the-zero/quicktools" target="_blank"></mdui-button-icon>
+        </mdui-tooltip>
     </mdui-top-app-bar>
 
     <div class="main">
