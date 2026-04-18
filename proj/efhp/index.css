@@ -46,6 +46,7 @@ a:hover{
     background-color: lightgray;
     border: none;
     border-radius: 1px;
+    font-family: 'Google Sans', 'Noto Sans SC';
 }
 .data-src-input input:focus {
     outline: none;
