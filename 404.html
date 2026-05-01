@@ -90,7 +90,13 @@
             }).then(function(xmlText){
                 var parser = new DOMParser();
                 var doc = parser.parseFromString(xmlText, 'text/xml');
-                var locs = doc.getElementsByTagName('loc');
+                var locs = doc.getElementsByTagNameNS('http://www.sitemaps.org/schemas/sitemap/0.9', 'loc');
+                if(!locs || locs.length === 0){
+                    locs = doc.getElementsByTagName('loc');
+                };
+                if(!locs || locs.length === 0){
+                    locs = doc.querySelectorAll('loc');
+                };
                 var currentCore = getCore(window.location.pathname);
                 for(var i=0;i<locs.length;i++){
                     var sitemapUrl = (locs[i].textContent || '').trim();
