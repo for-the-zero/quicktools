@@ -46,6 +46,7 @@
 
     <script>
         (function(){
+            console.log('[404] 脚本开始执行, 当前路径:', window.location.pathname);
             var hintEl = document.getElementById('hint2');
             function stripPrefix(path){
                 var prefixes = ['/proj/', '/vibe/', '/builts/'];
@@ -58,6 +59,7 @@
             };
             function getCore(path){
                 path = stripPrefix(path);
+                path = path.replace(/^\/+/, '');
                 path = path.replace(/\/index\.html$/, '');
                 path = path.replace(/\.html$/, '');
                 path = path.replace(/\/+$/, '');
@@ -76,45 +78,65 @@
                     urlObj.pathname = finalPath;
                     return urlObj.toString();
                 }catch(e){
+                    console.error('[404] buildRedirectUrl 出错:', e, 'sitemapUrl=', sitemapUrl);
                     return null;
                 };
             };
             function setHint(text){
+                console.log('[404] 设置提示:', text);
                 if(hintEl){
                     hintEl.innerHTML = text;
                 };
             };
+            console.log('[404] 开始 fetch sitemap.xml');
             fetch(window.location.origin + '/sitemap.xml').then(function(res){
+                console.log('[404] fetch 响应状态:', res.status, res.ok);
                 if(!res.ok) throw new Error('HTTP ' + res.status);
                 return res.text();
             }).then(function(xmlText){
+                console.log('[404] sitemap 获取成功, 长度:', xmlText.length);
                 var parser = new DOMParser();
                 var doc = parser.parseFromString(xmlText, 'text/xml');
                 var locs = doc.getElementsByTagNameNS('http://www.sitemaps.org/schemas/sitemap/0.9', 'loc');
+                console.log('[404] getElementsByTagNameNS 获取 loc 数量:', locs.length);
                 if(!locs || locs.length === 0){
                     locs = doc.getElementsByTagName('loc');
+                    console.log('[404] fallback getElementsByTagName 获取 loc 数量:', locs.length);
                 };
                 if(!locs || locs.length === 0){
                     locs = doc.querySelectorAll('loc');
+                    console.log('[404] fallback querySelectorAll 获取 loc 数量:', locs.length);
                 };
                 var currentCore = getCore(window.location.pathname);
+                console.log('[404] 当前路径 core:', currentCore);
+                var matched = false;
                 for(var i=0;i<locs.length;i++){
                     var sitemapUrl = (locs[i].textContent || '').trim();
                     if(!sitemapUrl) continue;
                     try{
                         var sitemapPath = new URL(sitemapUrl).pathname;
                         var sitemapCore = getCore(sitemapPath);
+                        console.log('[404] 对比 sitemap['+i+']:', sitemapUrl, '=> core:', sitemapCore);
                         if(currentCore === sitemapCore){
+                            console.log('[404] ✅ 匹配成功!');
                             var target = buildRedirectUrl(sitemapUrl);
+                            console.log('[404] 跳转目标:', target);
                             if(target){
                                 window.location.href = target;
+                                matched = true;
                                 return;
                             };
                         };
-                    }catch(e){};
+                    }catch(e){
+                        console.error('[404] 解析 sitemap URL 出错:', e, 'url=', sitemapUrl);
+                    };
                 };
-                setHint('自动跳转失败');
-            }).catch(function(){
+                if(!matched){
+                    console.log('[404] ❌ 未找到匹配, 当前 core:', currentCore);
+                    setHint('自动跳转失败');
+                };
+            }).catch(function(err){
+                console.error('[404] fetch 或解析出错:', err);
                 setHint('自动跳转失败');
             });
         })();
