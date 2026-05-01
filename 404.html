@@ -4,15 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404</title>
+    <link rel="stylesheet" href="https://cdn.jsdmirror.com/npm/mdui/mdui.css">
+    <script src="https://cdn.jsdmirror.com/npm/mdui/mdui.global.js"></script>
+    <link rel="preconnect" href="https://cdn.jsdmirror.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="8a96c320-b541-482f-acd4-6fc1b3ec22dc"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap"> 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body{
+            font-family: 'Google Sans','Noto Sans SC';
+            color: #201b12;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+        h1, p{
+            margin: 5px;
+        }
+    </style>
 </head>
 <body>
+    <h1 style="font-size: 75px;">404</h1>
+    <p>找不到页面</p>
+    <mdui-divider style="width: 50vw; margin: 25px 0;"></mdui-divider>
+    <p style="display: flex;align-items: center;justify-content: center;gap: 10px;">
+        <span id="hint1">可能是因为我删除或更名了相应的工具</span>
+        <mdui-button icon="home" href="/">返回首页找找</mdui-button>
+    </p>
+    <p>
+        也可能是我对它进行了重命名：
+        <span id="hint2" style="display: inline-flex;align-items: center;justify-content: center;gap: 10px;">正在尝试自动跳转<mdui-circular-progress></mdui-circular-progress></span>
+    </p>
+
     <script>
-        alert('404\n可能是因为我变更过目录，点击确定跳转回首页……')
-        if(window.location.hostname === 'for-the-zero.github.io'){
-            window.location.href = 'https://tooys.pages.dev/builts/selinkt/?{%22title%22:%22%E8%AF%A5%E5%8E%BB%E6%96%B0%E7%9A%84%E9%93%BE%E6%8E%A5%E4%BA%86%22,%22desc%22:%22%E6%9D%82%E9%B1%BC%E2%99%A5~%20%E8%A2%AB%E6%88%91%E6%8A%93%E5%88%B0%E4%BA%86%E5%90%A7~\\n%E4%BD%A0%E8%BF%98%E5%9C%A8%E7%94%A8Github%20Pages%E7%9A%84%E5%9F%9F%E5%90%8D%EF%BC%9F%E7%8C%AB%E7%8C%AB%E9%83%BD%E6%94%BE%E5%BC%83%E4%BA%86%E5%91%90\\n%E8%BF%99%E9%87%8C%E7%BB%99%E5%87%BA%E4%B8%89%E4%B8%AA%E6%96%B0%E7%9A%84%E7%9F%AD%E7%82%B9%E7%9A%84%E5%9F%9F%E5%90%8D%E4%BD%A0%E8%87%AA%E5%B7%B1%E8%AE%BF%E9%97%AE%E5%8E%BB%E5%90%A7~%22,%22links%22:[{%22name%22:%22Netlify%22,%22url%22:%22https://t.ftz.is-a.dev%22},{%22name%22:%22Vercel%22,%22url%22:%22https://t.ftz.cc.cd%22},{%22name%22:%22Cloudflare%20Pages%22,%22url%22:%22https://tooys.pages.dev%22}],%22tgb%22:false}';
-        }else{
-            window.location.href = `https://${window.location.hostname}/`;
-        };
+        (function(){
+            var hintEl = document.getElementById('hint2');
+            function stripPrefix(path){
+                var prefixes = ['/proj/', '/vibe/', '/builts/'];
+                for(var i=0;i<prefixes.length;i++){
+                    if(path.indexOf(prefixes[i])===0){
+                        return path.substring(prefixes[i].length);
+                    };
+                };
+                return path;
+            };
+            function getCore(path){
+                path = stripPrefix(path);
+                path = path.replace(/\/index\.html$/, '');
+                path = path.replace(/\.html$/, '');
+                path = path.replace(/\/+$/, '');
+                return path;
+            };
+            function buildRedirectUrl(sitemapUrl){
+                try{
+                    var urlObj = new URL(sitemapUrl);
+                    urlObj.protocol = window.location.protocol;
+                    urlObj.hostname = window.location.hostname;
+                    urlObj.port = window.location.port || '';
+                    var finalPath = urlObj.pathname;
+                    if(!finalPath.match(/\.html$/) && !finalPath.endsWith('/')){
+                        finalPath += '/';
+                    };
+                    urlObj.pathname = finalPath;
+                    return urlObj.toString();
+                }catch(e){
+                    return null;
+                };
+            };
+            function setHint(text){
+                if(hintEl){
+                    hintEl.innerHTML = text;
+                };
+            };
+            fetch(window.location.origin + '/sitemap.xml').then(function(res){
+                if(!res.ok) throw new Error('HTTP ' + res.status);
+                return res.text();
+            }).then(function(xmlText){
+                var parser = new DOMParser();
+                var doc = parser.parseFromString(xmlText, 'text/xml');
+                var locs = doc.getElementsByTagName('loc');
+                var currentCore = getCore(window.location.pathname);
+                for(var i=0;i<locs.length;i++){
+                    var sitemapUrl = (locs[i].textContent || '').trim();
+                    if(!sitemapUrl) continue;
+                    try{
+                        var sitemapPath = new URL(sitemapUrl).pathname;
+                        var sitemapCore = getCore(sitemapPath);
+                        if(currentCore === sitemapCore){
+                            var target = buildRedirectUrl(sitemapUrl);
+                            if(target){
+                                window.location.href = target;
+                                return;
+                            };
+                        };
+                    }catch(e){};
+                };
+                setHint('自动跳转失败');
+            }).catch(function(){
+                setHint('自动跳转失败');
+            });
+        })();
     </script>
 </body>
 </html>

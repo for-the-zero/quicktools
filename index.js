@@ -1,5 +1,5 @@
 //elements
-const e_tooltip = $('mdui-tooltip');
+const e_tooltip = $('mdui-tooltip[content="没有东西的，就一个摆设"]');
 const e_sort = $('.sort');
 const e_cate = $('.category');
 const e_toollist = $('.tools');

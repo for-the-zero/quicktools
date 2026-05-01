@@ -53,6 +53,20 @@
         <mdui-tooltip content="随机 Random">
             <mdui-button-icon icon="shuffle" target="_blank"></mdui-button-icon>
         </mdui-tooltip>
+        <mdui-dropdown>
+            <mdui-button-icon icon="feed" slot="trigger"></mdui-button-icon>
+            <mdui-menu>
+                <p class="mdui-menu-subh">
+                    关于WebTooys的博客文章<br>
+                    主要是对里面的工具的介绍<br>
+                    选择一个博客链接进入：
+                </p>
+                <mdui-menu-item target="_blank" href="https://ftz.is-a.dev/blog/?tag=WebTooys&lang=zh-CN">Netlify + .is-a.dev</mdui-menu-item>
+                <mdui-menu-item target="_blank" href="https://ftz.cc.cd/blog/?tag=WebTooys&lang=zh-CN">Vercel + .cc.cd</mdui-menu-item>
+                <mdui-menu-item target="_blank" href="https://ftz.pages.dev/blog/?tag=WebTooys&lang=zh-CN">Cloudflare Pages</mdui-menu-item>
+                <mdui-menu-item>其他域名</mdui-menu-item>
+            </mdui-menu>
+        </mdui-dropdown>
         <mdui-tooltip content="Github">
             <mdui-button-icon icon="code" href="https://github.com/for-the-zero/quicktools" target="_blank"></mdui-button-icon>
         </mdui-tooltip>

@@ -7,6 +7,11 @@ body{
     justify-content: center;
     overflow-x: hidden;
 }
+.mdui-menu-subh{
+    font-size: var(--mdui-typescale-label-small-size);
+    color: var(--mdui-color-on-surface-variant);
+    padding: 0 24px 0 16px;
+}
 mdui-card{
     padding: 8px;
     margin: 10px;
